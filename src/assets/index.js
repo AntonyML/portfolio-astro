@@ -41,25 +41,74 @@ document.addEventListener('astro:page-load', () => {
    });
 
    /*=============== Email JS ===============*/
+   // Referencia al botón
    const btn = document.getElementById('button');
 
+   // Evento submit
    document.getElementById('form')?.addEventListener('submit', function (event) {
       event.preventDefault();
 
-      btn.textContent = 'Sending...';
+      // Validar campos obligatorios
+      const name = this.elements['from_name'].value.trim();
+      const email = this.elements['from_email'].value.trim();
+      const message = this.elements['message'].value.trim();
 
-      const serviceID = 'default_service';
-      const templateID = 'template_y6waryv';
+      if (!name || !email || !message) {
+         showToast('Por favor, completa todos los campos.', 'error');
+         return;
+      }
+
+      // Validar formato básico de email
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+         showToast('Por favor, ingresa un correo electrónico válido.', 'error');
+         return;
+      }
+
+      // Agregar la hora actual al campo oculto
+      const timeField = document.getElementById('time');
+      if (timeField) {
+         timeField.value = new Date().toLocaleString();
+      }
+
+      btn.textContent = 'Enviando...';
+
+      const serviceID = 'service_6gch5fb';
+      const templateID = 'template_qc6164s';
 
       emailjs.sendForm(serviceID, templateID, this).then(
          () => {
-            btn.textContent = 'Send Email';
-            alert('Sent!');
+            btn.textContent = 'Mensaje enviado';
+            showToast('¡Mensaje enviado con éxito!', 'success');
+            this.reset(); // Limpia el formulario
+            setTimeout(() => {
+               btn.textContent = 'Enviar mensaje';
+            }, 3000); // vuelve a "Enviar mensaje" después de 3 segundos
          },
          (err) => {
-            btn.textContent = 'Send Email';
-            alert(JSON.stringify(err));
+            btn.textContent = 'Enviar mensaje';
+            showToast('Error al enviar el mensaje: ' + (err?.text || 'Error desconocido'), 'error');
          }
       );
    });
+
+   // Función JS para mostrar toast
+   function showToast(message, type = 'success') {
+      const toast = document.createElement('div');
+      toast.className = `toast show ${type}`;
+      toast.textContent = message;
+
+      document.body.appendChild(toast);
+
+      setTimeout(() => {
+         toast.classList.add('hide');
+         setTimeout(() => {
+            if (toast.parentNode) {
+               toast.parentNode.removeChild(toast);
+            }
+         }, 400);
+      }, 3500);
+   }
+
+
 });

@@ -12,6 +12,7 @@
    from {
       transform: translateX(0);
    }
+
    to {
       transform: translateX(-100%);
    }
@@ -54,4 +55,181 @@
 .parent-container:hover .container .paragraph {
    opacity: 1;
    transition: opacity ease-in 300ms;
+}
+
+/*=============== Alertas ===============*/
+:root {
+  --toast-bg-dark: rgba(20, 20, 20, 0.9);
+  --toast-bg-light: rgba(255, 255, 255, 0.95);
+
+  --toast-color-dark: #ffffff;
+  --toast-color-light: #000000;
+
+  --toast-glow-dark: rgba(255, 105, 135, 0.25);
+  --toast-glow-light: rgba(255, 160, 122, 0.2);
+
+  --toast-accent-success: #ffa94d;
+  --toast-accent-warning: #ff6f91;
+  --toast-accent-error: #ff4f4f;
+}
+
+.toast {
+  position: fixed;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.85);
+  border: 1.5px solid;
+  border-radius: 16px;
+  padding: 18px 60px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  max-width: 70vw;
+  min-width: 280px;
+  max-height: 130px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  cursor: default;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  z-index: 100000;
+}
+
+.toast::before {
+  content: '';
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  margin-right: 10px;
+  background: transparent;
+  mask-image: url('data:image/svg+xml;utf8,<svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 6L9 17l-5-5"/></svg>');
+  -webkit-mask-image: url('data:image/svg+xml;utf8,<svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 6L9 17l-5-5"/></svg>');
+  color: currentColor;
+  filter: drop-shadow(0 0 1px currentColor);
+}
+
+/* Iconos por tipo */
+.toast.success::before {
+  mask-image: url('data:image/svg+xml;utf8,<svg fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7"/></svg>');
+  -webkit-mask-image: url('data:image/svg+xml;utf8,<svg fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7"/></svg>');
+  color: var(--toast-accent-success);
+}
+
+.toast.warning::before {
+  mask-image: url('data:image/svg+xml;utf8,<svg fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a1.5 1.5 0 0 0 1.29 2.24h17.78a1.5 1.5 0 0 0 1.29-2.24L13.71 3.86a1.5 1.5 0 0 0-2.42 0z"/></svg>');
+  -webkit-mask-image: url('data:image/svg+xml;utf8,<svg fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a1.5 1.5 0 0 0 1.29 2.24h17.78a1.5 1.5 0 0 0 1.29-2.24L13.71 3.86a1.5 1.5 0 0 0-2.42 0z"/></svg>');
+  color: var(--toast-accent-warning);
+}
+
+.toast.error::before {
+  mask-image: url('data:image/svg+xml;utf8,<svg fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18 6L6 18M6 6l12 12"/></svg>');
+  -webkit-mask-image: url('data:image/svg+xml;utf8,<svg fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18 6L6 18M6 6l12 12"/></svg>');
+  color: var(--toast-accent-error);
+}
+
+/* Tema oscuro */
+@media (prefers-color-scheme: dark) {
+  .toast {
+    background: var(--toast-bg-dark);
+    color: var(--toast-color-dark);
+    border-color: var(--toast-color-dark);
+    box-shadow:
+      0 0 20px var(--toast-glow-dark),
+      0 8px 24px rgba(0, 0, 0, 0.6);
+    text-shadow: 0 0 4px rgba(0, 0, 0, 0.6);
+  }
+}
+
+/* Tema claro */
+@media (prefers-color-scheme: light) {
+  .toast {
+    background: var(--toast-bg-light);
+    color: var(--toast-color-light);
+    border-color: var(--toast-color-light);
+    box-shadow:
+      0 0 20px var(--toast-glow-light),
+      0 8px 24px rgba(0, 0, 0, 0.12);
+    text-shadow: 0 0 4px rgba(255, 255, 255, 0.7);
+  }
+}
+
+/* Animaciones */
+.toast.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, -50%) scale(1);
+  animation: slideFadeIn 0.45s forwards;
+}
+
+.toast.show.hide {
+  animation: slideFadeOut 0.4s forwards;
+}
+
+.toast:hover {
+  animation: bounce 0.5s ease;
+  box-shadow:
+    0 0 25px currentColor,
+    0 10px 35px rgba(0, 255, 128, 0.4);
+}
+
+/* Keyframes */
+@keyframes slideFadeIn {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -60%) scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes slideFadeOut {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -40%) scale(0.9);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -52%) scale(1.05);
+  }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .toast {
+    font-size: 16px;
+    padding: 14px 48px;
+    max-width: 90vw;
+    min-width: unset;
+  }
+
+  .toast::before {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* Accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+  .toast, .toast.show, .toast.show.hide, .toast:hover {
+    animation: none !important;
+    transition: none !important;
+  }
 }

@@ -3,35 +3,19 @@ interface Props {
    title: string;
 }
 
-import '../assets/style.css';
+import "../assets/style.css";
 const { title } = Astro.props;
-import { ViewTransitions } from 'astro:transitions';
+import { ViewTransitions } from "astro:transitions";
 ---
 
 <!doctype html>
-<html
-   lang="en"
-   class="scroll-smooth"
->
+<html lang="en" class="scroll-smooth">
    <head>
       <meta charset="UTF-8" />
-      <meta
-         name="description"
-         content="Astro description"
-      />
-      <meta
-         name="viewport"
-         content="width=device-width"
-      />
-      <link
-         rel="icon"
-         type="image/svg+xml"
-         href="/favicon.svg"
-      />
-      <meta
-         name="generator"
-         content={Astro.generator}
-      />
+      <meta name="description" content="Astro description" />
+      <meta name="viewport" content="width=device-width" />
+      <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+      <meta name="generator" content={Astro.generator} />
 
       <!--=============== BoxIcons ===============-->
       <link
@@ -48,13 +32,15 @@ import { ViewTransitions } from 'astro:transitions';
       ></script>
 
       <script type="text/javascript">
-         emailjs.init('Zy7aUsKbfBplaYqrE');
+         emailjs.init("swcBmOO82kEknRRAe");
       </script>
 
       <!--=============== View Transition ===============-->
       <ViewTransitions />
    </head>
    <body class="bg-black text-white">
+      <div id="toast" class="toast"></div>
+
       <slot />
       <script src="../assets/index.js"></script>
    </body>
