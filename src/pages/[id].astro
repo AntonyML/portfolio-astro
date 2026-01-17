@@ -10,6 +10,10 @@ export function getStaticPaths() {
 }
 
 const card = projects.find((card) => card.image == id);
+
+if (!card) {
+   return Astro.redirect('/');
+}
 ---
 
 <Layout title={`Project | ${id}`}>
@@ -42,12 +46,12 @@ const card = projects.find((card) => card.image == id);
                class="hover:scale-[105%] duration-300 ease-in aspect-square object-cover object-top mx-auto lg:mb-0 lg:mt-0 sm:w-[450px] xxs:mt-10 xs:w-[90%] xs:mb-5 xs:mt-20"
             />
 
-            <div class="flex flex-col gap-y-3 relative lg:py-0 xs:py-7">
+            <div class="flex flex-col gap-y-3 relative lg:pt-0 lg:pb-20 xs:pt-7 xs:pb-32">
                <h1 class="font-black sm:text-[75px] sm:leading-[70px] xxs:text-[60px] xxs:leading-[55px] xs:text-[45px] xs:leading-[40px]">{card.title}</h1>
                <p class="text-white/70 sm:text-[14px] xs:text-[12px]">{card.description}</p>
 
                <!--=============== Buttons ===============-->
-               <div class="absolute flex gap-x-5 lg:bottom-4 xxs:right-16 xxs:flex-row xxs:-bottom-4 xs:flex-col xs:-bottom-16 xs:right-[calc(100vw-90%)]">
+               <div class="absolute flex gap-8 lg:bottom-4 xxs:right-4 xxs:flex-row xxs:bottom-4 xs:flex-col xs:bottom-4 xs:right-4">
                   <a
                      href={`/#${id}`}
                      class="text-2xl opacity-60 hover:opacity-100 duration-300 ease-in"
@@ -61,11 +65,6 @@ const card = projects.find((card) => card.image == id);
                      ><i class={`${buttons[0].github} lg:text-[17px] xs:text-[14px]`}> Repositorio</i></a
                   >
 
-                  <a
-                     href="#"
-                     class="text-2xl opacity-60 hover:opacity-100 duration-300 ease-in"
-                     ><i class={`${buttons[0].demo} lg:text-[17px] xs:text-[14px]`}> Live Demo</i></a
-                  >
                </div>
             </div>
          </div>

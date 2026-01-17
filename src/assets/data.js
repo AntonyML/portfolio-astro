@@ -60,7 +60,7 @@ export const technologies = [
 
 export const projects = [
    {
-      title: 'Hogar de Ancianos - Sistema Integral',
+      title: 'Sistema Integral',
       description:
          'Sistema de gestión ambicioso para hogar de ancianos. Arquitectura modular con Backend NestJS, Base de Datos MySQL separada y estrategias de despliegue en microservicios, asegurando escalabilidad y alta disponibilidad para manejo de expedientes y administración. Proyecto hospedado en GitLab UCR.',
       image: 'image-hogar-ancianos',
@@ -69,12 +69,12 @@ export const projects = [
    {
       title: 'Automatización Empresarial con Hangfire',
       description:
-         'Ecosistema de automatización basado en microservicios y orquestación de tareas en segundo plano. Utiliza ASP.NET Core con Hangfire para gestión de colas, SQL Server, y Kafka para mensajería distribuida. Incluye servidores dedicados para generación de PDFs, emails y notificaciones a Discord, integrados mediante una arquitectura robusta.',
+         'Ecosistema de automatización basado en microservicios y orquestación de tareas en segundo plano. Utiliza ASP.NET Core con Hangfire para gestión de colas, SQL Server, y Kafka para mensajería distribuida. Incluye servidores dedicados para generación de PDFs, emails y notificaciones a Discord y Gmail.',
       image: 'image-hangfire-automation',
       color: '#5c2d91',
    },
    {
-      title: 'TaskManager Cross-Platform',
+      title: 'TaskManager',
       description:
          'Sistema tipo JIRA multiplataforma. Backend robusto en Django REST Framework con soporte para prioridades, estados de tareas, carga de imágenes y asignación de usuarios. Diseñado para gestión ágil de proyectos con API RESTful autodocumentada.',
       image: 'image-task-manager',
@@ -95,44 +95,44 @@ export const projects = [
       color: '#009688',
    },
    {
-      title: 'AML Audio Tool - Media Downloader',
+      title: 'AML Audio Tool',
       description:
-         'Desktop application built with Electron and Node.js for high-quality YouTube media downloads. Integrates yt-dlp and ffmpeg for format conversion, playlist processing, and concurrent file management.',
+         'Aplicación de escritorio construida con Electron y Node.js para descargas de alta calidad de YouTube. Integra yt-dlp y ffmpeg para conversión de formatos, procesamiento de listas de reproducción y gestión de archivos concurrentes.',
       image: 'image-aml-audio',
       color: '#E62117',
    },
    {
-      title: 'Ollama AI Chat Interface',
+      title: 'Ollama AI Chat',
       description:
-         'Conversational web interface for local LLMs powered by Ollama. Developed with React, enabling private, offline-capable AI interactions with a clean, modern UI.',
+         'Interfaz web conversacional para LLMs locales impulsada por Ollama. Desarrollada con React, permitiendo interacciones privadas con IA y capacidad offline, con una interfaz de usuario limpia y moderna.',
       image: 'image-ollama-chat',
       color: '#212121',
    },
    {
-      title: 'Uber Clone Microservices Platform',
+      title: 'Clon de Uber',
       description:
-         'Scalable ride-sharing backend engineered with Spring Boot (Java 17) and WebSockets. Features real-time tracking, layered architecture, comprehensive unit testing, and SQL Server integration.',
+         'Backend escalable para transporte compartido diseñado con Spring Boot (Java 17) y WebSockets. Cuenta con seguimiento en tiempo real, arquitectura en capas, pruebas unitarias exhaustivas e integración con SQL Server.',
       image: 'image-uber-clone',
       color: '#000000',
    },
    {
-      title: 'Concurrent Bingo System',
+      title: 'Sistema de Bingo',
       description:
-         'Multi-process simulation of a Bingo game developed in C for Linux. Demonstrates OS concurrency concepts using shared memory, semaphores, and message queues for synchronization.',
+         'Simulación multiproceso de un juego de Bingo desarrollado en C para Linux. Demuestra conceptos de concurrencia del SO utilizando memoria compartida, semáforos y colas de mensajes para la sincronización.',
       image: 'image-tico-bingo',
       color: '#00796B',
    },
    {
-      title: 'Restaurant Management App',
+      title: 'Gestión de Restaurante',
       description:
-         'Java-based desktop application for restaurant administration. Handles order processing, inventory tracking, and billing with a MVC architecture and Swing interface.',
+         'Aplicación de escritorio basada en Java para la administración de restaurantes. Maneja procesamiento de pedidos, seguimiento de inventario y facturación con una arquitectura MVC e interfaz Swing.',
       image: 'image-restaurante-java',
       color: '#FF5722',
    },
    {
-      title: 'Armeria Prime Management System',
+      title: 'Gestión Armería Prime',
       description:
-         'Enterprise-grade inventory and sales system for an armory built with C# .NET and Windows Forms. Integrates PostgreSQL, auditing, and secure user management with a Material Design UI.',
+         'Sistema de ventas e inventario de nivel empresarial para una armería, construido con C# .NET y Windows Forms. Integra PostgreSQL, auditoría y gestión segura de usuarios con una interfaz Material Design.',
       image: 'image-armeria-prime',
       color: '#3F51B5',
    },

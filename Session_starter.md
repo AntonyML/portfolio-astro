@@ -32,8 +32,22 @@ Optimize prompts: be specific, define output format, split tasks, provide sample
 
 - [x] Analyze user's repositories for portfolio content
 - [x] Update `src/assets/data.js` with 4 new major projects
-- [ ] Ensure correct referencing of project details (NestJS, Django, Next.js, ASP.NET Core)
-- [ ] Setup image placeholders for new projects in `data.js`
+- [ ] Add missing images to `public/`:
+    - `image-hogar-ancianos.jpg`
+    - `image-hangfire-automation.jpg`
+    - `image-task-manager.jpg`
+    - `image-cortinas.jpg`
+    - `image-tribux.jpg`
+    - `image-aml-audio.jpg`
+    - `image-ollama-chat.jpg`
+    - `image-uber-clone.jpg`
+    - `image-tico-bingo.jpg`
+    - `image-restaurante-java.jpg`
+    - `image-armeria-prime.jpg`
 
-2026-01-16 | Updated `data.js` with 6 new projects (Audio Tool, Ollama Chat, Uber Clone, Tico Bingo, Restaurant App, Armeria Prime) and fixed dynamic routing in `[id].astro`.
-2026-01-16 | Updated `data.js` to include "Automatización Empresarial con Hangfire" (ASP.NET Core/Hangfire/Kafka) alongside previous key projects.
+2026-01-16 | Refactored `ProfilePicture.astro` to provide 4 UI/UX design options (Split Screen, Avatar Centered, Cinematic Hero, Glassmorphism) alongside the original code, allowing the user to easily switch and test different layouts.
+2026-01-16 | Fixed title truncation in `data.js` for "Automatización Empresarial con Hangfire".
+2026-01-16 | Improved styling in `[id].astro`: added padding to prevent text overlap and simplified button positioning with `gap-8`.
+2026-01-16 | Fixed TypeScript error in `[id].astro` by adding a null check for `card` with a redirect fallback.
+2026-01-16 | Added full list of 11 custom projects to `data.js` (inc. Uber, TicoBingo, Armeria). Pending image assets.
+2026-01-16 | Translated all new project descriptions in `data.js` to Spanish per user request.
