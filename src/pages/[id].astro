@@ -4,16 +4,9 @@ import Layout from '../layouts/Layout.astro';
 import { projects, buttons } from '../assets/data';
 
 export function getStaticPaths() {
-   return [
-      { params: { id: 'image-blog' } },
-      { params: { id: 'image-youtube-clone' } },
-      { params: { id: 'image-ecommerce' } },
-      { params: { id: 'image-facebook-clone' } },
-      { params: { id: 'image-instagram-clone' } },
-      { params: { id: 'image-slider' } },
-      { params: { id: 'image-spotify-clone' } },
-      { params: { id: 'image-chatgpt-api' } },
-   ];
+   return projects.map((project) => ({
+      params: { id: project.image },
+   }));
 }
 
 const card = projects.find((card) => card.image == id);
