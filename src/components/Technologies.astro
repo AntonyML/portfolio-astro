@@ -15,8 +15,8 @@ import TechnologyCard from './TechnologyCard.astro';
    </div>
 
    <!-- Slider Infinito -->
-   <!-- Shader Mask para suavizar bordes -->
-   <div class='relative w-full mask-linear-fade'>
+   <!-- Shader Mask para suavizar bordes: Ahora centrado y con max-width para no tocar bordes de pantalla -->
+   <div class='relative max-w-5xl mx-auto mask-linear-fade overflow-hidden'>
       <div class='flex w-max items-center gap-4 animate-infinite-scroll hover:pause-animation'>
          <!-- Renderizamos 2 veces para loop perfecto -->
          {
@@ -75,8 +75,9 @@ import TechnologyCard from './TechnologyCard.astro';
 
 <style>
    .mask-linear-fade {
-      mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-      -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+      /* Máscara más agresiva (20%) para efecto "túnel" */
+      mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%);
    }
 
    @keyframes infinite-scroll {
