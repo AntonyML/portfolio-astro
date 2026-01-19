@@ -111,7 +111,7 @@ export const projects = [
    {
       title: 'Clon de Uber',
       description:
-         'Backend escalable para transporte compartido diseñado con Spring Boot (Java 17) y WebSockets. Cuenta con seguimiento en tiempo real, arquitectura en capas, pruebas unitarias exhaustivas e integración con SQL Server.',
+         'Aplicación full-stack de transporte compartido inspirada en Uber. Backend desarrollado en Spring Boot (Java 17) con arquitectura en capas, API REST, WebSockets para tracking en tiempo real, seguridad y persistencia en SQL Server, respaldado por pruebas unitarias. Frontend desacoplado que consume la API y los canales en tiempo real para gestión de viajes, usuarios y conductores, simulando un sistema de producción.',
       image: 'image-uber-clone',
       color: '#000000',
    },
