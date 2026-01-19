@@ -1,24 +1,35 @@
 ---
 const { pathname } = Astro.url;
 
-import { socials, info } from "../assets/data";
+const socials = [
+   { logo: 'bx bxl-github', href: 'https://github.com/AntonyML' },
+   { logo: 'bx bxl-linkedin-square', href: 'https://www.linkedin.com/in/antony-monge-lopez/' },
+   { logo: 'bx bxl-instagram', href: 'https://www.instagram.com/tony_m_l_/' },
+   { logo: 'bx bxl-facebook-circle', href: 'https://www.facebook.com/tony.ml.786149' }
+];
+
+const navItems = [
+   { text: 'Inicio', href: '#home' },
+   { text: 'Sobre mí', href: '#about' },
+   { text: 'Proyectos', href: '#projects' },
+   { text: 'Stack', href: '#technologies' },
+   { text: 'Contacto', href: '#form' }
+];
 ---
 
 <nav
-   class="w-full h-16 bg-black text-white flex items-center px-4 py-3 fixed top-0 z-50 md:justify-between xs:justify-center"
+   class="w-full h-16 bg-[#0a0a0a]/60 backdrop-blur-xl border-b border-white/5 text-white flex items-center px-6 py-3 fixed top-0 z-50 justify-between transition-all duration-300"
 >
-   <ul
-      class="justify-items-center xl:basis-[20%] md:basis-[28%] md:grid xs:hidden"
-      style={{
-         gridTemplateColumns: `repeat(${socials.length}, minmax(0, 1fr))`,
-      }}
-   >
+   <!-- Socials -->
+   <ul class="flex items-center gap-5 hidden md:flex">
       {
          socials.map((social) => (
             <li>
                <a
-                  href="#"
-                  class="text-2xl opacity-50 hover:opacity-100 duration-300 ease-in cursor-pointer"
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-2xl text-zinc-400 hover:text-white hover:scale-110 duration-300 ease-in-out cursor-pointer transition-all"
                >
                   <i class={social.logo} />
                </a>
@@ -27,31 +38,43 @@ import { socials, info } from "../assets/data";
       }
    </ul>
 
-   <ul
-      class="grid justify-items-center gap-x-3 xl:basis-[20%] md:basis-[28%] sm:basis-[40%] xs:basis-[75%]"
-      style={{
-         gridTemplateColumns: `repeat(${info.length + 1}, minmax(0, 1fr))`,
-      }}
-   >
-      <li>
-         <a
-            class="opacity-70 hover:opacity-100 duration-300 text-[17px] font-semibold"
-            href="#home">Home</a
-         >
-      </li>
-
+   <!-- Nav Links -->
+   <ul class="flex items-center gap-6 md:gap-8 mx-auto md:mx-0">
       {
          pathname === "/" &&
-            info.map((i) => (
+            navItems.map((item) => (
                <li>
                   <a
-                     class="opacity-70 hover:opacity-100 duration-300 text-[17px] font-semibold"
-                     href={`#${i.id}`}
+                     class="text-sm font-medium text-zinc-400 hover:text-white hover:scale-105 duration-300 transition-all font-sans"
+                     href={item.href}
                   >
-                     {i.text}
+                     {item.text}
                   </a>
                </li>
             ))
       }
    </ul>
 </nav>
+
+<script>
+   // Smooth scrolling default behavior override to ensuring finding targets
+   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', (e) => {
+         e.preventDefault();
+         const href = anchor.getAttribute('href');
+         if (!href) return;
+         
+         const target = document.querySelector(href);
+         if (target) {
+            target.scrollIntoView({
+               behavior: 'smooth'
+            });
+         } else if (href === '#technologies') {
+             // Fallback for Technologies section identification
+             const headings = Array.from(document.querySelectorAll('h2'));
+             const techHeading = headings.find(h => h.textContent.includes('Stack') || h.textContent.includes('Tecnologías'));
+             techHeading?.closest('section')?.scrollIntoView({ behavior: 'smooth' });
+         }
+      });
+   });
+</script>
