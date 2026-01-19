@@ -66,6 +66,15 @@ const navItems = [
          
          const target = document.querySelector(href);
          if (target) {
+            // Fix for form section scrolling - scroll to container to show title
+            if (href === '#form') {
+               const section = target.closest('section');
+               if (section) {
+                  section.scrollIntoView({ behavior: 'smooth' });
+                  return;
+               }
+            }
+
             target.scrollIntoView({
                behavior: 'smooth'
             });
