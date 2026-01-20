@@ -39,13 +39,13 @@ const navItems = [
    </ul>
 
    <!-- Nav Links -->
-   <ul class="flex items-center gap-6 md:gap-8 mx-auto md:mx-0">
+   <ul class="flex items-center gap-4 sm:gap-6 md:gap-8 mx-auto md:mx-0">
       {
          pathname === "/" &&
             navItems.map((item) => (
                <li>
                   <a
-                     class="text-sm font-medium text-zinc-400 hover:text-white hover:scale-105 duration-300 transition-all font-sans"
+                     class="text-xs sm:text-sm whitespace-nowrap font-medium text-zinc-400 hover:text-white hover:scale-105 duration-300 transition-all font-sans"
                      href={item.href}
                   >
                      {item.text}
