@@ -51,3 +51,4 @@ Optimize prompts: be specific, define output format, split tasks, provide sample
 2026-01-16 | Fixed TypeScript error in `[id].astro` by adding a null check for `card` with a redirect fallback.
 2026-01-16 | Added full list of 11 custom projects to `data.js` (inc. Uber, TicoBingo, Armeria). Pending image assets.
 2026-01-16 | Translated all new project descriptions in `data.js` to Spanish per user request.
+2026-01-20 | Fixed relative image path issue in src/pages/[id].astro to prevent 404s on subroutes; identified missing image-cortinas.jpg
