@@ -22,7 +22,7 @@ if (!card) {
 
    <!-- Background -->
    <div class='fixed inset-0 z-[-1]' style={`--ctx: ${card.color}`}>
-      <img src={`/${id}.jpg`} alt='' id='fade-image'
+      <img src={`/${id}.webp`} alt='' id='fade-image'
          class='absolute inset-0 w-full h-full object-cover opacity-10 scale-90 blur-xl transition-all duration-700' />
       <div class='absolute inset-0 bg-gradient-to-br from-[var(--ctx)]/10 via-zinc-950 to-zinc-950'></div>
    </div>
@@ -40,7 +40,7 @@ if (!card) {
 
          <!-- Imagen sticky sidebar -->
          <div class='w-full lg:w-72 xl:w-80 shrink-0 lg:sticky lg:top-24'>
-            <img src={`/${id}.jpg`} alt={card.title}
+            <img src={`/${id}.webp`} alt={card.title}
                class='w-full rounded-2xl object-cover object-top shadow-2xl ring-1 ring-white/10' />
             <div class='mt-4 flex flex-col gap-2'>
                {(card.githubFront || card.githubBack) ? (
@@ -218,7 +218,7 @@ if (!card) {
       <!-- ── Imagen del Proyecto ──────────────────────────────────────────── -->
       <div class='w-full max-w-sm lg:max-w-md shrink-0'>
          <img
-            src={`/${id}.jpg`}
+            src={`/${id}.webp`}
             alt={card.title}
             class='w-full rounded-2xl object-cover object-top shadow-2xl ring-1 ring-white/10 hover:scale-[102%] transition-transform duration-300'
          />
