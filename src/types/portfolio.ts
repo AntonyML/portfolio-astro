@@ -15,6 +15,9 @@ export interface Technology {
   logo: string;
 }
 
+// path de imagen que debe terminar en .webp
+export type WebPPath = `${string}.webp`;
+
 export interface Project {
   id: string;
   title: string;
@@ -23,7 +26,7 @@ export interface Project {
   description: string;
   highlights: string[];
   stack: string[];
-  image: string;
+  image: WebPPath;
   color: string;
   github: string;
   githubFront?: string;
@@ -48,7 +51,7 @@ export interface Buttons {
 export interface Experience {
   id: string;
   projectTitle: string;
-  image: string;
+  image: WebPPath;
   role: string;
   client: string;
   country: string;
