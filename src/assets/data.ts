@@ -14,7 +14,10 @@ export const projects: Project[] = projectsRaw as Project[];
 
 // ─── Technologies ────────────────────────────────────────────────────────────
 export const technologies: Technology[] = technologiesRaw as Technology[];
-
+// Lookup map: tech name → logo (class or URL)
+export const techMap: Record<string, string> = Object.fromEntries(
+   technologies.map((t) => [t.text, t.logo])
+);
 // ─── Buttons / Links ─────────────────────────────────────────────────────────
 export const buttons: Buttons[] = buttonsRaw as Buttons[];
 

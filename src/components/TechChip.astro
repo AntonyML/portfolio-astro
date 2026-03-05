@@ -1,0 +1,22 @@
+---
+import { techMap } from '../assets/data';
+
+interface Props {
+  tech: string;
+}
+
+const { tech } = Astro.props;
+const logo = techMap[tech];
+const isUrl = logo?.startsWith('http');
+---
+
+<span class='inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-white/5 text-zinc-300 border border-white/8 tracking-wide'>
+  {logo && (
+    isUrl ? (
+      <img src={logo} alt={tech} class='w-3.5 h-3.5 object-contain opacity-70' />
+    ) : (
+      <i class={`${logo} text-sm leading-none opacity-80`}></i>
+    )
+  )}
+  {tech}
+</span>

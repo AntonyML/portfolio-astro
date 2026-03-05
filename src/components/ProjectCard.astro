@@ -1,4 +1,6 @@
 ---
+import TechChip from './TechChip.astro';
+
 interface Props {
    id:          string;
    title:       string;
@@ -60,9 +62,7 @@ const { id, title, type, role, description, stack, image, color } = Astro.props;
       <!-- Stack chips -->
       <div class='flex flex-wrap gap-1.5 pt-1'>
          {stack.map((tech) => (
-            <span class='px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-white/5 text-zinc-300 border border-white/8 tracking-wide'>
-               {tech}
-            </span>
+            <TechChip tech={tech} />
          ))}
       </div>
 

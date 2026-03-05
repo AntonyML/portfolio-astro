@@ -2,6 +2,7 @@
 const { id } = Astro.params;
 import Layout from '../layouts/Layout.astro';
 import { projects, buttons } from '../assets/data';
+import TechChip from '../components/TechChip.astro';
 
 export function getStaticPaths() {
    return projects.map((project) => ({
@@ -91,12 +92,7 @@ if (!card) {
          <!-- Stack -->
          <div class='flex flex-wrap gap-2 pt-1'>
             {card.stack.map((tech) => (
-               <span
-                  class='px-3 py-1 rounded-full text-xs font-medium text-zinc-200 border tracking-wide'
-                  style={`border-color: ${card.color}50; background-color: ${card.color}12;`}
-               >
-                  {tech}
-               </span>
+               <TechChip tech={tech} />
             ))}
          </div>
 
