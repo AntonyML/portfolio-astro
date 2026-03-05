@@ -26,6 +26,16 @@ export interface Project {
   image: string;
   color: string;
   github: string;
+  githubFront?: string;
+  githubBack?: string;
+  // Engineering Case Study fields
+  challenge?: string;
+  solution?: string;
+  architecture?: string;
+  testing?: string;
+  management?: string;
+  impact?: string;
+  artifacts?: string[];
 }
 
 export interface Buttons {
@@ -51,4 +61,5 @@ export interface Experience {
   impact: string;
   highlights: string[];
   stack: string[];
+  github?: string;
 }

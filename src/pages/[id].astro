@@ -33,7 +33,7 @@ if (!card) {
       <a href='/#projects'
          class='inline-flex items-center gap-2 text-sm font-medium text-zinc-500 hover:text-white transition-colors duration-200 mb-10'>
          <i class={`${buttons[0].back} text-base`}></i>
-         Volver a proyectos
+         Volver a casos de estudio
       </a>
 
       <div class='flex flex-col lg:flex-row gap-10 items-start'>
@@ -42,23 +42,40 @@ if (!card) {
          <div class='w-full lg:w-72 xl:w-80 shrink-0 lg:sticky lg:top-24'>
             <img src={`/${id}.jpg`} alt={card.title}
                class='w-full rounded-2xl object-cover object-top shadow-2xl ring-1 ring-white/10' />
-            <div class='mt-4'>
-               {
-                  card.github ? (
-                     <a href={card.github} target='_blank' rel='noopener noreferrer'
-                        class='flex items-center justify-center gap-2 w-full px-5 py-2.5 rounded-xl text-sm font-semibold text-white transition-all duration-300 hover:brightness-110'
-                        style={`background-color: ${card.color}`}>
-                        <i class={`${buttons[0].github} text-base`}></i>
-                        Ver Repositorio
-                     </a>
-                  ) : (
-                     <span class='flex items-center justify-center gap-2 w-full px-5 py-2.5 rounded-xl text-sm font-semibold text-white/25 cursor-not-allowed border border-white/8'
-                        title='Repositorio privado'>
-                        <i class={`${buttons[0].github} text-base`}></i>
-                        Repositorio privado
-                     </span>
-                  )
-               }
+            <div class='mt-4 flex flex-col gap-2'>
+               {(card.githubFront || card.githubBack) ? (
+                  <>
+                     {card.githubFront && (
+                        <a href={card.githubFront} target='_blank' rel='noopener noreferrer'
+                           class='flex items-center justify-center gap-2 w-full px-5 py-2.5 rounded-xl text-sm font-semibold text-white transition-all duration-300 hover:brightness-110'
+                           style={`background-color: ${card.color}`}>
+                           <i class={`${buttons[0].github} text-base`}></i>
+                           Frontend
+                        </a>
+                     )}
+                     {card.githubBack && (
+                        <a href={card.githubBack} target='_blank' rel='noopener noreferrer'
+                           class='flex items-center justify-center gap-2 w-full px-5 py-2.5 rounded-xl text-sm font-semibold text-white transition-all duration-300 hover:brightness-110'
+                           style={`background-color: ${card.color}99`}>
+                           <i class={`${buttons[0].github} text-base`}></i>
+                           Backend
+                        </a>
+                     )}
+                  </>
+               ) : card.github ? (
+                  <a href={card.github} target='_blank' rel='noopener noreferrer'
+                     class='flex items-center justify-center gap-2 w-full px-5 py-2.5 rounded-xl text-sm font-semibold text-white transition-all duration-300 hover:brightness-110'
+                     style={`background-color: ${card.color}`}>
+                     <i class={`${buttons[0].github} text-base`}></i>
+                     Ver Repositorio
+                  </a>
+               ) : (
+                  <span class='flex items-center justify-center gap-2 w-full px-5 py-2.5 rounded-xl text-sm font-semibold text-white/25 cursor-not-allowed border border-white/8'
+                     title='Repositorio privado'>
+                     <i class={`${buttons[0].github} text-base`}></i>
+                     Repositorio privado
+                  </span>
+               )}
             </div>
          </div>
 
@@ -99,6 +116,65 @@ if (!card) {
                   style={`background-color: ${card.color}10; border: 1px solid ${card.color}30`}>
                   <p class='text-[10px] font-bold uppercase tracking-widest mb-2' style={`color: ${card.color}`}>Impacto</p>
                   <p class='text-zinc-200 text-sm leading-relaxed'>{job.impact}</p>
+               </div>
+            )}
+
+            <!-- ═══ Engineering Case Study Sections ═══ -->
+
+            {card.challenge && (
+               <div class='rounded-2xl bg-white/3 border border-white/8 px-5 py-4'>
+                  <p class='text-[10px] font-bold uppercase tracking-widest text-zinc-500 mb-2'>Desafio de Negocio</p>
+                  <p class='text-zinc-300 text-sm leading-relaxed'>{card.challenge}</p>
+               </div>
+            )}
+
+            {card.solution && (
+               <div class='rounded-2xl bg-white/3 border border-white/8 px-5 py-4'>
+                  <p class='text-[10px] font-bold uppercase tracking-widest mb-2' style={`color: ${card.color}`}>Solucion de Ingenieria</p>
+                  <p class='text-zinc-300 text-sm leading-relaxed'>{card.solution}</p>
+               </div>
+            )}
+
+            {card.architecture && (
+               <div class='rounded-2xl bg-white/3 border border-white/8 px-5 py-4'>
+                  <p class='text-[10px] font-bold uppercase tracking-widest text-zinc-500 mb-2'>Arquitectura y Decisiones Tecnicas</p>
+                  <p class='text-zinc-300 text-sm leading-relaxed'>{card.architecture}</p>
+               </div>
+            )}
+
+            {card.testing && (
+               <div class='rounded-2xl px-5 py-4'
+                  style={`background-color: ${card.color}08; border: 1px solid ${card.color}20`}>
+                  <p class='text-[10px] font-bold uppercase tracking-widest mb-2' style={`color: ${card.color}`}>Testing y Aseguramiento de Calidad</p>
+                  <p class='text-zinc-300 text-sm leading-relaxed'>{card.testing}</p>
+               </div>
+            )}
+
+            {card.management && (
+               <div class='rounded-2xl bg-white/3 border border-white/8 px-5 py-4'>
+                  <p class='text-[10px] font-bold uppercase tracking-widest text-zinc-500 mb-2'>Gestion del Proyecto</p>
+                  <p class='text-zinc-300 text-sm leading-relaxed'>{card.management}</p>
+               </div>
+            )}
+
+            {card.impact && (
+               <div class='rounded-2xl px-5 py-4'
+                  style={`background-color: ${card.color}10; border: 1px solid ${card.color}30`}>
+                  <p class='text-[10px] font-bold uppercase tracking-widest mb-2' style={`color: ${card.color}`}>Impacto y Resultados</p>
+                  <p class='text-zinc-200 text-sm leading-relaxed'>{card.impact}</p>
+               </div>
+            )}
+
+            {card.artifacts && card.artifacts.length > 0 && (
+               <div class='rounded-2xl bg-white/3 border border-white/8 px-5 py-4'>
+                  <p class='text-[10px] font-bold uppercase tracking-widest text-zinc-500 mb-3'>Artefactos de Ingenieria</p>
+                  <div class='flex flex-wrap gap-2'>
+                     {card.artifacts.map((artifact) => (
+                        <span class='px-3 py-1 rounded-full text-xs font-medium text-zinc-300 bg-white/5 border border-white/10'>
+                           {artifact}
+                        </span>
+                     ))}
+                  </div>
                </div>
             )}
 
@@ -204,31 +280,56 @@ if (!card) {
                class='flex items-center gap-2 text-sm font-medium text-zinc-400 hover:text-white transition-colors duration-200'
             >
                <i class={`${buttons[0].back} text-base`}></i>
-               Volver
+               Volver a casos de estudio
             </a>
 
-            {
-               card.github ? (
-                  <a
-                     href={card.github}
-                     target='_blank'
-                     rel='noopener noreferrer'
-                     class='flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold text-white transition-all duration-300 hover:brightness-110 hover:scale-[1.03]'
-                     style={`background-color: ${card.color}`}
-                  >
-                     <i class={`${buttons[0].github} text-base`}></i>
-                     Ver Repositorio
-                  </a>
-               ) : (
-                  <span
-                     class='flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold text-white/30 cursor-not-allowed border border-white/10'
-                     title='Repositorio privado o no disponible'
-                  >
-                     <i class={`${buttons[0].github} text-base`}></i>
-                     Repositorio privado
-                  </span>
-               )
-            }
+            {(card.githubFront || card.githubBack) ? (
+               <>
+                  {card.githubFront && (
+                     <a
+                        href={card.githubFront}
+                        target='_blank'
+                        rel='noopener noreferrer'
+                        class='flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold text-white transition-all duration-300 hover:brightness-110 hover:scale-[1.03]'
+                        style={`background-color: ${card.color}`}
+                     >
+                        <i class={`${buttons[0].github} text-base`}></i>
+                        Frontend
+                     </a>
+                  )}
+                  {card.githubBack && (
+                     <a
+                        href={card.githubBack}
+                        target='_blank'
+                        rel='noopener noreferrer'
+                        class='flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold text-white transition-all duration-300 hover:brightness-110 hover:scale-[1.03]'
+                        style={`background-color: ${card.color}99`}
+                     >
+                        <i class={`${buttons[0].github} text-base`}></i>
+                        Backend
+                     </a>
+                  )}
+               </>
+            ) : card.github ? (
+               <a
+                  href={card.github}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  class='flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold text-white transition-all duration-300 hover:brightness-110 hover:scale-[1.03]'
+                  style={`background-color: ${card.color}`}
+               >
+                  <i class={`${buttons[0].github} text-base`}></i>
+                  Ver Repositorio
+               </a>
+            ) : (
+               <span
+                  class='flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold text-white/30 cursor-not-allowed border border-white/10'
+                  title='Repositorio privado o no disponible'
+               >
+                  <i class={`${buttons[0].github} text-base`}></i>
+                  Repositorio privado
+               </span>
+            )}
          </div>
 
       </div>

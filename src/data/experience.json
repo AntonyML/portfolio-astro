@@ -1,48 +1,50 @@
 [
   {
     "id": "sistema-ventas-rd",
-    "projectTitle": "Sistema de Ventas",
+    "projectTitle": "Sistema de Ventas Empresarial",
     "image": "image-sistema-ventas",
-    "role": "Fullstack Developer – Freelance",
+    "role": "Ingeniero de Software - Consultoria Internacional",
     "client": "Empresa Privada",
-    "country": "República Dominicana",
-    "flag": "🇩🇴",
-    "origin": "🇨🇷 Costa Rica → 🇩🇴 República Dominicana",
-    "period": "2022 – 2024",
+    "country": "Republica Dominicana",
+    "flag": "",
+    "origin": "Costa Rica → Republica Dominicana",
+    "period": "2022 - 2024",
     "color": "#4CAF50",
-    "description": "Sistema de escritorio modular para automatizar facturación, inventario y gestión comercial completa de una empresa dominicana. Primer contrato internacional remunerado, con entrega y soporte remoto entre países.",
-    "context": "Arquitectura modular escalable con interfaz gráfica, persistencia en base de datos relacional, validaciones robustas, módulos de artículos, clientes, proveedores, facturación, inventario y reportes dinámicos.",
-    "impact": "Reducción significativa de errores operativos y tiempos administrativos. Sistema implementado y funcionando en producción desde el primer día de entrega.",
+    "description": "Sistema empresarial modular para automatizacion de facturacion, inventario y gestion comercial completa. Primer contrato de consultoria internacional remunerado, con diseño, implementacion y soporte remoto entre Costa Rica y Republica Dominicana.",
+    "context": "Arquitectura modular orientada a negocio con separacion de modulos por dominio comercial: articulos, clientes, proveedores, facturacion, inventario y reportes dinamicos. Sistema de escritorio con persistencia en base de datos relacional SQL Server, validaciones a nivel de dominio, y logica de negocio encapsulada en servicios. Diseñado para mantenibilidad a largo plazo y extension de funcionalidades sin afectar modulos existentes.",
+    "impact": "El sistema elimino los procesos manuales de facturacion e inventario, reduciendo errores operativos y tiempos administrativos de forma significativa. Implementado y funcionando en produccion desde el primer dia de entrega, con soporte remoto internacional continuo. La arquitectura modular permitio al cliente solicitar extensiones funcionales sin impacto sobre los modulos existentes.",
     "highlights": [
-      "Primer contrato internacional CR → RD",
-      "Módulos: artículos, clientes, proveedores, facturación e inventario",
-      "Sistema implementado y en producción",
-      "Entrega y soporte 100% remoto desde Costa Rica",
-      "Reportes y consultas dinámicas"
+      "Consultoria internacional: Costa Rica → Republica Dominicana",
+      "Arquitectura modular orientada a dominio de negocio",
+      "Modulos: facturacion, inventario, clientes, proveedores, reportes",
+      "Sistema en produccion con soporte remoto internacional",
+      "Reduccion de errores operativos y tiempos administrativos"
     ],
-    "stack": ["C#", ".NET Framework", "SQL Server"]
+    "stack": ["C#", ".NET", "SQL Server"],
+    "github": "https://github.com/AntonyML/Sistema-de-Ventas"
   },
   {
     "id": "gestion-municiones",
-    "projectTitle": "Sistema de Gestión de Municiones",
+    "projectTitle": "Sistema de Gestion de Inventario Critico",
     "image": "image-municiones",
-    "role": "Fullstack Developer – Freelance",
+    "role": "Ingeniero de Software - Seguridad y Trazabilidad",
     "client": "Cliente Privado",
     "country": "Costa Rica",
-    "flag": "🇨🇷",
-    "origin": "🇨🇷 Costa Rica",
-    "period": "2023 – 2024",
+    "flag": "",
+    "origin": "Costa Rica",
+    "period": "2023 - 2024",
     "color": "#3F51B5",
-    "description": "Sistema empresarial de ventas e inventario desarrollado para cliente privado. Manejo de insumos sensibles con énfasis en seguridad de acceso, trazabilidad de movimientos y recuperación de contraseña.",
-    "context": "Segundo proyecto freelance remunerado. Incluó gestión segura de usuarios con recuperación de contraseña, control de inventario sensible, trazabilidad de movimientos y arquitectura diseñada para escalar con nuevos módulos.",
-    "impact": "Cliente con operaciones activas desde la entrega. Sistema diseñado para crecer: preparado para integración con módulos de reportes, roles y API REST en el futuro.",
+    "description": "Sistema empresarial para gestion de inventario sensible con enfasis en seguridad de acceso, trazabilidad completa de movimientos y control estricto de operaciones. Diseñado con arquitectura escalable preparada para integracion con modulos futuros.",
+    "context": "Arquitectura diseñada para manejo de datos sensibles con control de acceso seguro, trazabilidad completa de movimientos de inventario, gestion de usuarios con recuperacion de contraseña segura, y auditoria de operaciones criticas. El sistema implementa validaciones estrictas a nivel de dominio y persistencia en PostgreSQL con indices optimizados para consultas de trazabilidad. Arquitectura preparada para escalar con integracion de roles, reportes avanzados y API REST.",
+    "impact": "El sistema permitio al cliente centralizar el control de inventario sensible con trazabilidad completa de cada movimiento, eliminando registros manuales propensos a errores. La gestion segura de accesos y la auditoria de operaciones criticas mejoraron significativamente la rendicion de cuentas. Sistema en produccion activa desde la entrega, con arquitectura lista para extensiones futuras.",
     "highlights": [
-      "Segundo contrato freelance pagado",
-      "Control de inventario sensible con trazabilidad completa",
-      "Gestión segura de usuarios y recuperación de contraseña",
-      "Arquitectura lista para escalar a nuevos módulos",
-      "Implementación en entorno real de producción"
+      "Software para manejo de datos sensibles con control de seguridad",
+      "Trazabilidad completa de movimientos de inventario",
+      "Gestion segura de usuarios con recuperacion de contraseña",
+      "Auditoria de operaciones criticas",
+      "Arquitectura escalable preparada para modulos futuros"
     ],
-    "stack": ["C#", ".NET", "PostgreSQL"]
+    "stack": ["C#", ".NET", "PostgreSQL"],
+    "github": "https://github.com/AntonyML/Armeria-Prime-Management-System"
   }
 ]

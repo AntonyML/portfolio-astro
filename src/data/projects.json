@@ -1,55 +1,80 @@
 [
   {
     "id": "hogar-ancianos",
-    "title": "Sistema Integral de Gestión – Hogar de Ancianos",
-    "type": "Social / Institucional",
-    "role": "Arquitecto y Desarrollador Principal",
-    "description": "Plataforma empresarial multiplataforma diseñada para digitalizar la gestión administrativa y médica de un hogar de ancianos (34 residentes). Arquitecturada bajo Clean Architecture y desplegada como aplicación de escritorio mediante Electron, con autenticación JWT, 2FA, control de roles y testing completo (Unit + E2E).",
+    "title": "Sistema Integral de Gestion Institucional",
+    "type": "Impacto Social / Clean Architecture",
+    "role": "Arquitecto de Software y Desarrollador Principal",
+    "description": "Plataforma empresarial multiplataforma construida bajo Clean Architecture para digitalizar la gestion administrativa y medica de una institucion social con 34 residentes. Diseñada con separacion estricta de capas, autenticacion JWT con 2FA, control de roles granular y estrategia de testing integral (Unit + E2E).",
     "highlights": [
-      "Clean Architecture",
-      "Aplicación Desktop con Electron",
-      "JWT + 2FA + Roles",
-      "Testing Unitario y E2E",
-      "Impacto social real"
+      "Clean Architecture con separacion de dominio, aplicacion e infraestructura",
+      "Aplicacion desktop multiplataforma con Electron",
+      "Autenticacion segura: JWT + 2FA + Control de Roles",
+      "Testing automatizado: Vitest (unitario) + Playwright (E2E)",
+      "Impacto social real: digitalizacion de procesos criticos"
     ],
-    "stack": ["React", "TypeScript", "Electron", "Vite", "TailwindCSS"],
+    "stack": ["React", "TypeScript", "Electron", "NestJS", "Vitest", "Playwright", "TailwindCSS"],
     "image": "image-hogar-ancianos",
     "color": "#0b7bfc",
-    "github": ""
+    "github": "",
+    "githubFront": "https://github.com/Proyecto-Hogar-Ancianos/frontend_proton_react_hogar_de_ancianos",
+    "githubBack": "https://github.com/Proyecto-Hogar-Ancianos/backend_nest_js_hogar_de_ancianos",
+    "challenge": "Una institucion social responsable de 34 residentes operaba con procesos manuales fragmentados: registros medicos en papel, control de medicamentos sin trazabilidad, y gestion administrativa sin centralizacion. Los riesgos operativos incluian perdida de informacion critica de salud, errores en la administracion de medicamentos y ausencia total de auditoria sobre las acciones del personal.",
+    "solution": "Se diseño una plataforma empresarial multiplataforma bajo Clean Architecture, con separacion estricta entre las capas de dominio, aplicacion e infraestructura. El sistema implementa autenticacion JWT con segundo factor (2FA), control de acceso basado en roles con permisos granulares, y una capa de persistencia desacoplada. La arquitectura frontend sigue el patron de componentes reutilizables con estado centralizado, mientras que el backend expone una API REST documentada con validaciones a nivel de dominio.",
+    "architecture": "Patron: Clean Architecture (Frontend) + Arquitectura Hexagonal (Backend NestJS). El backend implementa inyeccion de dependencias nativa de NestJS con modulos desacoplados por dominio. La capa de presentacion se construyo como aplicacion Electron multiplataforma con React y TypeScript, permitiendo despliegue en Windows, macOS y Linux desde un unico codebase. La comunicacion entre capas se realiza mediante interfaces y DTOs tipados, garantizando contratos claros entre frontend y backend.",
+    "testing": "Estrategia de testing en dos niveles: pruebas unitarias con Vitest para logica de negocio y servicios, y pruebas End-to-End con Playwright para validar flujos criticos del usuario (autenticacion, gestion de residentes, administracion de medicamentos). La cobertura de testing se enfoco en los caminos criticos del sistema donde un error podria impactar directamente la salud de los residentes.",
+    "management": "Proyecto ad-honorem liderado como arquitecto y desarrollador principal. Se establecio la estructura del repositorio, las convenciones de codigo, la estrategia de branching y los estandares de calidad. Coordinacion directa con el personal administrativo de la institucion para levantamiento de requerimientos y validacion iterativa.",
+    "impact": "El sistema permitio centralizar la gestion medica y administrativa de la institucion, eliminando registros en papel y reduciendo errores en la administracion de medicamentos. Se implemento trazabilidad completa de acciones del personal mediante auditorias automaticas, mejorando la rendicion de cuentas y la seguridad operativa de la institucion.",
+    "artifacts": ["Clean Architecture", "JWT + 2FA", "Electron Desktop", "Vitest Unit Tests", "Playwright E2E", "REST API documentada", "Control de roles granular"]
   },
   {
     "id": "britany-salon",
-    "title": "Britany Salon – Plataforma Empresarial",
-    "type": "Académico Empresarial",
-    "role": "Backend, Frontend, QA y Scrum Master",
-    "description": "Sistema full stack para gestión de citas, clientes e inventario en salón de belleza. Proyecto colaborativo desarrollado bajo metodología Scrum con repositorios separados (Front, Back, Testing) y rotación de roles dentro del equipo.",
+    "title": "Britany Salon - Plataforma de Gestion Empresarial",
+    "type": "Liderazgo Tecnico / Full Stack",
+    "role": "Backend Developer, Frontend Developer, QA Engineer y Scrum Master",
+    "description": "Sistema full stack empresarial para gestion de citas, clientes, inventario y operaciones de negocio. Desarrollado bajo metodologia Scrum con repositorios desacoplados (Frontend, Backend, Testing), rotacion de roles y gestion completa del ciclo de desarrollo con cliente real.",
     "highlights": [
-      "Trabajo colaborativo real",
-      "Scrum con Taiga (Epics y Dailys)",
-      "Backend + Frontend desacoplado",
-      "Testing y control de calidad",
-      "Gestión de tareas multirol"
+      "Liderazgo tecnico como Scrum Master y desarrollador multirol",
+      "Metodologia Scrum con Taiga: epicas, sprints y dailys",
+      "Arquitectura desacoplada: Frontend y Backend en repositorios independientes",
+      "Aseguramiento de calidad: pruebas funcionales y de integracion",
+      "Ciclo completo de desarrollo con cliente empresarial real"
     ],
     "stack": ["C#", ".NET", "SQL Server", "React"],
     "image": "image-britany-salon",
     "color": "#9c27b0",
-    "github": ""
+    "github": "",
+    "githubFront": "https://git.ucr.ac.cr/BRITANY.VILLALOBOS/grupo_4_proyectofront_2026",
+    "githubBack": "https://git.ucr.ac.cr/BRITANY.VILLALOBOS/grupo_4_proyectoback_2026",
+    "challenge": "Un salon de belleza con operaciones en crecimiento enfrentaba cuellos de botella operativos: gestion manual de citas con doble reserva frecuente, inventario de productos sin control automatizado, y ausencia de un sistema centralizado para la relacion con clientes. El negocio requeria una plataforma que integrara los procesos comerciales criticos en una solucion unificada.",
+    "solution": "Se diseño un sistema full stack con arquitectura desacoplada: backend en .NET con patron de capas (Controllers, Services, Repositories) y frontend en React con componentes modulares. La comunicacion entre capas se realiza mediante API REST con validaciones a nivel de entrada y logica de negocio. El sistema cubre los modulos de gestion de citas, clientes, inventario y facturacion con reglas de negocio especificas del dominio.",
+    "architecture": "Patron: Layered Architecture (.NET Backend) + Component-Based Architecture (React Frontend). El backend implementa el patron Repository para abstraccion de acceso a datos sobre SQL Server, con servicios de aplicacion que encapsulan la logica de negocio. El frontend consume la API mediante servicios HTTP centralizados con manejo de estado por contexto. Los repositorios estan separados por responsabilidad (Front, Back, Testing) siguiendo principios de despliegue independiente.",
+    "testing": "Estrategia de QA con pruebas funcionales manuales estructuradas por sprint, pruebas de integracion entre frontend y backend, y validaciones de aceptacion con el cliente al cierre de cada iteracion. El repositorio de Testing contiene los planes de prueba documentados y los reportes de ejecucion por sprint.",
+    "management": "Proyecto gestionado con Scrum utilizando Taiga como herramienta de planificacion. Se definieron epicas por modulo funcional, sprints de dos semanas, dailys documentados y retrospectivas. Como Scrum Master, se facilito la coordinacion del equipo, la priorizacion del backlog y la comunicacion con el cliente para validacion de entregas incrementales.",
+    "impact": "Se entrego un sistema funcional que automatizo los procesos criticos del negocio: la gestion de citas redujo las dobles reservas, el modulo de inventario permitio control en tiempo real de productos, y la plataforma centralizo la informacion de clientes. El cliente valido cada entrega incremental, confirmando la alineacion del sistema con sus necesidades operativas reales.",
+    "artifacts": ["Scrum con Taiga", "Repositorios desacoplados", "Planes de prueba por sprint", "API REST documentada", "Gestion de epicas y sprints"]
   },
   {
     "id": "automatizacion-empresarial",
-    "title": "Automatización Empresarial – Microservicios",
-    "type": "Arquitectura / Enterprise",
-    "role": "Diseño y Desarrollo de Microservicios",
-    "description": "Ecosistema basado en microservicios para orquestación empresarial avanzada. Integra servicios en Python, .NET y Node.js con mensajería distribuida (Kafka), procesamiento en segundo plano (Hangfire) y despliegues automatizados mediante configuración YAML.",
+    "title": "Ecosistema de Microservicios Empresariales",
+    "type": "Arquitectura Distribuida / Enterprise",
+    "role": "Arquitecto de Sistemas y Desarrollador de Microservicios",
+    "description": "Ecosistema de microservicios poliglota para orquestacion empresarial avanzada. Integra servicios en Python, .NET y Node.js con mensajeria asincrona distribuida (Apache Kafka), procesamiento en segundo plano (Hangfire), y configuraciones de despliegue automatizado mediante YAML. Diseñado para explorar patrones de arquitectura empresarial a escala.",
     "highlights": [
-      "Arquitectura de microservicios",
-      "Kafka para mensajería distribuida",
-      "Workers y procesamiento en background",
-      "Alta escalabilidad y resiliencia"
+      "Arquitectura de microservicios poliglota (Python, .NET, Node.js)",
+      "Mensajeria asincrona distribuida con Apache Kafka",
+      "Workers y procesamiento en background con Hangfire",
+      "Comunicacion entre servicios con boundaries definidos",
+      "Configuraciones de despliegue automatizado (YAML)"
     ],
-    "stack": ["Python", ".NET", "Node.js", "Kafka"],
+    "stack": ["Python", ".NET", "Node.js", "Kafka", "Hangfire", "YAML"],
     "image": "image-automation",
     "color": "#5c2d91",
-    "github": ""
+    "github": "https://github.com/Proyecto-Info-Aplicada",
+    "challenge": "Los sistemas monoliticos empresariales enfrentan limitaciones criticas de escalabilidad, despliegue independiente y resiliencia ante fallos. Se requeria diseñar un ecosistema que demostrara como descomponer responsabilidades de negocio en servicios autonomos con comunicacion asincrona, tolerancia a fallos y capacidad de escalar componentes de forma independiente.",
+    "solution": "Se diseño un ecosistema de microservicios poliglota donde cada servicio encapsula un bounded context de negocio especifico. La comunicacion entre servicios se realiza mediante Apache Kafka como broker de mensajeria asincrona, garantizando desacoplamiento temporal y resiliencia ante fallos parciales. Los procesos de larga duracion se delegan a workers en segundo plano mediante Hangfire, permitiendo procesamiento asincrono sin bloquear los flujos principales.",
+    "architecture": "Patron: Microservices Architecture con Event-Driven Communication. Cada microservicio se implementa en el lenguaje mas adecuado para su dominio: Python para procesamiento de datos, .NET para logica de negocio empresarial, y Node.js para servicios de alta concurrencia. Kafka actua como bus de eventos central con topicos por dominio. Hangfire gestiona jobs recurrentes y tareas diferidas en los servicios .NET. Las configuraciones de despliegue se definen en archivos YAML parametrizados.",
+    "testing": "Validacion de contratos entre servicios mediante pruebas de integracion que verifican la estructura de mensajes en los topicos de Kafka. Pruebas unitarias por servicio individual para validar logica de dominio aislada. Monitoreo de health checks por servicio para verificar disponibilidad del ecosistema.",
+    "impact": "El ecosistema demuestra dominio sobre patrones de arquitectura distribuida empresarial: descomposicion de servicios, comunicacion asincrona, procesamiento en background, y orquestacion de sistemas heterogeneos. Representa capacidad para diseñar, implementar y mantener arquitecturas de software a escala empresarial.",
+    "artifacts": ["Apache Kafka (mensajeria)", "Hangfire (background jobs)", "Configuraciones YAML", "Microservicios poliglota", "Event-Driven Architecture"]
   }
 ]
