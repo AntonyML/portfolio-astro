@@ -3,8 +3,10 @@
 import { sync } from 'glob';
 
 
-// asegurarse de que sólo hay .webp en public
-const bad: string[] = sync('public/**/*.{png,jpg,jpeg,gif,svg,bmp}');
+// asegurarse de que sólo hay .webp en public (se excluye la carpeta favicon)
+const bad: string[] = sync('public/**/*.{png,jpg,jpeg,gif,svg,bmp}', {
+  ignore: ['public/favicon/**'],
+});
 if (bad.length) {
   console.error('¡Se han encontrado imágenes no‑WebP!');
   bad.forEach((f: string) => console.error('  ' + f));
