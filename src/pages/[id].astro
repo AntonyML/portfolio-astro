@@ -110,16 +110,28 @@ if (!card) {
                Volver
             </a>
 
-            <a
-               href={buttons[0].hrefgithub}
-               target='_blank'
-               rel='noopener noreferrer'
-               class='flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold text-white transition-all duration-300 hover:brightness-110 hover:scale-[1.03]'
-               style={`background-color: ${card.color}`}
-            >
-               <i class={`${buttons[0].github} text-base`}></i>
-               Ver Repositorio
-            </a>
+            {
+               card.github ? (
+                  <a
+                     href={card.github}
+                     target='_blank'
+                     rel='noopener noreferrer'
+                     class='flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold text-white transition-all duration-300 hover:brightness-110 hover:scale-[1.03]'
+                     style={`background-color: ${card.color}`}
+                  >
+                     <i class={`${buttons[0].github} text-base`}></i>
+                     Ver Repositorio
+                  </a>
+               ) : (
+                  <span
+                     class='flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold text-white/30 cursor-not-allowed border border-white/10'
+                     title='Repositorio privado o no disponible'
+                  >
+                     <i class={`${buttons[0].github} text-base`}></i>
+                     Repositorio privado
+                  </span>
+               )
+            }
          </div>
 
       </div>

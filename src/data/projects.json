@@ -14,7 +14,8 @@
     ],
     "stack": ["React", "TypeScript", "Electron", "Vite", "TailwindCSS"],
     "image": "image-hogar-ancianos",
-    "color": "#0b7bfc"
+    "color": "#0b7bfc",
+    "github": ""
   },
   {
     "id": "britany-salon",
@@ -31,7 +32,8 @@
     ],
     "stack": ["C#", ".NET", "SQL Server", "React"],
     "image": "image-britany-salon",
-    "color": "#9c27b0"
+    "color": "#9c27b0",
+    "github": ""
   },
   {
     "id": "sistema-ventas-rd",
@@ -47,7 +49,8 @@
     ],
     "stack": ["C#", ".NET Framework", "SQL Server"],
     "image": "image-sistema-ventas",
-    "color": "#4CAF50"
+    "color": "#4CAF50",
+    "github": ""
   },
   {
     "id": "automatizacion-empresarial",
@@ -63,7 +66,8 @@
     ],
     "stack": ["Python", ".NET", "Node.js", "Kafka"],
     "image": "image-automation",
-    "color": "#5c2d91"
+    "color": "#5c2d91",
+    "github": ""
   },
   {
     "id": "gestion-municiones",
@@ -79,7 +83,8 @@
     ],
     "stack": ["C#", ".NET", "PostgreSQL"],
     "image": "image-municiones",
-    "color": "#3F51B5"
+    "color": "#3F51B5",
+    "github": ""
   },
   {
     "id": "tribux-saas",
@@ -95,6 +100,7 @@
     ],
     "stack": ["Next.js", "Node.js", "PostgreSQL"],
     "image": "image-tribux",
-    "color": "#009688"
+    "color": "#009688",
+    "github": ""
   }
 ]

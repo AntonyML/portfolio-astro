@@ -25,6 +25,7 @@ export interface Project {
   stack: string[];
   image: string;
   color: string;
+  github: string;
 }
 
 export interface Buttons {
