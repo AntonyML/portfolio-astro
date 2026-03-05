@@ -35,12 +35,10 @@ document.addEventListener('astro:page-load', () => {
 
    addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
-         // Tech modal
          if (modal && !modal.classList.contains('hidden')) {
             modal.classList.remove('flex');
             modal.classList.add('hidden');
          }
-         // Contact modal
          if (contactModal && !contactModal.classList.contains('hidden')) {
             closeContactModal();
          }
@@ -79,15 +77,12 @@ document.addEventListener('astro:page-load', () => {
       document.getElementById('form')?.reset();
    });
 
-   /*=============== Email JS ===============*/
-   // Referencia al botón
+   /*=============== Contact Form → Cloudflare Worker ===============*/
    const btn = document.getElementById('button');
 
-   // Evento submit
-   document.getElementById('form')?.addEventListener('submit', function (event) {
+   document.getElementById('form')?.addEventListener('submit', async function (event) {
       event.preventDefault();
 
-      // Validar campos obligatorios
       const name = this.elements['from_name'].value.trim();
       const email = this.elements['from_email'].value.trim();
       const message = this.elements['message'].value.trim();
@@ -97,41 +92,43 @@ document.addEventListener('astro:page-load', () => {
          return;
       }
 
-      // Validar formato básico de email
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(email)) {
          showToast('Por favor, ingresa un correo electrónico válido.', 'error');
          return;
       }
 
-      // Agregar la hora actual al campo oculto
-      const timeField = document.getElementById('time');
-      if (timeField) {
-         timeField.value = new Date().toLocaleString();
-      }
-
       btn.textContent = 'Enviando...';
+      btn.disabled = true;
 
-      const serviceID = 'service_6gch5fb';
-      const templateID = 'template_qc6164s';
+      try {
+         const response = await fetch('https://contact-worke.antony-mongelopez.workers.dev', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, email, message }),
+         });
 
-      emailjs.sendForm(serviceID, templateID, this).then(
-         () => {
-            btn.textContent = 'Mensaje enviado';
+         const data = await response.json();
+
+         if (response.ok && data.success) {
+            btn.textContent = 'Mensaje enviado ✓';
             showToast('¡Mensaje enviado con éxito!', 'success');
-            this.reset(); // Limpia el formulario
-            setTimeout(() => {
-               btn.textContent = 'Enviar mensaje';
-            }, 3000); // vuelve a "Enviar mensaje" después de 3 segundos
-         },
-         (err) => {
-            btn.textContent = 'Enviar mensaje';
-            showToast('Error al enviar el mensaje: ' + (err?.text || 'Error desconocido'), 'error');
+            this.reset();
+         } else {
+            throw new Error(data.error || 'Error desconocido');
          }
-      );
+      } catch (err) {
+         showToast('Error al enviar el mensaje: ' + err.message, 'error');
+         btn.textContent = 'Enviar mensaje';
+      } finally {
+         btn.disabled = false;
+         setTimeout(() => {
+            btn.textContent = 'Enviar mensaje';
+         }, 3000);
+      }
    });
 
-   // Función JS para mostrar toast
+   /*=============== Toast ===============*/
    function showToast(message, type = 'success') {
       const toast = document.createElement('div');
       toast.className = `toast show ${type}`;
@@ -148,6 +145,5 @@ document.addEventListener('astro:page-load', () => {
          }, 400);
       }, 3500);
    }
-
 
 });
