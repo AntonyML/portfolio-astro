@@ -36,23 +36,6 @@
     "github": ""
   },
   {
-    "id": "sistema-ventas-rd",
-    "title": "Sistema de Ventas Corporativo",
-    "type": "Comercial",
-    "role": "Full Stack Developer",
-    "description": "Sistema de escritorio modular para automatizar facturación e inventario de un cliente internacional en República Dominicana. Implementado en producción, reduciendo errores operativos y mejorando la trazabilidad comercial.",
-    "highlights": [
-      "Contrato internacional (CR → RD)",
-      "Sistema en producción",
-      "Facturación e inventario integrados",
-      "Proyecto remunerado"
-    ],
-    "stack": ["C#", ".NET Framework", "SQL Server"],
-    "image": "image-sistema-ventas",
-    "color": "#4CAF50",
-    "github": ""
-  },
-  {
     "id": "automatizacion-empresarial",
     "title": "Automatización Empresarial – Microservicios",
     "type": "Arquitectura / Enterprise",
@@ -67,40 +50,6 @@
     "stack": ["Python", ".NET", "Node.js", "Kafka"],
     "image": "image-automation",
     "color": "#5c2d91",
-    "github": ""
-  },
-  {
-    "id": "gestion-municiones",
-    "title": "Sistema de Gestión de Municiones",
-    "type": "Comercial",
-    "role": "Desarrollador Principal",
-    "description": "Sistema empresarial de ventas e inventario desarrollado para cliente privado. Incluye gestión de usuarios, control de inventario sensible y base de datos relacional, con enfoque en seguridad y escalabilidad futura.",
-    "highlights": [
-      "Segundo proyecto remunerado",
-      "Gestión de inventario sensible",
-      "Control de usuarios y recuperación de contraseña",
-      "Implementación en entorno real"
-    ],
-    "stack": ["C#", ".NET", "PostgreSQL"],
-    "image": "image-municiones",
-    "color": "#3F51B5",
-    "github": ""
-  },
-  {
-    "id": "tribux-saas",
-    "title": "Tribux – Plataforma SaaS Tributaria",
-    "type": "SaaS",
-    "role": "Full Stack Developer",
-    "description": "Aplicación SaaS para gestión tributaria de pequeñas empresas. Arquitectura moderna basada en microservicios con frontend en Next.js 15, generación de PDFs y servicios desacoplados para notificaciones y cumplimiento fiscal.",
-    "highlights": [
-      "Arquitectura SaaS moderna",
-      "Microservicios desacoplados",
-      "Generación automática de PDF",
-      "Enfoque en cumplimiento fiscal"
-    ],
-    "stack": ["Next.js", "Node.js", "PostgreSQL"],
-    "image": "image-tribux",
-    "color": "#009688",
     "github": ""
   }
 ]
