@@ -1,0 +1,9 @@
+---
+const { imageName, alt = "", ...rest } = Astro.props;
+
+// Busca todas las imágenes .webp en public/
+const images = import.meta.glob('/public/*.webp', { eager: true });
+const imagePath = `/public/${imageName}.webp`;
+const src = images[imagePath] ? `/${imageName}.webp` : '/no-image.webp';
+---
+<img src={src} alt={alt} {...rest} loading="lazy" />

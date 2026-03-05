@@ -1,4 +1,5 @@
 ---
+import SafeImage from './SafeImage.astro';
 import TechChip from './TechChip.astro';
 
 interface Props {
@@ -29,12 +30,13 @@ const { id, title, type, role, description, stack, image, color } = Astro.props;
          alt={title}
          class='w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105 opacity-70 group-hover:opacity-55'
       />
+---
       <!-- Gradiente al fondo de la imagen -->
-      <div class='absolute inset-0 bg-gradient-to-t from-[#0d0d0f] via-[#0d0d0f]/40 to-transparent'></div>
-
-      <!-- Badge tipo (arriba-izquierda) -->
-      <span
-         class='absolute top-4 left-4 px-3 py-1 rounded-full text-[10px] font-semibold tracking-widest uppercase text-white/90'
+      <SafeImage
+         imageName={image}
+         alt={title}
+         class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105 opacity-70 group-hover:opacity-55"
+      />
          style={`background-color: ${color}30; border: 1px solid ${color}60;`}
       >
          {type}

@@ -3,6 +3,7 @@ const { id } = Astro.params;
 import Layout from '../layouts/Layout.astro';
 import { projects, buttons, experience } from '../assets/data';
 import TechChip from '../components/TechChip.astro';
+import SafeImage from '../components/SafeImage.astro';
 
 export function getStaticPaths() {
    return projects.map((project) => ({
@@ -22,7 +23,7 @@ if (!card) {
 
    <!-- Background -->
    <div class='fixed inset-0 z-[-1]' style={`--ctx: ${card.color}`}>
-      <img src={`/${id}.webp`} alt='' id='fade-image'
+      <SafeImage imageName={id} alt='' id='fade-image'
          class='absolute inset-0 w-full h-full object-cover opacity-10 scale-90 blur-xl transition-all duration-700' />
       <div class='absolute inset-0 bg-gradient-to-br from-[var(--ctx)]/10 via-zinc-950 to-zinc-950'></div>
    </div>
@@ -40,7 +41,7 @@ if (!card) {
 
          <!-- Imagen sticky sidebar -->
          <div class='w-full lg:w-72 xl:w-80 shrink-0 lg:sticky lg:top-24'>
-            <img src={`/${id}.webp`} alt={card.title}
+            <SafeImage imageName={id} alt={card.title}
                class='w-full rounded-2xl object-cover object-top shadow-2xl ring-1 ring-white/10' />
             <div class='mt-4 flex flex-col gap-2'>
                {(card.githubFront || card.githubBack) ? (

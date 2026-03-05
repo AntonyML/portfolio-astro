@@ -1,3 +1,6 @@
+---
+import SafeImage from './SafeImage.astro';
+---
 <article class='w-full pt-4 pb-0 px-5 flex justify-center items-center relative overflow-hidden z-30'>
    <!-- Iluminación Ambiental Localizada -->
    <div class='absolute top-20 left-1/4 w-72 h-72 bg-white/5 rounded-full blur-[100px] -z-10 animate-pulse'></div>
@@ -57,11 +60,10 @@
          <div class='absolute -inset-4 bg-gradient-to-b from-white/10 to-transparent rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition duration-700'></div>
          
          <div class='relative w-56 h-[320px] sm:w-64 sm:h-[380px] md:w-[280px] md:h-[400px] rounded-2xl overflow-hidden border border-white/10 bg-gradient-to-b from-zinc-800/50 to-black shadow-2xl'>
-            <img 
-               src='/image-profile.png' 
-               alt='Antony Profile' 
-               class='w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105'
-            >
+            <SafeImage 
+               imageName="image-profile" 
+               alt="Antony Profile" 
+               class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" />
             <div class='absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60'></div>
          </div>
       </div>
