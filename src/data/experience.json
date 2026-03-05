@@ -1,0 +1,38 @@
+[
+  {
+    "id": "sistema-ventas-rd",
+    "role": "Fullstack Developer – Freelance",
+    "client": "Empresa Privada",
+    "country": "República Dominicana",
+    "flag": "🇩🇴",
+    "origin": "🇨🇷 Costa Rica → 🇩🇴 República Dominicana",
+    "period": "2024",
+    "color": "#4CAF50",
+    "description": "Sistema de escritorio para automatizar la gestión comercial completa de una empresa dominicana. Primer contrato internacional remunerado, con entrega y soporte remoto entre países.",
+    "highlights": [
+      "Contrato internacional pagado (primer cliente extranjero)",
+      "Gestión de artículos, clientes, proveedores y facturación",
+      "Sistema implementado y funcionando en producción",
+      "Entrega remota y soporte continuo desde Costa Rica"
+    ],
+    "stack": ["C#", ".NET Framework", "SQL Server", "Windows Forms"]
+  },
+  {
+    "id": "gestion-municiones",
+    "role": "Fullstack Developer – Freelance",
+    "client": "Cliente Privado",
+    "country": "Costa Rica",
+    "flag": "🇨🇷",
+    "origin": "🇨🇷 Costa Rica",
+    "period": "2024 – 2025",
+    "color": "#3F51B5",
+    "description": "Sistema empresarial de ventas e inventario para manejo de insumos sensibles. Segundo proyecto freelance remunerado, con énfasis en seguridad de acceso, trazabilidad de movimientos y recuperación de contraseña.",
+    "highlights": [
+      "Segundo contrato freelance pagado",
+      "Control de inventario sensible con trazabilidad",
+      "Gestión segura de usuarios y recuperación de contraseña",
+      "Sistema diseñado para escalar a módulos futuros"
+    ],
+    "stack": ["C#", ".NET", "PostgreSQL", "Windows Forms"]
+  }
+]

@@ -8,6 +8,7 @@ import Separator from "../components/Separator.astro";
 import Technologies from "../components/Technologies.astro";
 import ProfilePicture from "../components/ProfilePicture.astro";
 import Footer from "../components/Footer.astro";
+import WorkExperience from "../components/WorkExperience.astro";
 ---
 
 <Layout title="Antony Monge | Portfolio">
@@ -17,10 +18,14 @@ import Footer from "../components/Footer.astro";
       <ProfilePicture />
       <Separator />
       <About />
+      <Separator />
+      <WorkExperience />
       <Projects />
       <Technologies />
-      <Form />
    </main>
-   
+
+   <!-- Contact modal lives outside main flow (fixed overlay) -->
+   <Form />
+
    <Footer />
 </Layout>

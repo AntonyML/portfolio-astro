@@ -9,11 +9,12 @@ const socials = [
 ];
 
 const navItems = [
-   { text: 'Inicio', href: '#home' },
-   { text: 'Sobre mí', href: '#about' },
-   { text: 'Proyectos', href: '#projects' },
-   { text: 'Stack', href: '#technologies' },
-   { text: 'Contacto', href: '#form' }
+   { text: 'Inicio',      href: '#home',         modal: false },
+   { text: 'Sobre mí',    href: '#about',        modal: false },
+   { text: 'Experiencia', href: '#experience',   modal: false },
+   { text: 'Proyectos',   href: '#projects',     modal: false },
+   { text: 'Stack',       href: '#technologies', modal: false },
+   { text: 'Contacto',    href: '#',             modal: true  },
 ];
 ---
 
@@ -44,12 +45,21 @@ const navItems = [
          pathname === "/" &&
             navItems.map((item) => (
                <li>
-                  <a
-                     class="text-xs sm:text-sm whitespace-nowrap font-medium text-zinc-400 hover:text-white hover:scale-105 duration-300 transition-all font-sans"
-                     href={item.href}
-                  >
-                     {item.text}
-                  </a>
+                  {item.modal ? (
+                     <button
+                        data-contact-open
+                        class='text-xs sm:text-sm whitespace-nowrap font-medium text-zinc-400 hover:text-white hover:scale-105 duration-300 transition-all font-sans cursor-pointer'
+                     >
+                        {item.text}
+                     </button>
+                  ) : (
+                     <a
+                        class='text-xs sm:text-sm whitespace-nowrap font-medium text-zinc-400 hover:text-white hover:scale-105 duration-300 transition-all font-sans'
+                        href={item.href}
+                     >
+                        {item.text}
+                     </a>
+                  )}
                </li>
             ))
       }

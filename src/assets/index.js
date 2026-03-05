@@ -35,9 +35,48 @@ document.addEventListener('astro:page-load', () => {
 
    addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
-         modal.classList.remove('flex');
-         modal.classList.add('hidden');
+         // Tech modal
+         if (modal && !modal.classList.contains('hidden')) {
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+         }
+         // Contact modal
+         if (contactModal && !contactModal.classList.contains('hidden')) {
+            closeContactModal();
+         }
       }
+   });
+
+   /*=============== Contact Modal ===============*/
+   const contactModal = document.querySelector('[data-contact-modal]');
+   const contactOpenBtns = document.querySelectorAll('[data-contact-open]');
+   const contactCloseBtns = document.querySelectorAll('[data-contact-close]');
+   const resetBtn = document.getElementById('reset-btn');
+
+   function openContactModal() {
+      contactModal.classList.remove('hidden');
+      contactModal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+   }
+
+   function closeContactModal() {
+      contactModal.classList.remove('flex');
+      contactModal.classList.add('hidden');
+      document.body.style.overflow = '';
+   }
+
+   contactOpenBtns.forEach((btn) => btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openContactModal();
+   }));
+
+   contactCloseBtns.forEach((btn) => btn.addEventListener('click', closeContactModal));
+
+   contactModal?.addEventListener('click', closeContactModal);
+   document.querySelector('[data-contact-stop]')?.addEventListener('click', (e) => e.stopPropagation());
+
+   resetBtn?.addEventListener('click', () => {
+      document.getElementById('form')?.reset();
    });
 
    /*=============== Email JS ===============*/

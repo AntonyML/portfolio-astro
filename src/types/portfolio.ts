@@ -34,3 +34,17 @@ export interface Buttons {
   back: string;
   hrefgithub: string;
 }
+
+export interface Experience {
+  id: string;
+  role: string;
+  client: string;
+  country: string;
+  flag: string;
+  origin: string;
+  period: string;
+  color: string;
+  description: string;
+  highlights: string[];
+  stack: string[];
+}
