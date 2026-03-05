@@ -6,17 +6,31 @@ import TechChip from '../components/TechChip.astro';
 import SafeImage from '../components/SafeImage.astro';
 
 export function getStaticPaths() {
-   return projects.map((project) => ({
-      params: { id: project.image },
-   }));
+   return [
+      ...projects.map((project) => ({ params: { id: project.image } })),
+      ...experience.map((job) => ({ params: { id: job.image } })),
+   ];
 }
 
-const card = projects.find((p) => p.image === id);
-const job  = experience.find((e) => e.image === id);
+const baseCard = projects.find((p) => p.image === id);
+const job      = experience.find((e) => e.image === id);
 
-if (!card) {
+if (!baseCard && !job) {
    return Astro.redirect('/');
 }
+
+const card = baseCard ?? {
+   id:          job!.id,
+   title:       job!.projectTitle,
+   type:        'Consultoria · Contrato',
+   role:        job!.role,
+   description: job!.description,
+   highlights:  job!.highlights,
+   stack:       job!.stack,
+   image:       job!.image,
+   color:       job!.color,
+   github:      job!.github ?? '',
+};
 ---
 
 <Layout title={`${card.title} | Portfolio`}>
@@ -206,133 +220,6 @@ if (!card) {
             </div>
 
          </div>
-      </div>
-   </main>
-</Layout>
-
-   <!-- ═══ Main Layout ═══════════════════════════════════════════════════════ -->
-   <main
-      class='min-h-screen flex flex-col lg:flex-row items-center justify-center gap-10 px-6 py-24 max-w-6xl mx-auto'
-      transition:name={`image-${id}`}
-   >
-
-      <!-- ── Imagen del Proyecto ──────────────────────────────────────────── -->
-      <div class='w-full max-w-sm lg:max-w-md shrink-0'>
-         <img
-            src={`/${id}.webp`}
-            alt={card.title}
-            class='w-full rounded-2xl object-cover object-top shadow-2xl ring-1 ring-white/10 hover:scale-[102%] transition-transform duration-300'
-         />
-      </div>
-
-      <!-- ── Panel de Información ────────────────────────────────────────── -->
-      <div class='flex flex-col gap-5 max-w-xl w-full'>
-
-         <!-- Tipo + Rol -->
-         <div class='flex flex-wrap items-center gap-3'>
-            <span
-               class='px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase text-white'
-               style={`background-color: ${card.color}35; border: 1px solid ${card.color}70;`}
-            >
-               {card.type}
-            </span>
-            <span class='text-xs text-zinc-400 font-medium tracking-wide'>{card.role}</span>
-         </div>
-
-         <!-- Título -->
-         <h1 class='text-3xl sm:text-4xl font-black leading-tight text-white'>
-            {card.title}
-         </h1>
-
-         <!-- Descripción -->
-         <p class='text-zinc-300 text-sm sm:text-base leading-relaxed'>
-            {card.description}
-         </p>
-
-         <!-- Highlights -->
-         <ul class='flex flex-col gap-2'>
-            {card.highlights.map((h) => (
-               <li class='flex items-start gap-2.5 text-sm text-zinc-300'>
-                  <svg
-                     class='mt-0.5 shrink-0'
-                     style={`color: ${card.color}`}
-                     xmlns='http://www.w3.org/2000/svg' width='16' height='16'
-                     viewBox='0 0 24 24' fill='none' stroke='currentColor'
-                     stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'
-                  >
-                     <path d='M20 6 9 17l-5-5'/>
-                  </svg>
-                  {h}
-               </li>
-            ))}
-         </ul>
-
-         <!-- Stack -->
-         <div class='flex flex-wrap gap-2 pt-1'>
-            {card.stack.map((tech) => (
-               <TechChip tech={tech} />
-            ))}
-         </div>
-
-         <!-- Acciones -->
-         <div class='flex items-center gap-5 pt-2'>
-            <a
-               href='/#projects'
-               class='flex items-center gap-2 text-sm font-medium text-zinc-400 hover:text-white transition-colors duration-200'
-            >
-               <i class={`${buttons[0].back} text-base`}></i>
-               Volver a casos de estudio
-            </a>
-
-            {(card.githubFront || card.githubBack) ? (
-               <>
-                  {card.githubFront && (
-                     <a
-                        href={card.githubFront}
-                        target='_blank'
-                        rel='noopener noreferrer'
-                        class='flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold text-white transition-all duration-300 hover:brightness-110 hover:scale-[1.03]'
-                        style={`background-color: ${card.color}`}
-                     >
-                        <i class={`${buttons[0].github} text-base`}></i>
-                        Frontend
-                     </a>
-                  )}
-                  {card.githubBack && (
-                     <a
-                        href={card.githubBack}
-                        target='_blank'
-                        rel='noopener noreferrer'
-                        class='flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold text-white transition-all duration-300 hover:brightness-110 hover:scale-[1.03]'
-                        style={`background-color: ${card.color}99`}
-                     >
-                        <i class={`${buttons[0].github} text-base`}></i>
-                        Backend
-                     </a>
-                  )}
-               </>
-            ) : card.github ? (
-               <a
-                  href={card.github}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  class='flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold text-white transition-all duration-300 hover:brightness-110 hover:scale-[1.03]'
-                  style={`background-color: ${card.color}`}
-               >
-                  <i class={`${buttons[0].github} text-base`}></i>
-                  Ver Repositorio
-               </a>
-            ) : (
-               <span
-                  class='flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold text-white/30 cursor-not-allowed border border-white/10'
-                  title='Repositorio privado o no disponible'
-               >
-                  <i class={`${buttons[0].github} text-base`}></i>
-                  Repositorio privado
-               </span>
-            )}
-         </div>
-
       </div>
    </main>
 </Layout>
