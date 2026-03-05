@@ -37,6 +37,8 @@ export interface Buttons {
 
 export interface Experience {
   id: string;
+  projectTitle: string;
+  image: string;
   role: string;
   client: string;
   country: string;
@@ -45,6 +47,8 @@ export interface Experience {
   period: string;
   color: string;
   description: string;
+  context: string;
+  impact: string;
   highlights: string[];
   stack: string[];
 }

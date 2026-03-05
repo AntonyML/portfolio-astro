@@ -1,6 +1,8 @@
 [
   {
     "id": "sistema-ventas-rd",
+    "projectTitle": "Sistema de Ventas Corporativo",
+    "image": "image-sistema-ventas",
     "role": "Fullstack Developer – Freelance",
     "client": "Empresa Privada",
     "country": "República Dominicana",
@@ -8,17 +10,22 @@
     "origin": "🇨🇷 Costa Rica → 🇩🇴 República Dominicana",
     "period": "2024",
     "color": "#4CAF50",
-    "description": "Sistema de escritorio para automatizar la gestión comercial completa de una empresa dominicana. Primer contrato internacional remunerado, con entrega y soporte remoto entre países.",
+    "description": "Sistema de escritorio modular para automatizar facturación, inventario y gestión comercial completa de una empresa dominicana. Primer contrato internacional remunerado, con entrega y soporte remoto entre países.",
+    "context": "Arquitectura modular escalable con interfaz gráfica profesional (Windows Forms), persistencia en base de datos relacional, validaciones robustas, módulos de artículos, clientes, proveedores, facturación, inventario y reportes dinámicos.",
+    "impact": "Reducción significativa de errores operativos y tiempos administrativos. Sistema implementado y funcionando en producción desde el primer día de entrega.",
     "highlights": [
-      "Contrato internacional pagado (primer cliente extranjero)",
-      "Gestión de artículos, clientes, proveedores y facturación",
-      "Sistema implementado y funcionando en producción",
-      "Entrega remota y soporte continuo desde Costa Rica"
+      "Primer contrato internacional pagado (CR → RD)",
+      "Módulos: artículos, clientes, proveedores, facturación e inventario",
+      "Sistema implementado y en producción",
+      "Entrega y soporte 100% remoto desde Costa Rica",
+      "Reportes y consultas dinámicas en tiempo real"
     ],
-    "stack": ["C#", ".NET Framework", "SQL Server", "Windows Forms"]
+    "stack": ["C#", ".NET Framework", "SQL Server"]
   },
   {
     "id": "gestion-municiones",
+    "projectTitle": "Sistema de Gestión de Municiones",
+    "image": "image-municiones",
     "role": "Fullstack Developer – Freelance",
     "client": "Cliente Privado",
     "country": "Costa Rica",
@@ -26,13 +33,16 @@
     "origin": "🇨🇷 Costa Rica",
     "period": "2024 – 2025",
     "color": "#3F51B5",
-    "description": "Sistema empresarial de ventas e inventario para manejo de insumos sensibles. Segundo proyecto freelance remunerado, con énfasis en seguridad de acceso, trazabilidad de movimientos y recuperación de contraseña.",
+    "description": "Sistema empresarial de ventas e inventario desarrollado para cliente privado. Manejo de insumos sensibles con énfasis en seguridad de acceso, trazabilidad de movimientos y recuperación de contraseña.",
+    "context": "Segundo proyecto freelance remunerado. Incluó gestión segura de usuarios con recuperación de contraseña, control de inventario sensible, trazabilidad de movimientos y arquitectura diseñada para escalar con nuevos módulos.",
+    "impact": "Cliente con operaciones activas desde la entrega. Sistema diseñado para crecer: preparado para integración con módulos de reportes, roles y API REST en el futuro.",
     "highlights": [
       "Segundo contrato freelance pagado",
-      "Control de inventario sensible con trazabilidad",
+      "Control de inventario sensible con trazabilidad completa",
       "Gestión segura de usuarios y recuperación de contraseña",
-      "Sistema diseñado para escalar a módulos futuros"
+      "Arquitectura lista para escalar a nuevos módulos",
+      "Implementación en entorno real de producción"
     ],
-    "stack": ["C#", ".NET", "PostgreSQL", "Windows Forms"]
+    "stack": ["C#", ".NET", "PostgreSQL"]
   }
 ]

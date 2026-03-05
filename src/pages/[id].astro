@@ -1,7 +1,7 @@
 ---
 const { id } = Astro.params;
 import Layout from '../layouts/Layout.astro';
-import { projects, buttons } from '../assets/data';
+import { projects, buttons, experience } from '../assets/data';
 import TechChip from '../components/TechChip.astro';
 
 export function getStaticPaths() {
@@ -11,6 +11,7 @@ export function getStaticPaths() {
 }
 
 const card = projects.find((p) => p.image === id);
+const job  = experience.find((e) => e.image === id);
 
 if (!card) {
    return Astro.redirect('/');
@@ -18,19 +19,119 @@ if (!card) {
 ---
 
 <Layout title={`${card.title} | Portfolio`}>
-   <!-- ═══ Background layer ═══════════════════════════════════════════════════ -->
-   <div
-      class='fixed inset-0 z-[-1]'
-      style={`--ctx: ${card.color}`}
-   >
-      <img
-         src={`/${id}.jpg`}
-         alt=''
-         id='fade-image'
-         class='absolute inset-0 w-full h-full object-cover opacity-10 scale-90 blur-xl transition-all duration-700'
-      />
+
+   <!-- Background -->
+   <div class='fixed inset-0 z-[-1]' style={`--ctx: ${card.color}`}>
+      <img src={`/${id}.jpg`} alt='' id='fade-image'
+         class='absolute inset-0 w-full h-full object-cover opacity-10 scale-90 blur-xl transition-all duration-700' />
       <div class='absolute inset-0 bg-gradient-to-br from-[var(--ctx)]/10 via-zinc-950 to-zinc-950'></div>
    </div>
+
+   <main class='min-h-screen px-6 py-24 max-w-5xl mx-auto' transition:name={`image-${id}`}>
+
+      <!-- Back -->
+      <a href='/#projects'
+         class='inline-flex items-center gap-2 text-sm font-medium text-zinc-500 hover:text-white transition-colors duration-200 mb-10'>
+         <i class={`${buttons[0].back} text-base`}></i>
+         Volver a proyectos
+      </a>
+
+      <div class='flex flex-col lg:flex-row gap-10 items-start'>
+
+         <!-- Imagen sticky sidebar -->
+         <div class='w-full lg:w-72 xl:w-80 shrink-0 lg:sticky lg:top-24'>
+            <img src={`/${id}.jpg`} alt={card.title}
+               class='w-full rounded-2xl object-cover object-top shadow-2xl ring-1 ring-white/10' />
+            <div class='mt-4'>
+               {
+                  card.github ? (
+                     <a href={card.github} target='_blank' rel='noopener noreferrer'
+                        class='flex items-center justify-center gap-2 w-full px-5 py-2.5 rounded-xl text-sm font-semibold text-white transition-all duration-300 hover:brightness-110'
+                        style={`background-color: ${card.color}`}>
+                        <i class={`${buttons[0].github} text-base`}></i>
+                        Ver Repositorio
+                     </a>
+                  ) : (
+                     <span class='flex items-center justify-center gap-2 w-full px-5 py-2.5 rounded-xl text-sm font-semibold text-white/25 cursor-not-allowed border border-white/8'
+                        title='Repositorio privado'>
+                        <i class={`${buttons[0].github} text-base`}></i>
+                        Repositorio privado
+                     </span>
+                  )
+               }
+            </div>
+         </div>
+
+         <!-- Contenido principal -->
+         <div class='flex flex-col gap-7 flex-1 min-w-0'>
+
+            <!-- Badges -->
+            <div class='flex flex-wrap items-center gap-2'>
+               <span class='px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase text-white'
+                  style={`background-color: ${card.color}30; border: 1px solid ${card.color}60;`}>
+                  {card.type}
+               </span>
+               {job && (
+                  <span class='px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase text-emerald-400 bg-emerald-400/10 border border-emerald-400/30'>
+                     Proyecto Pagado
+                  </span>
+               )}
+               <span class='text-xs text-zinc-500 font-medium'>{card.role}</span>
+            </div>
+
+            <!-- Titulo -->
+            <h1 class='text-3xl sm:text-4xl font-black leading-tight text-white -mt-2'>{card.title}</h1>
+
+            <!-- Descripcion -->
+            <p class='text-zinc-300 text-sm sm:text-base leading-relaxed'>{card.description}</p>
+
+            <!-- Contexto tecnico (solo proyectos pagados) -->
+            {job && (
+               <div class='rounded-2xl bg-white/3 border border-white/8 px-5 py-4'>
+                  <p class='text-[10px] font-bold uppercase tracking-widest text-zinc-500 mb-2'>Contexto tecnico</p>
+                  <p class='text-zinc-300 text-sm leading-relaxed'>{job.context}</p>
+               </div>
+            )}
+
+            <!-- Impacto (solo proyectos pagados) -->
+            {job && (
+               <div class='rounded-2xl px-5 py-4'
+                  style={`background-color: ${card.color}10; border: 1px solid ${card.color}30`}>
+                  <p class='text-[10px] font-bold uppercase tracking-widest mb-2' style={`color: ${card.color}`}>Impacto</p>
+                  <p class='text-zinc-200 text-sm leading-relaxed'>{job.impact}</p>
+               </div>
+            )}
+
+            <!-- Puntos clave -->
+            <div>
+               <p class='text-[10px] font-bold uppercase tracking-widest text-zinc-500 mb-3'>Puntos clave</p>
+               <ul class='grid grid-cols-1 sm:grid-cols-2 gap-2.5'>
+                  {(job ? job.highlights : card.highlights).map((h) => (
+                     <li class='flex items-start gap-2.5 text-sm text-zinc-300'>
+                        <svg class='mt-0.5 shrink-0' style={`color: ${card.color}`}
+                           xmlns='http://www.w3.org/2000/svg' width='14' height='14'
+                           viewBox='0 0 24 24' fill='none' stroke='currentColor'
+                           stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'>
+                           <path d='M20 6 9 17l-5-5'/>
+                        </svg>
+                        {h}
+                     </li>
+                  ))}
+               </ul>
+            </div>
+
+            <!-- Stack -->
+            <div>
+               <p class='text-[10px] font-bold uppercase tracking-widest text-zinc-500 mb-3'>Stack tecnologico</p>
+               <div class='flex flex-wrap gap-2'>
+                  {card.stack.map((tech) => (<TechChip tech={tech} />))}
+               </div>
+            </div>
+
+         </div>
+      </div>
+   </main>
+</Layout>
 
    <!-- ═══ Main Layout ═══════════════════════════════════════════════════════ -->
    <main
