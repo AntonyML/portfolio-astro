@@ -1,0 +1,100 @@
+[
+  {
+    "id": "hogar-ancianos",
+    "title": "Sistema Integral de Gestión – Hogar de Ancianos",
+    "type": "Social / Institucional",
+    "role": "Arquitecto y Desarrollador Principal",
+    "description": "Plataforma empresarial multiplataforma diseñada para digitalizar la gestión administrativa y médica de un hogar de ancianos (34 residentes). Arquitecturada bajo Clean Architecture y desplegada como aplicación de escritorio mediante Electron, con autenticación JWT, 2FA, control de roles y testing completo (Unit + E2E).",
+    "highlights": [
+      "Clean Architecture",
+      "Aplicación Desktop con Electron",
+      "JWT + 2FA + Roles",
+      "Testing Unitario y E2E",
+      "Impacto social real"
+    ],
+    "stack": ["React", "TypeScript", "Electron", "Vite", "TailwindCSS"],
+    "image": "image-hogar-ancianos",
+    "color": "#0b7bfc"
+  },
+  {
+    "id": "britany-salon",
+    "title": "Britany Salon – Plataforma Empresarial",
+    "type": "Académico Empresarial",
+    "role": "Backend, Frontend, QA y Scrum Master",
+    "description": "Sistema full stack para gestión de citas, clientes e inventario en salón de belleza. Proyecto colaborativo desarrollado bajo metodología Scrum con repositorios separados (Front, Back, Testing) y rotación de roles dentro del equipo.",
+    "highlights": [
+      "Trabajo colaborativo real",
+      "Scrum con Taiga (Epics y Dailys)",
+      "Backend + Frontend desacoplado",
+      "Testing y control de calidad",
+      "Gestión de tareas multirol"
+    ],
+    "stack": ["C#", ".NET", "SQL Server", "React"],
+    "image": "image-britany-salon",
+    "color": "#9c27b0"
+  },
+  {
+    "id": "sistema-ventas-rd",
+    "title": "Sistema de Ventas Corporativo",
+    "type": "Comercial",
+    "role": "Full Stack Developer",
+    "description": "Sistema de escritorio modular para automatizar facturación e inventario de un cliente internacional en República Dominicana. Implementado en producción, reduciendo errores operativos y mejorando la trazabilidad comercial.",
+    "highlights": [
+      "Contrato internacional (CR → RD)",
+      "Sistema en producción",
+      "Facturación e inventario integrados",
+      "Proyecto remunerado"
+    ],
+    "stack": ["C#", ".NET Framework", "SQL Server"],
+    "image": "image-sistema-ventas",
+    "color": "#4CAF50"
+  },
+  {
+    "id": "automatizacion-empresarial",
+    "title": "Automatización Empresarial – Microservicios",
+    "type": "Arquitectura / Enterprise",
+    "role": "Diseño y Desarrollo de Microservicios",
+    "description": "Ecosistema basado en microservicios para orquestación empresarial avanzada. Integra servicios en Python, .NET y Node.js con mensajería distribuida (Kafka), procesamiento en segundo plano (Hangfire) y despliegues automatizados mediante configuración YAML.",
+    "highlights": [
+      "Arquitectura de microservicios",
+      "Kafka para mensajería distribuida",
+      "Workers y procesamiento en background",
+      "Alta escalabilidad y resiliencia"
+    ],
+    "stack": ["Python", ".NET", "Node.js", "Kafka"],
+    "image": "image-automation",
+    "color": "#5c2d91"
+  },
+  {
+    "id": "gestion-municiones",
+    "title": "Sistema de Gestión de Municiones",
+    "type": "Comercial",
+    "role": "Desarrollador Principal",
+    "description": "Sistema empresarial de ventas e inventario desarrollado para cliente privado. Incluye gestión de usuarios, control de inventario sensible y base de datos relacional, con enfoque en seguridad y escalabilidad futura.",
+    "highlights": [
+      "Segundo proyecto remunerado",
+      "Gestión de inventario sensible",
+      "Control de usuarios y recuperación de contraseña",
+      "Implementación en entorno real"
+    ],
+    "stack": ["C#", ".NET", "PostgreSQL"],
+    "image": "image-municiones",
+    "color": "#3F51B5"
+  },
+  {
+    "id": "tribux-saas",
+    "title": "Tribux – Plataforma SaaS Tributaria",
+    "type": "SaaS",
+    "role": "Full Stack Developer",
+    "description": "Aplicación SaaS para gestión tributaria de pequeñas empresas. Arquitectura moderna basada en microservicios con frontend en Next.js 15, generación de PDFs y servicios desacoplados para notificaciones y cumplimiento fiscal.",
+    "highlights": [
+      "Arquitectura SaaS moderna",
+      "Microservicios desacoplados",
+      "Generación automática de PDF",
+      "Enfoque en cumplimiento fiscal"
+    ],
+    "stack": ["Next.js", "Node.js", "PostgreSQL"],
+    "image": "image-tribux",
+    "color": "#009688"
+  }
+]

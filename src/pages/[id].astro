@@ -9,65 +9,119 @@ export function getStaticPaths() {
    }));
 }
 
-const card = projects.find((card) => card.image == id);
+const card = projects.find((p) => p.image === id);
 
 if (!card) {
    return Astro.redirect('/');
 }
 ---
 
-<Layout title={`Project | ${id}`}>
+<Layout title={`${card.title} | Portfolio`}>
+   <!-- ═══ Background layer ═══════════════════════════════════════════════════ -->
    <div
-      class="relative flex items-center lg:h-screen xs:h-fit"
-      transition:name={`image-${id}`}
-      transition:persist
+      class='fixed inset-0 z-[-1]'
+      style={`--ctx: ${card.color}`}
    >
-      <!--=============== Background ===============-->
-      <div
-         class="absolute min-h-screen inset-0 z-[-1] bg-gradient-to-b from-context"
-         style=`--context-color: ${card.color}`
-      >
+      <img
+         src={`/${id}.jpg`}
+         alt=''
+         id='fade-image'
+         class='absolute inset-0 w-full h-full object-cover opacity-10 scale-90 blur-xl transition-all duration-700'
+      />
+      <div class='absolute inset-0 bg-gradient-to-br from-[var(--ctx)]/10 via-zinc-950 to-zinc-950'></div>
+   </div>
+
+   <!-- ═══ Main Layout ═══════════════════════════════════════════════════════ -->
+   <main
+      class='min-h-screen flex flex-col lg:flex-row items-center justify-center gap-10 px-6 py-24 max-w-6xl mx-auto'
+      transition:name={`image-${id}`}
+   >
+
+      <!-- ── Imagen del Proyecto ──────────────────────────────────────────── -->
+      <div class='w-full max-w-sm lg:max-w-md shrink-0'>
          <img
             src={`/${id}.jpg`}
-            alt="#"
-            id="fade-image"
-            class="transition-all duration-500 absolute z-[-1] inset-0 mix-blend-overlay opacity-20 scale-90 w-full h-full object-cover blur-md"
+            alt={card.title}
+            class='w-full rounded-2xl object-cover object-top shadow-2xl ring-1 ring-white/10 hover:scale-[102%] transition-transform duration-300'
          />
-
-         <div class="absolute inset-0 bg-gradient-to-t via-transparent from-zinc-900"></div>
       </div>
 
-      <!--=============== Main Section ===============-->
-      <div class="flex justify-center items-center w-full h-[80%] xs:h-fit">
-         <div class="flex gap-x-10 2xl:mt-2 2xl:w-3/5 2xl:h-fit xl:w-4/5 lg:mt-0 lg:flex-row lg:h-[90%] xs:w-4/5 xs:flex-col-reverse">
-            <img
-               src={`/${id}.jpg`}
-               alt="#"
-               class="hover:scale-[105%] duration-300 ease-in aspect-square object-cover object-top mx-auto lg:mb-0 lg:mt-0 sm:w-[450px] xxs:mt-10 xs:w-[90%] xs:mb-5 xs:mt-20"
-            />
+      <!-- ── Panel de Información ────────────────────────────────────────── -->
+      <div class='flex flex-col gap-5 max-w-xl w-full'>
 
-            <div class="flex flex-col gap-y-3 relative lg:pt-0 lg:pb-20 xs:pt-7 xs:pb-32">
-               <h1 class="font-black sm:text-[75px] sm:leading-[70px] xxs:text-[60px] xxs:leading-[55px] xs:text-[45px] xs:leading-[40px]">{card.title}</h1>
-               <p class="text-white/70 sm:text-[14px] xs:text-[12px]">{card.description}</p>
-
-               <!--=============== Buttons ===============-->
-               <div class="absolute flex gap-8 lg:bottom-4 xxs:right-4 xxs:flex-row xxs:bottom-4 xs:flex-col xs:bottom-4 xs:right-4">
-                  <a
-                     href={`/#${id}`}
-                     class="text-2xl opacity-60 hover:opacity-100 duration-300 ease-in"
-                     ><i class={`${buttons[0].back} lg:text-[17px] xs:text-[14px]`}> Atras</i></a
-                  >
-
-                  <a
-                     target="_blank"
-                     href={buttons[0].hrefgithub}
-                     class="text-2xl opacity-60 hover:opacity-100 duration-300 ease-in"
-                     ><i class={`${buttons[0].github} lg:text-[17px] xs:text-[14px]`}> Repositorio</i></a
-                  >
-
-               </div>
-            </div>
+         <!-- Tipo + Rol -->
+         <div class='flex flex-wrap items-center gap-3'>
+            <span
+               class='px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase text-white'
+               style={`background-color: ${card.color}35; border: 1px solid ${card.color}70;`}
+            >
+               {card.type}
+            </span>
+            <span class='text-xs text-zinc-400 font-medium tracking-wide'>{card.role}</span>
          </div>
+
+         <!-- Título -->
+         <h1 class='text-3xl sm:text-4xl font-black leading-tight text-white'>
+            {card.title}
+         </h1>
+
+         <!-- Descripción -->
+         <p class='text-zinc-300 text-sm sm:text-base leading-relaxed'>
+            {card.description}
+         </p>
+
+         <!-- Highlights -->
+         <ul class='flex flex-col gap-2'>
+            {card.highlights.map((h) => (
+               <li class='flex items-start gap-2.5 text-sm text-zinc-300'>
+                  <svg
+                     class='mt-0.5 shrink-0'
+                     style={`color: ${card.color}`}
+                     xmlns='http://www.w3.org/2000/svg' width='16' height='16'
+                     viewBox='0 0 24 24' fill='none' stroke='currentColor'
+                     stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'
+                  >
+                     <path d='M20 6 9 17l-5-5'/>
+                  </svg>
+                  {h}
+               </li>
+            ))}
+         </ul>
+
+         <!-- Stack -->
+         <div class='flex flex-wrap gap-2 pt-1'>
+            {card.stack.map((tech) => (
+               <span
+                  class='px-3 py-1 rounded-full text-xs font-medium text-zinc-200 border tracking-wide'
+                  style={`border-color: ${card.color}50; background-color: ${card.color}12;`}
+               >
+                  {tech}
+               </span>
+            ))}
+         </div>
+
+         <!-- Acciones -->
+         <div class='flex items-center gap-5 pt-2'>
+            <a
+               href='/#projects'
+               class='flex items-center gap-2 text-sm font-medium text-zinc-400 hover:text-white transition-colors duration-200'
+            >
+               <i class={`${buttons[0].back} text-base`}></i>
+               Volver
+            </a>
+
+            <a
+               href={buttons[0].hrefgithub}
+               target='_blank'
+               rel='noopener noreferrer'
+               class='flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold text-white transition-all duration-300 hover:brightness-110 hover:scale-[1.03]'
+               style={`background-color: ${card.color}`}
+            >
+               <i class={`${buttons[0].github} text-base`}></i>
+               Ver Repositorio
+            </a>
+         </div>
+
       </div>
-   </div>
+   </main>
 </Layout>
