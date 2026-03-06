@@ -45,10 +45,10 @@ const card = baseCard ?? {
    <main class='min-h-screen px-6 py-24 max-w-5xl mx-auto' transition:name={`image-${id}`}>
 
       <!-- Back -->
-      <a href='/#projects'
+      <a href={job && !baseCard ? '/#experience' : '/#projects'}
          class='inline-flex items-center gap-2 text-sm font-medium text-zinc-500 hover:text-white transition-colors duration-200 mb-10'>
          <i class={`${buttons[0].back} text-base`}></i>
-         Volver a casos de estudio
+         {job && !baseCard ? 'Volver a Consultoria' : 'Volver a casos de estudio'}
       </a>
 
       <div class='flex flex-col lg:flex-row gap-10 items-start'>

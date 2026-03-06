@@ -1,7 +1,11 @@
 {
-  "name": "portfolio-astro",
+  "name": "antony-monge-portfolio",
+  "description": "Portfolio profesional de Antony Monge — Ingeniero de Software",
+  "author": "Antony Monge <antonymonge18@gmail.com>",
+  "license": "MIT",
+  "private": true,
   "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "scripts": {
     "dev": "astro dev",
     "prebuild": "tsx scripts/validate-images.ts",
