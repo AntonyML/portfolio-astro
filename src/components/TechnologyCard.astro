@@ -18,7 +18,7 @@ const isUrl = logo.startsWith('http');
       <SafeImage
         imageName={logo.replace('.webp','').replace('/','')}
         alt={text}
-        class="w-8 h-8 object-contain filter grayscale group-hover:grayscale-0 transition-all duration-500 opacity-70 group-hover:opacity-100"
+        class="w-8 h-8 object-contain filter grayscale transition-all duration-500 opacity-70" data-grayscale-reveal
       />
     ) : (
       <i class={`${logo} text-3xl text-zinc-400 group-hover:text-white transition-colors duration-300`}></i>

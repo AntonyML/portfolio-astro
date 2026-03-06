@@ -128,6 +128,33 @@ document.addEventListener('astro:page-load', () => {
       }
    });
 
+   /*=============== Grayscale Scroll Reveal ===============*/
+   function revealImage(el) {
+      el.classList.remove('grayscale', 'opacity-80');
+      el.classList.add('grayscale-0', 'opacity-100');
+   }
+
+   const revealObserver = new IntersectionObserver(
+      (entries) => {
+         entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+               const delay = parseInt(entry.target.dataset.revealDelay ?? '0', 10);
+               setTimeout(() => revealImage(entry.target), delay);
+               revealObserver.unobserve(entry.target);
+            }
+         });
+      },
+      { threshold: 0.4 }
+   );
+   document.querySelectorAll('[data-grayscale-reveal]').forEach((el) => revealObserver.observe(el));
+
+   /* En móvil: primer toque en cualquier parte revela la imagen de perfil */
+   document.addEventListener('touchstart', function onFirstTouch() {
+      const profileImg = document.querySelector('[data-grayscale-reveal][data-reveal-delay]');
+      if (profileImg) revealImage(profileImg);
+      document.removeEventListener('touchstart', onFirstTouch);
+   }, { once: true, passive: true });
+
    /*=============== Toast ===============*/
    function showToast(message, type = 'success') {
       const toast = document.createElement('div');
