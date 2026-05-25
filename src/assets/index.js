@@ -1,176 +1,158 @@
-/*=============== View Transition (Scale) ===============*/
-document.addEventListener('astro:page-load', () => {
-   for (const element of document.querySelectorAll('#fade-image')) {
-      element.classList.remove('scale-90');
-   }
-});
+const THEME_KEY = "portfolio-theme";
+const THEME_META_SELECTOR = "[data-dynamic-theme-color]";
 
-document.addEventListener('astro:page-load', () => {
-   /*=============== Slider ===============*/
-   const wrapper = document.querySelector('[data-tech-wrapper]');
-   let copy = document.querySelector('.tech-card')?.cloneNode(true);
-   wrapper?.append(copy);
+function applyTheme(theme) {
+  const root = document.documentElement;
+  root.dataset.theme = theme;
+  root.style.colorScheme = theme;
 
-   /*=============== Modal ===============*/
-   const modal = document.querySelector('[data-tech-modal]');
-   const h1 = document.querySelector('[data-tech-h1]');
-   const stop = document.querySelector('[data-tech-stop]');
+  const meta = document.querySelector(THEME_META_SELECTOR);
+  if (meta) {
+    meta.setAttribute("content", theme === "dark" ? "#111318" : "#f4efea");
+  }
 
-   h1?.addEventListener('click', () => {
-      modal.classList.toggle('hidden');
-      modal.classList.add('flex');
-   });
+  document.querySelectorAll("[data-theme-toggle]").forEach((button) => {
+    button.setAttribute("aria-pressed", String(theme === "dark"));
+  });
 
-   wrapper?.addEventListener('click', () => {
-      modal.classList.toggle('hidden');
-      modal.classList.add('flex');
-   });
+  document.querySelectorAll("[data-theme-label]").forEach((label) => {
+    label.textContent = theme === "dark" ? "Activar modo claro" : "Activar modo oscuro";
+  });
+}
 
-   modal?.addEventListener('click', () => {
-      modal.classList.remove('flex');
-      modal.classList.toggle('hidden');
-   });
+function initThemeToggle() {
+  const current = document.documentElement.dataset.theme || "light";
+  applyTheme(current);
 
-   stop?.addEventListener('click', (e) => e.stopPropagation());
+  document.querySelectorAll("[data-theme-toggle]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+      localStorage.setItem(THEME_KEY, next);
+      applyTheme(next);
+    });
+  });
 
-   addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-         if (modal && !modal.classList.contains('hidden')) {
-            modal.classList.remove('flex');
-            modal.classList.add('hidden');
-         }
-         if (contactModal && !contactModal.classList.contains('hidden')) {
-            closeContactModal();
-         }
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (event) => {
+    if (!localStorage.getItem(THEME_KEY)) {
+      applyTheme(event.matches ? "dark" : "light");
+    }
+  });
+}
+
+function initMobileNav() {
+  const toggle = document.querySelector("[data-nav-toggle]");
+  const panel = document.querySelector("[data-nav-panel]");
+  const closeButtons = document.querySelectorAll("[data-nav-close]");
+
+  if (!toggle || !panel) return;
+
+  const setOpen = (open) => {
+    toggle.setAttribute("aria-expanded", String(open));
+    panel.toggleAttribute("data-open", open);
+    document.body.style.overflow = open ? "hidden" : "";
+  };
+
+  toggle.addEventListener("click", () => {
+    const open = toggle.getAttribute("aria-expanded") !== "true";
+    setOpen(open);
+  });
+
+  closeButtons.forEach((button) => button.addEventListener("click", () => setOpen(false)));
+  panel.addEventListener("click", (event) => {
+    if (event.target === panel) setOpen(false);
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") setOpen(false);
+  });
+}
+
+function setStatus(message, type = "idle") {
+  const status = document.querySelector("[data-form-status]");
+  const liveRegion = document.querySelector("[data-live-region]");
+
+  if (status) {
+    status.textContent = message;
+    if (type === "success" || type === "error") {
+      status.setAttribute("data-status", type);
+    } else {
+      status.removeAttribute("data-status");
+    }
+  }
+
+  if (liveRegion && (type === "success" || type === "error")) {
+    liveRegion.textContent = message;
+  }
+}
+
+function initContactForm() {
+  const form = document.getElementById("contact-form");
+  const submitButton = document.getElementById("contact-submit");
+  const resetButton = document.getElementById("contact-reset");
+
+  if (!(form instanceof HTMLFormElement) || !(submitButton instanceof HTMLButtonElement)) {
+    return;
+  }
+
+  resetButton?.addEventListener("click", () => {
+    form.reset();
+    setStatus("Puedes escribir tu mensaje cuando quieras.");
+  });
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(form);
+    const name = String(formData.get("from_name") ?? "").trim();
+    const email = String(formData.get("from_email") ?? "").trim();
+    const message = String(formData.get("message") ?? "").trim();
+
+    if (!name || !email || !message) {
+      setStatus("Completa nombre, correo y mensaje para poder enviarlo.", "error");
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setStatus("Ingresa un correo electrónico válido antes de enviar el formulario.", "error");
+      return;
+    }
+
+    const defaultLabel = submitButton.dataset.defaultLabel || "Enviar mensaje";
+    submitButton.disabled = true;
+    submitButton.textContent = "Enviando...";
+    setStatus("Enviando mensaje...");
+
+    try {
+      const response = await fetch("https://contact-worke.antony-mongelopez.workers.dev", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, message }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.error || "No fue posible enviar el mensaje.");
       }
-   });
 
-   /*=============== Contact Modal ===============*/
-   const contactModal = document.querySelector('[data-contact-modal]');
-   const contactOpenBtns = document.querySelectorAll('[data-contact-open]');
-   const contactCloseBtns = document.querySelectorAll('[data-contact-close]');
-   const resetBtn = document.getElementById('reset-btn');
+      form.reset();
+      setStatus("Mensaje enviado con éxito. Te responderé lo antes posible.", "success");
+      submitButton.textContent = "Enviado";
+    } catch (error) {
+      const detail = error instanceof Error ? error.message : "Error desconocido";
+      setStatus(`No se pudo enviar el mensaje: ${detail}`, "error");
+      submitButton.textContent = defaultLabel;
+    } finally {
+      submitButton.disabled = false;
+      window.setTimeout(() => {
+        submitButton.textContent = submitButton.dataset.defaultLabel || "Enviar mensaje";
+      }, 2200);
+    }
+  });
+}
 
-   function openContactModal() {
-      contactModal.classList.remove('hidden');
-      contactModal.classList.add('flex');
-      document.body.style.overflow = 'hidden';
-   }
-
-   function closeContactModal() {
-      contactModal.classList.remove('flex');
-      contactModal.classList.add('hidden');
-      document.body.style.overflow = '';
-   }
-
-   contactOpenBtns.forEach((btn) => btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      openContactModal();
-   }));
-
-   contactCloseBtns.forEach((btn) => btn.addEventListener('click', closeContactModal));
-
-   contactModal?.addEventListener('click', closeContactModal);
-   document.querySelector('[data-contact-stop]')?.addEventListener('click', (e) => e.stopPropagation());
-
-   resetBtn?.addEventListener('click', () => {
-      document.getElementById('form')?.reset();
-   });
-
-   /*=============== Contact Form → Cloudflare Worker ===============*/
-   const btn = document.getElementById('button');
-
-   document.getElementById('form')?.addEventListener('submit', async function (event) {
-      event.preventDefault();
-
-      const name = this.elements['from_name'].value.trim();
-      const email = this.elements['from_email'].value.trim();
-      const message = this.elements['message'].value.trim();
-
-      if (!name || !email || !message) {
-         showToast('Por favor, completa todos los campos.', 'error');
-         return;
-      }
-
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(email)) {
-         showToast('Por favor, ingresa un correo electrónico válido.', 'error');
-         return;
-      }
-
-      btn.textContent = 'Enviando...';
-      btn.disabled = true;
-
-      try {
-         const response = await fetch('https://contact-worke.antony-mongelopez.workers.dev', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, email, message }),
-         });
-
-         const data = await response.json();
-
-         if (response.ok && data.success) {
-            btn.textContent = 'Mensaje enviado ✓';
-            showToast('¡Mensaje enviado con éxito!', 'success');
-            this.reset();
-         } else {
-            throw new Error(data.error || 'Error desconocido');
-         }
-      } catch (err) {
-         showToast('Error al enviar el mensaje: ' + err.message, 'error');
-         btn.textContent = 'Enviar mensaje';
-      } finally {
-         btn.disabled = false;
-         setTimeout(() => {
-            btn.textContent = 'Enviar mensaje';
-         }, 3000);
-      }
-   });
-
-   /*=============== Grayscale Scroll Reveal ===============*/
-   function revealImage(el) {
-      el.classList.remove('grayscale', 'opacity-80');
-      el.classList.add('grayscale-0', 'opacity-100');
-   }
-
-   const revealObserver = new IntersectionObserver(
-      (entries) => {
-         entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-               const delay = parseInt(entry.target.dataset.revealDelay ?? '0', 10);
-               setTimeout(() => revealImage(entry.target), delay);
-               revealObserver.unobserve(entry.target);
-            }
-         });
-      },
-      { threshold: 0.4 }
-   );
-   document.querySelectorAll('[data-grayscale-reveal]').forEach((el) => revealObserver.observe(el));
-
-   /* En móvil: primer toque en cualquier parte revela la imagen de perfil */
-   document.addEventListener('touchstart', function onFirstTouch() {
-      const profileImg = document.querySelector('[data-grayscale-reveal][data-reveal-delay]');
-      if (profileImg) revealImage(profileImg);
-      document.removeEventListener('touchstart', onFirstTouch);
-   }, { once: true, passive: true });
-
-   /*=============== Toast ===============*/
-   function showToast(message, type = 'success') {
-      const toast = document.createElement('div');
-      toast.className = `toast show ${type}`;
-      toast.textContent = message;
-
-      document.body.appendChild(toast);
-
-      setTimeout(() => {
-         toast.classList.add('hide');
-         setTimeout(() => {
-            if (toast.parentNode) {
-               toast.parentNode.removeChild(toast);
-            }
-         }, 400);
-      }, 3500);
-   }
-
+document.addEventListener("astro:page-load", () => {
+  initThemeToggle();
+  initMobileNav();
+  initContactForm();
 });

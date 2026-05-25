@@ -1,225 +1,204 @@
 ---
 const { id } = Astro.params;
-import Layout from '../layouts/Layout.astro';
-import { projects, buttons, experience } from '../assets/data';
-import TechChip from '../components/TechChip.astro';
-import SafeImage from '../components/SafeImage.astro';
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import { buttons, experience, projects } from "../assets/data";
+import TechChip from "../components/TechChip.astro";
+import SafeImage from "../components/SafeImage.astro";
 
 export function getStaticPaths() {
-   return [
-      ...projects.map((project) => ({ params: { id: project.image } })),
-      ...experience.map((job) => ({ params: { id: job.image } })),
-   ];
+  return [
+    ...projects.map((project) => ({ params: { id: project.image } })),
+    ...experience.map((job) => ({ params: { id: job.image } })),
+  ];
 }
 
-const baseCard = projects.find((p) => p.image === id);
-const job      = experience.find((e) => e.image === id);
+const baseCard = projects.find((project) => project.image === id);
+const job = experience.find((item) => item.image === id);
 
 if (!baseCard && !job) {
-   return Astro.redirect('/');
+  return Astro.redirect("/");
 }
 
 const card = baseCard ?? {
-   id:          job!.id,
-   title:       job!.projectTitle,
-   type:        'Consultoria · Contrato',
-   role:        job!.role,
-   description: job!.description,
-   highlights:  job!.highlights,
-   stack:       job!.stack,
-   image:       job!.image,
-   color:       job!.color,
-   github:      job!.github ?? '',
+  id: job!.id,
+  title: job!.projectTitle,
+  type: "Consultoría · Contrato",
+  role: job!.role,
+  description: job!.description,
+  highlights: job!.highlights,
+  stack: job!.stack,
+  image: job!.image,
+  color: job!.color,
+  github: job!.github ?? "",
 };
+
+type DetailSection = {
+  title: string;
+  content: string;
+  tone: "neutral" | "accent";
+};
+
+const detailSections = [
+  card.challenge && { title: "Desafío", content: card.challenge, tone: "neutral" },
+  card.solution && { title: "Solución", content: card.solution, tone: "accent" },
+  card.architecture && { title: "Arquitectura y decisiones", content: card.architecture, tone: "neutral" },
+  job?.context && { title: "Contexto técnico", content: job.context, tone: "neutral" },
+  card.testing && { title: "Testing y calidad", content: card.testing, tone: "accent" },
+  card.management && { title: "Gestión", content: card.management, tone: "neutral" },
+  (card.impact || job?.impact) && { title: "Impacto", content: card.impact ?? job!.impact, tone: "accent" },
+].filter((section): section is DetailSection => Boolean(section));
+
+const dualRepos = "githubFront" in card || "githubBack" in card;
 ---
 
-<Layout title={`${card.title} | Portfolio`}>
+<Layout
+  title={`${card.title} | Caso de estudio`}
+  description={card.description}
+  canonicalPath={`/${id}/`}
+  image={`/${id}.webp`}
+  ogType="article"
+>
+  <Navbar />
 
-   <!-- Background -->
-   <div class='fixed inset-0 z-[-1]' style={`--ctx: ${card.color}`}>
-      <SafeImage imageName={id} alt='' id='fade-image'
-         class='absolute inset-0 w-full h-full object-cover opacity-10 scale-90 blur-xl transition-all duration-700' />
-      <div class='absolute inset-0 bg-gradient-to-br from-[var(--ctx)]/10 via-zinc-950 to-zinc-950'></div>
-   </div>
-
-   <main class='min-h-screen px-6 py-24 max-w-5xl mx-auto' transition:name={`image-${id}`}>
-
-      <!-- Back -->
-      <a href={job && !baseCard ? '/#experience' : '/#projects'}
-         class='inline-flex items-center gap-2 text-sm font-medium text-zinc-500 hover:text-white transition-colors duration-200 mb-10'>
-         <i class={`${buttons[0].back} text-base`}></i>
-         {job && !baseCard ? 'Volver a Consultoria' : 'Volver a casos de estudio'}
+  <main id="main-content" class="section-space">
+    <div class="page-wrap">
+      <a href={job && !baseCard ? "/#experience" : "/#projects"} class="button-ghost mb-6">
+        <i class={buttons[0].back} aria-hidden="true"></i>
+        {job && !baseCard ? "Volver a experiencia" : "Volver a proyectos"}
       </a>
 
-      <div class='flex flex-col lg:flex-row gap-10 items-start'>
+      <div class="grid gap-6 xl:grid-cols-[minmax(0,1.1fr)_22rem]">
+        <section class="section-card p-6 sm:p-8">
+          <div class="flex flex-wrap items-center gap-2">
+            <span
+              class="inline-flex rounded-full px-3 py-1 text-[0.72rem] font-bold uppercase tracking-[0.16em]"
+              style={`background:${card.color}18; color:${card.color}; border:1px solid ${card.color}44;`}
+            >
+              {card.type}
+            </span>
+            <span class="pill">{card.role}</span>
+            {job && <span class="pill">Proyecto pagado</span>}
+          </div>
 
-         <!-- Imagen sticky sidebar -->
-         <div class='w-full lg:w-72 xl:w-80 shrink-0 lg:sticky lg:top-24'>
-            <SafeImage imageName={id} alt={card.title}
-               class='w-full rounded-2xl object-cover object-top shadow-2xl ring-1 ring-white/10' />
-            <div class='mt-4 flex flex-col gap-2'>
-               {(card.githubFront || card.githubBack) ? (
-                  <>
-                     {card.githubFront && (
-                        <a href={card.githubFront} target='_blank' rel='noopener noreferrer'
-                           class='flex items-center justify-center gap-2 w-full px-5 py-2.5 rounded-xl text-sm font-semibold text-white transition-all duration-300 hover:brightness-110'
-                           style={`background-color: ${card.color}`}>
-                           <i class={`${buttons[0].github} text-base`}></i>
-                           Frontend
-                        </a>
-                     )}
-                     {card.githubBack && (
-                        <a href={card.githubBack} target='_blank' rel='noopener noreferrer'
-                           class='flex items-center justify-center gap-2 w-full px-5 py-2.5 rounded-xl text-sm font-semibold text-white transition-all duration-300 hover:brightness-110'
-                           style={`background-color: ${card.color}99`}>
-                           <i class={`${buttons[0].github} text-base`}></i>
-                           Backend
-                        </a>
-                     )}
-                  </>
-               ) : card.github ? (
-                  <a href={card.github} target='_blank' rel='noopener noreferrer'
-                     class='flex items-center justify-center gap-2 w-full px-5 py-2.5 rounded-xl text-sm font-semibold text-white transition-all duration-300 hover:brightness-110'
-                     style={`background-color: ${card.color}`}>
-                     <i class={`${buttons[0].github} text-base`}></i>
-                     Ver Repositorio
+          <h1 class="mt-6 font-['Space_Mono'] text-[clamp(2.4rem,5vw,4.5rem)] font-bold uppercase leading-[0.95] tracking-[-0.05em] text-[var(--text-primary)]">
+            {card.title}
+          </h1>
+
+          <p class="mt-6 max-w-3xl text-lg leading-8 text-[var(--text-secondary)]">{card.description}</p>
+
+          <div class="mt-8 flex flex-wrap gap-3">
+            {dualRepos ? (
+              <>
+                {"githubFront" in card && card.githubFront && (
+                  <a
+                    href={card.githubFront}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="button-primary"
+                    style={`background:${card.color};`}
+                  >
+                    <i class={buttons[0].github} aria-hidden="true"></i>
+                    Frontend
                   </a>
-               ) : (
-                  <span class='flex items-center justify-center gap-2 w-full px-5 py-2.5 rounded-xl text-sm font-semibold text-white/25 cursor-not-allowed border border-white/8'
-                     title='Repositorio privado'>
-                     <i class={`${buttons[0].github} text-base`}></i>
-                     Repositorio privado
-                  </span>
-               )}
-            </div>
-         </div>
-
-         <!-- Contenido principal -->
-         <div class='flex flex-col gap-7 flex-1 min-w-0'>
-
-            <!-- Badges -->
-            <div class='flex flex-wrap items-center gap-2'>
-               <span class='px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase text-white'
-                  style={`background-color: ${card.color}30; border: 1px solid ${card.color}60;`}>
-                  {card.type}
-               </span>
-               {job && (
-                  <span class='px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase text-emerald-400 bg-emerald-400/10 border border-emerald-400/30'>
-                     Proyecto Pagado
-                  </span>
-               )}
-               <span class='text-xs text-zinc-500 font-medium'>{card.role}</span>
-            </div>
-
-            <!-- Titulo -->
-            <h1 class='text-3xl sm:text-4xl font-black leading-tight text-white -mt-2'>{card.title}</h1>
-
-            <!-- Descripcion -->
-            <p class='text-zinc-300 text-sm sm:text-base leading-relaxed'>{card.description}</p>
-
-            <!-- Contexto tecnico (solo proyectos pagados) -->
-            {job && (
-               <div class='rounded-2xl bg-white/3 border border-white/8 px-5 py-4'>
-                  <p class='text-[10px] font-bold uppercase tracking-widest text-zinc-500 mb-2'>Contexto tecnico</p>
-                  <p class='text-zinc-300 text-sm leading-relaxed'>{job.context}</p>
-               </div>
+                )}
+                {"githubBack" in card && card.githubBack && (
+                  <a
+                    href={card.githubBack}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="button-secondary"
+                  >
+                    <i class={buttons[0].github} aria-hidden="true"></i>
+                    Backend
+                  </a>
+                )}
+              </>
+            ) : card.github ? (
+              <a
+                href={card.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="button-primary"
+                style={`background:${card.color};`}
+              >
+                <i class={buttons[0].github} aria-hidden="true"></i>
+                Ver repositorio
+              </a>
+            ) : (
+              <span class="button-secondary cursor-default opacity-70">Repositorio privado</span>
             )}
+          </div>
+        </section>
 
-            <!-- Impacto (solo proyectos pagados) -->
-            {job && (
-               <div class='rounded-2xl px-5 py-4'
-                  style={`background-color: ${card.color}10; border: 1px solid ${card.color}30`}>
-                  <p class='text-[10px] font-bold uppercase tracking-widest mb-2' style={`color: ${card.color}`}>Impacto</p>
-                  <p class='text-zinc-200 text-sm leading-relaxed'>{job.impact}</p>
-               </div>
-            )}
-
-            <!-- ═══ Engineering Case Study Sections ═══ -->
-
-            {card.challenge && (
-               <div class='rounded-2xl bg-white/3 border border-white/8 px-5 py-4'>
-                  <p class='text-[10px] font-bold uppercase tracking-widest text-zinc-500 mb-2'>Desafio de Negocio</p>
-                  <p class='text-zinc-300 text-sm leading-relaxed'>{card.challenge}</p>
-               </div>
-            )}
-
-            {card.solution && (
-               <div class='rounded-2xl bg-white/3 border border-white/8 px-5 py-4'>
-                  <p class='text-[10px] font-bold uppercase tracking-widest mb-2' style={`color: ${card.color}`}>Solucion de Ingenieria</p>
-                  <p class='text-zinc-300 text-sm leading-relaxed'>{card.solution}</p>
-               </div>
-            )}
-
-            {card.architecture && (
-               <div class='rounded-2xl bg-white/3 border border-white/8 px-5 py-4'>
-                  <p class='text-[10px] font-bold uppercase tracking-widest text-zinc-500 mb-2'>Arquitectura y Decisiones Tecnicas</p>
-                  <p class='text-zinc-300 text-sm leading-relaxed'>{card.architecture}</p>
-               </div>
-            )}
-
-            {card.testing && (
-               <div class='rounded-2xl px-5 py-4'
-                  style={`background-color: ${card.color}08; border: 1px solid ${card.color}20`}>
-                  <p class='text-[10px] font-bold uppercase tracking-widest mb-2' style={`color: ${card.color}`}>Testing y Aseguramiento de Calidad</p>
-                  <p class='text-zinc-300 text-sm leading-relaxed'>{card.testing}</p>
-               </div>
-            )}
-
-            {card.management && (
-               <div class='rounded-2xl bg-white/3 border border-white/8 px-5 py-4'>
-                  <p class='text-[10px] font-bold uppercase tracking-widest text-zinc-500 mb-2'>Gestion del Proyecto</p>
-                  <p class='text-zinc-300 text-sm leading-relaxed'>{card.management}</p>
-               </div>
-            )}
-
-            {card.impact && (
-               <div class='rounded-2xl px-5 py-4'
-                  style={`background-color: ${card.color}10; border: 1px solid ${card.color}30`}>
-                  <p class='text-[10px] font-bold uppercase tracking-widest mb-2' style={`color: ${card.color}`}>Impacto y Resultados</p>
-                  <p class='text-zinc-200 text-sm leading-relaxed'>{card.impact}</p>
-               </div>
-            )}
-
-            {card.artifacts && card.artifacts.length > 0 && (
-               <div class='rounded-2xl bg-white/3 border border-white/8 px-5 py-4'>
-                  <p class='text-[10px] font-bold uppercase tracking-widest text-zinc-500 mb-3'>Artefactos de Ingenieria</p>
-                  <div class='flex flex-wrap gap-2'>
-                     {card.artifacts.map((artifact) => (
-                        <span class='px-3 py-1 rounded-full text-xs font-medium text-zinc-300 bg-white/5 border border-white/10'>
-                           {artifact}
-                        </span>
-                     ))}
-                  </div>
-               </div>
-            )}
-
-            <!-- Puntos clave -->
-            <div>
-               <p class='text-[10px] font-bold uppercase tracking-widest text-zinc-500 mb-3'>Puntos clave</p>
-               <ul class='grid grid-cols-1 sm:grid-cols-2 gap-2.5'>
-                  {(job ? job.highlights : card.highlights).map((h) => (
-                     <li class='flex items-start gap-2.5 text-sm text-zinc-300'>
-                        <svg class='mt-0.5 shrink-0' style={`color: ${card.color}`}
-                           xmlns='http://www.w3.org/2000/svg' width='14' height='14'
-                           viewBox='0 0 24 24' fill='none' stroke='currentColor'
-                           stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'>
-                           <path d='M20 6 9 17l-5-5'/>
-                        </svg>
-                        {h}
-                     </li>
-                  ))}
-               </ul>
-            </div>
-
-            <!-- Stack -->
-            <div>
-               <p class='text-[10px] font-bold uppercase tracking-widest text-zinc-500 mb-3'>Stack tecnologico</p>
-               <div class='flex flex-wrap gap-2'>
-                  {card.stack.map((tech) => (<TechChip tech={tech} />))}
-               </div>
-            </div>
-
-         </div>
+        <aside class="section-card p-4 sm:p-5">
+          <SafeImage
+            imageName={id}
+            alt={`Vista del proyecto ${card.title}`}
+            class="h-full min-h-[18rem] w-full rounded-[1.6rem] object-cover object-top"
+            loading="eager"
+          />
+        </aside>
       </div>
-   </main>
+
+      <div class="mt-6 grid gap-6 xl:grid-cols-[minmax(0,1fr)_22rem]">
+        <section class="space-y-4">
+          {detailSections.map((section) => (
+            <article
+              class:list={[
+                "detail-section rounded-[1.8rem] border p-6 sm:p-7",
+                section.tone === "accent"
+                  ? "border-transparent bg-[var(--bg-muted)]"
+                  : "border-[var(--border-soft)] bg-[var(--bg-card)]",
+              ]}
+            >
+              <h2 class="text-sm font-extrabold uppercase tracking-[0.16em] text-[var(--text-primary)]">{section.title}</h2>
+              <p class="mt-4 text-base leading-8 text-[var(--text-secondary)]">{section.content}</p>
+            </article>
+          ))}
+
+          <article class="section-card p-6 sm:p-7">
+            <h2 class="text-sm font-extrabold uppercase tracking-[0.16em] text-[var(--text-primary)]">Puntos clave</h2>
+            <ul class="mt-5 grid gap-3 sm:grid-cols-2">
+              {card.highlights.map((highlight) => (
+                <li class="flex gap-3 text-sm leading-7 text-[var(--text-primary)]">
+                  <span
+                    class="mt-2 h-2.5 w-2.5 rounded-full"
+                    style={`background:${card.color}; box-shadow:0 0 0 5px ${card.color}22;`}
+                    aria-hidden="true"
+                  ></span>
+                  <span>{highlight}</span>
+                </li>
+              ))}
+            </ul>
+          </article>
+        </section>
+
+        <aside class="space-y-4">
+          <section class="section-card p-5">
+            <h2 class="text-sm font-extrabold uppercase tracking-[0.16em] text-[var(--text-primary)]">Stack tecnológico</h2>
+            <div class="mt-4 flex flex-wrap gap-2">
+              {card.stack.map((tech) => (
+                <TechChip tech={tech} />
+              ))}
+            </div>
+          </section>
+
+          {card.artifacts && card.artifacts.length > 0 && (
+            <section class="section-card p-5">
+              <h2 class="text-sm font-extrabold uppercase tracking-[0.16em] text-[var(--text-primary)]">Artefactos de ingeniería</h2>
+              <div class="mt-4 flex flex-wrap gap-2">
+                {card.artifacts.map((artifact) => (
+                  <span class="pill">{artifact}</span>
+                ))}
+              </div>
+            </section>
+          )}
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
 </Layout>

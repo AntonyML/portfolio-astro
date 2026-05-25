@@ -1,51 +1,107 @@
 ---
 interface Props {
-   title: string;
+  title: string;
+  description?: string;
+  canonicalPath?: string;
+  image?: string;
+  robots?: string;
+  ogType?: "website" | "article";
 }
 
 import "../assets/style.css";
-const { title } = Astro.props;
 import { ViewTransitions } from "astro:transitions";
+
+const {
+  title,
+  description = "Portafolio de Antony Monge: arquitectura de software, sistemas empresariales y experiencias de producto mantenibles, accesibles y listas para escalar.",
+  canonicalPath,
+  image = "/social-card.svg",
+  robots = "index, follow",
+  ogType = "website",
+} = Astro.props;
+
+const site = Astro.site ?? new URL("https://porfolio.tonyml.com");
+const canonicalUrl = new URL(canonicalPath ?? Astro.url.pathname, site).toString();
+const ogImageUrl = new URL(image, site).toString();
 ---
 
 <!doctype html>
-<html lang="en" class="scroll-smooth">
-   <head>
-      <meta charset="UTF-8" />
-      <meta name="description" content="Portfolio de Antony Monge — Ingeniero de Software especializado en arquitectura de sistemas, desarrollo empresarial y consultoria tecnica." />
-      <meta name="author" content="Antony Monge" />
-      <meta name="keywords" content="Antony Monge, Ingeniero de Software, Arquitectura de Software, Clean Architecture, Microservicios, .NET, React, TypeScript, Costa Rica" />
-      <meta property="og:title" content="Antony Monge | Portfolio" />
-      <meta property="og:description" content="Ingeniero de Software especializado en arquitectura de sistemas, desarrollo empresarial y consultoria tecnica." />
-      <meta property="og:type" content="website" />
-      <meta name="viewport" content="width=device-width" />
-      
-      <!--=============== Favicons ===============-->
-      <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
-      <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
-      <link rel="shortcut icon" href="/favicon/favicon.ico" />
-      <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
-      <meta name="apple-mobile-web-app-title" content="Portfolio" />
-      <link rel="manifest" href="/favicon/site.webmanifest" />
-      <meta name="theme-color" content="#0a0a0a" />
+<html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="robots" content={robots} />
+    <meta name="author" content="Antony Monge" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Antony Monge" />
+    <meta name="application-name" content="Antony Monge Portfolio" />
+    <meta name="msapplication-TileColor" content="#111318" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f4efea" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#111318" />
+    <meta name="theme-color" content="#111318" data-dynamic-theme-color />
 
-      <meta name="generator" content={Astro.generator} />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="/favicon/site.webmanifest" />
 
-      <!--=============== BoxIcons ===============-->
-      <link
-         rel="stylesheet"
-         href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"
-      />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"
+    />
 
-      <title>{title}</title>
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:site_name" content="Antony Monge Portfolio" />
+    <meta property="og:locale" content="es_CR" />
 
-      <!--=============== View Transition ===============-->
-      <ViewTransitions />
-   </head>
-   <body class="bg-black text-white">
-      <div id="toast" class="toast"></div>
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+    <meta name="twitter:creator" content="@AntonyML" />
+    <meta name="twitter:site" content="@AntonyML" />
 
+    <title>{title}</title>
+
+    <script is:inline>
+      (() => {
+        const storageKey = "portfolio-theme";
+        const root = document.documentElement;
+        const saved = localStorage.getItem(storageKey);
+        const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const theme = saved === "light" || saved === "dark" ? saved : systemDark ? "dark" : "light";
+        root.dataset.theme = theme;
+        root.style.colorScheme = theme;
+        const themeMeta = document.querySelector("[data-dynamic-theme-color]");
+        if (themeMeta) {
+          themeMeta.setAttribute("content", theme === "dark" ? "#111318" : "#f4efea");
+        }
+      })();
+    </script>
+
+    <ViewTransitions />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Saltar al contenido</a>
+    <div class="site-shell">
       <slot />
-      <script src="../assets/index.js"></script>
-   </body>
+    </div>
+    <div class="sr-only" aria-live="polite" data-live-region></div>
+    <script src="../assets/index.js"></script>
+  </body>
 </html>

@@ -1,109 +1,100 @@
-<!-- ═══ Contact Modal ════════════════════════════════════════════════════════ -->
-<div
-   class='fixed inset-0 z-[200] hidden items-center justify-center bg-black/70 backdrop-blur-md transition-all duration-300 px-4'
-   data-contact-modal
->
-   <!-- Panel -->
-   <div
-      class='relative w-full max-w-lg bg-[#0a0a0a] border border-white/10 rounded-[2rem] p-8 md:p-10 shadow-2xl shadow-black/60'
-      data-contact-stop
-   >
-      <!-- Brillo sutil de borde superior -->
-      <div class='absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent rounded-full'></div>
+<section id="contact" class="section-space scroll-mt-32">
+  <div class="page-wrap">
+    <div class="section-card grid gap-8 p-6 sm:p-8 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:p-10">
+      <div class="space-y-6">
+        <div>
+          <p class="eyebrow">Contacto</p>
+          <h2 class="section-title max-w-3xl">Si el proyecto merece precisión, podemos hablar.</h2>
+          <p class="section-copy">
+            Espacio abierto para consultoría, colaboración técnica o conversaciones sobre arquitectura, producto digital y calidad de ingeniería.
+          </p>
+        </div>
 
-      <!-- X Cerrar -->
-      <button
-         data-contact-close
-         class='absolute top-5 right-5 p-2 rounded-full text-zinc-500 hover:text-white hover:bg-white/10 transition-colors duration-200'
-         aria-label='Cerrar'
-      >
-         <svg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'>
-            <line x1='18' y1='6' x2='6' y2='18'/><line x1='6' y1='6' x2='18' y2='18'/>
-         </svg>
-      </button>
+        <div class="grid gap-4 sm:grid-cols-2">
+          <a href="mailto:antony.mongelopez@ucr.ac.cr" class="rounded-[1.4rem] border border-[var(--border-soft)] bg-[var(--bg-soft)] p-4 transition hover:border-[var(--border-strong)]">
+            <p class="text-xs uppercase tracking-[0.16em] text-[var(--text-muted)]">Correo</p>
+            <p class="mt-2 text-base font-semibold text-[var(--text-primary)]">antony.mongelopez@ucr.ac.cr</p>
+            <p class="mt-2 text-sm leading-6 text-[var(--text-secondary)]">Respuesta clara y directa para proyectos o consultas.</p>
+          </a>
 
-      <!-- Header -->
-      <div class='mb-7 space-y-1 pr-8'>
-         <div class='flex items-center gap-3 mb-2'>
-            <div class='h-px w-6 bg-zinc-700'></div>
-            <span class='text-zinc-500 text-[10px] font-bold uppercase tracking-widest'>Contacto</span>
-         </div>
-         <h2 class='text-2xl font-bold text-white tracking-tight'>Hablemos</h2>
-         <p class='text-zinc-400 text-sm leading-relaxed'>
-            ¿Tienes un proyecto, una propuesta o simplemente quieres conversar? Escríbeme.
-         </p>
+          <a
+            href="https://www.linkedin.com/in/antony-monge-lopez/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="rounded-[1.4rem] border border-[var(--border-soft)] bg-[var(--bg-soft)] p-4 transition hover:border-[var(--border-strong)]"
+          >
+            <p class="text-xs uppercase tracking-[0.16em] text-[var(--text-muted)]">LinkedIn</p>
+            <p class="mt-2 text-base font-semibold text-[var(--text-primary)]">Perfil profesional</p>
+            <p class="mt-2 text-sm leading-6 text-[var(--text-secondary)]">Canal ideal para networking, oportunidades y contexto profesional.</p>
+          </a>
+        </div>
+
+        <div class="rounded-[1.6rem] border border-[var(--border-soft)] bg-[var(--bg-card-strong)] p-5">
+          <p class="text-xs uppercase tracking-[0.16em] text-[var(--text-muted)]">Disponibilidad</p>
+          <p class="mt-2 text-lg font-extrabold text-[var(--text-primary)]">Consultoría, colaboración y nuevos retos</p>
+          <p class="mt-2 text-sm leading-7 text-[var(--text-secondary)]">
+            Si necesitas una mano con arquitectura, mejora de experiencia o una implementación front-end más sólida, este es un buen momento para iniciar.
+          </p>
+        </div>
       </div>
 
-      <!-- Form -->
-      <form id='form' autocomplete='off' class='flex flex-col gap-4'>
-
-         <!-- Nombre -->
-         <div class='flex flex-col gap-1.5'>
-            <label for='from_name' class='text-xs font-semibold text-zinc-400 uppercase tracking-widest'>Nombre</label>
+      <div class="rounded-[1.8rem] border border-[var(--border-soft)] bg-[var(--bg-soft)] p-5 sm:p-6">
+        <form id="contact-form" class="grid gap-4" novalidate>
+          <div class="grid gap-2">
+            <label for="from_name" class="text-sm font-semibold text-[var(--text-primary)]">Nombre</label>
             <input
-               type='text'
-               id='from_name'
-               name='from_name'
-               placeholder='¿Cuál es tu nombre?'
-               class='w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-zinc-600 focus:outline-none focus:border-white/25 focus:bg-white/8 transition-all duration-200'
+              id="from_name"
+              name="from_name"
+              type="text"
+              autocomplete="name"
+              placeholder="Tu nombre"
+              class="min-h-12 rounded-2xl border border-[var(--border-soft)] bg-[var(--bg-card-strong)] px-4 text-[var(--text-primary)] placeholder:text-[var(--text-muted)]"
             />
-         </div>
+          </div>
 
-         <!-- Email -->
-         <div class='flex flex-col gap-1.5'>
-            <label for='from_email' class='text-xs font-semibold text-zinc-400 uppercase tracking-widest'>Correo electrónico</label>
+          <div class="grid gap-2">
+            <label for="from_email" class="text-sm font-semibold text-[var(--text-primary)]">Correo electrónico</label>
             <input
-               type='email'
-               id='from_email'
-               name='from_email'
-               placeholder='tu@correo.com'
-               required
-               class='w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-zinc-600 focus:outline-none focus:border-white/25 focus:bg-white/8 transition-all duration-200'
+              id="from_email"
+              name="from_email"
+              type="email"
+              autocomplete="email"
+              placeholder="tu@correo.com"
+              required
+              class="min-h-12 rounded-2xl border border-[var(--border-soft)] bg-[var(--bg-card-strong)] px-4 text-[var(--text-primary)] placeholder:text-[var(--text-muted)]"
             />
-         </div>
+          </div>
 
-         <!-- Mensaje -->
-         <div class='flex flex-col gap-1.5'>
-            <label for='message' class='text-xs font-semibold text-zinc-400 uppercase tracking-widest'>Mensaje</label>
+          <div class="grid gap-2">
+            <label for="message" class="text-sm font-semibold text-[var(--text-primary)]">Mensaje</label>
             <textarea
-               id='message'
-               name='message'
-               rows='4'
-               placeholder='Cuéntame en qué puedo ayudarte...'
-               class='w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-zinc-600 focus:outline-none focus:border-white/25 focus:bg-white/8 transition-all duration-200 resize-none'
+              id="message"
+              name="message"
+              rows="6"
+              placeholder="Cuéntame sobre tu proyecto, reto técnico o necesidad de producto."
+              class="rounded-[1.5rem] border border-[var(--border-soft)] bg-[var(--bg-card-strong)] px-4 py-3 text-[var(--text-primary)] placeholder:text-[var(--text-muted)]"
             ></textarea>
-         </div>
+          </div>
 
-         <!-- Hidden -->
-         <input type='hidden' name='time' id='time' />
+          <p class="status-text" role="status" aria-live="polite" data-form-status>
+            Puedes escribir tu mensaje cuando quieras.
+          </p>
 
-         <!-- Botones -->
-         <div class='flex flex-wrap gap-3 pt-1'>
+          <div class="flex flex-wrap gap-3 pt-2">
             <button
-               id='button'
-               type='submit'
-               class='flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold bg-white text-black hover:bg-zinc-200 transition-all duration-300 hover:scale-[1.02]'
+              id="contact-submit"
+              type="submit"
+              class="button-primary"
+              data-default-label="Enviar mensaje"
             >
-               <svg xmlns='http://www.w3.org/2000/svg' width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><line x1='22' y1='2' x2='11' y2='13'/><polygon points='22 2 15 22 11 13 2 9 22 2'/></svg>
-               Enviar mensaje
+              Enviar mensaje
             </button>
-            <button
-               id='reset-btn'
-               type='button'
-               class='flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold bg-white/5 border border-white/10 text-zinc-300 hover:bg-white/10 hover:text-white transition-all duration-300'
-            >
-               <svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8'/><path d='M3 3v5h5'/></svg>
-               Limpiar
+            <button id="contact-reset" type="button" class="button-secondary">
+              Limpiar
             </button>
-            <button
-               data-contact-close
-               type='button'
-               class='flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium text-zinc-500 hover:text-zinc-300 transition-colors duration-200'
-            >
-               Volver
-            </button>
-         </div>
-
-      </form>
-   </div>
-</div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

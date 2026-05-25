@@ -1,32 +1,32 @@
 ---
-import SafeImage from './SafeImage.astro';
-// Interface
+import SafeImage from "./SafeImage.astro";
+
 interface Props {
   text: string;
   logo: string;
 }
 
 const { text, logo } = Astro.props;
-
-// Verificamos si es una URL
-const isUrl = logo.startsWith('http');
+const isUrl = logo.startsWith("http");
 ---
 
-<div class='group flex items-center gap-4 px-5 py-3 rounded-2xl bg-zinc-900/40 border border-white/5 hover:border-white/10 hover:bg-zinc-800/50 backdrop-blur-md transition-all duration-300 w-max'>
-  {
-    isUrl ? (
-      <SafeImage
-        imageName={logo.replace('.webp','').replace('/','')}
-        alt={text}
-        class="w-8 h-8 object-contain filter grayscale transition-all duration-500 opacity-70" data-grayscale-reveal
-      />
-    ) : (
-      <i class={`${logo} text-3xl text-zinc-400 group-hover:text-white transition-colors duration-300`}></i>
-    )
-  }
+<div class="rounded-[1.25rem] border border-[var(--border-soft)] bg-[var(--bg-soft)] p-3.5 transition duration-300 hover:-translate-y-1 hover:border-[var(--border-strong)] hover:bg-[var(--bg-card-strong)]">
+  <div class="flex items-center gap-4">
+    <div class="grid h-10 w-10 shrink-0 place-items-center rounded-[1rem] border border-[var(--border-soft)] bg-[var(--bg-card)] text-xl text-[var(--text-primary)]">
+      {isUrl ? (
+        <SafeImage
+          imageName={logo.replace(".webp", "").replace("/", "")}
+          alt={`Logo de ${text}`}
+          class="h-7 w-7 object-contain"
+        />
+      ) : (
+        <i class={logo} aria-hidden="true"></i>
+      )}
+    </div>
 
-  <span class='text-lg font-medium text-zinc-400 group-hover:text-white transition-colors duration-300 tracking-wide'>
-    {text}
-  </span>
+    <div>
+      <p class="text-[0.96rem] font-semibold text-[var(--text-primary)]">{text}</p>
+      <p class="mt-1 text-sm leading-5 text-[var(--text-secondary)]">Parte del toolkit de entrega y arquitectura.</p>
+    </div>
+  </div>
 </div>
----

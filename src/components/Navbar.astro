@@ -1,110 +1,133 @@
 ---
+import ThemeToggle from "./ThemeToggle.astro";
+
 const { pathname } = Astro.url;
 
 const socials = [
-   { logo: "bx bxl-github", href: "https://github.com/AntonyML" },
-   {
-      logo: "bx bxl-linkedin-square",
-      href: "https://www.linkedin.com/in/antony-monge-lopez/",
-   },
-   { logo: "bx bxl-instagram", href: "https://www.instagram.com/tony_m_l_/" },
-   {
-      logo: "bx bxl-facebook-circle",
-      href: "https://www.facebook.com/tony.ml.786149",
-   },
+  { label: "GitHub", icon: "bx bxl-github", href: "https://github.com/AntonyML" },
+  { label: "LinkedIn", icon: "bx bxl-linkedin-square", href: "https://www.linkedin.com/in/antony-monge-lopez/" },
 ];
 
 const navItems = [
-   { text: "Inicio", href: "#home", modal: false },
-   { text: "Experiencia laboral", href: "#experience", modal: false },
-   { text: "Proyectos", href: "#projects", modal: false },
-   { text: "Perfil", href: "#about", modal: false },
-   { text: "Contacto", href: "#", modal: true },
+  { text: "Inicio", href: "#home" },
+  { text: "Experiencia", href: "#experience" },
+  { text: "Proyectos", href: "#projects" },
+  { text: "Stack", href: "#stack" },
+  { text: "Sobre mí", href: "#about" },
+  { text: "Contacto", href: "#contact" },
 ];
 ---
 
-<nav
-   class="w-full h-16 bg-[#0a0a0a]/60 backdrop-blur-xl border-b border-white/5 text-white flex items-center px-6 py-3 fixed top-0 z-50 justify-between transition-all duration-300"
->
-   <!-- Socials -->
-   <ul class="flex items-center gap-5 hidden md:flex">
-      {
-         socials.map((social) => (
-            <li>
-               <a
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="text-2xl text-zinc-400 hover:text-white hover:scale-110 duration-300 ease-in-out cursor-pointer transition-all"
-               >
-                  <i class={social.logo} />
-               </a>
-            </li>
-         ))
-      }
-   </ul>
+<header class="site-nav">
+  <div class="page-wrap">
+    <div class="section-card surface-outline flex items-center justify-between gap-4 px-4 py-3 md:px-5">
+      <a href="/" class="flex min-w-0 items-center gap-3" aria-label="Ir al inicio del portafolio">
+        <span class="grid h-11 w-11 place-items-center rounded-2xl border border-[var(--border-soft)] bg-[var(--bg-soft)] font-['Space_Mono'] text-sm font-bold uppercase tracking-[0.18em] text-[var(--text-primary)]">
+          AM
+        </span>
+        <span class="min-w-0">
+          <span class="block truncate text-sm font-semibold text-[var(--text-primary)] md:text-base">Antony Monge</span>
+          <span class="block truncate text-xs text-[var(--text-muted)]">Software Engineer · Portfolio</span>
+        </span>
+      </a>
 
-   <!-- Nav Links -->
-   <ul class="flex items-center gap-4 sm:gap-6 md:gap-8 mx-auto md:mx-0">
-      {
-         pathname === "/" &&
-            navItems.map((item) => (
-               <li>
-                  {item.modal ? (
-                     <button
-                        data-contact-open
-                        class="text-xs sm:text-sm whitespace-nowrap font-medium text-zinc-400 hover:text-white hover:scale-105 duration-300 transition-all font-sans cursor-pointer"
-                     >
-                        {item.text}
-                     </button>
-                  ) : (
-                     <a
-                        class="text-xs sm:text-sm whitespace-nowrap font-medium text-zinc-400 hover:text-white hover:scale-105 duration-300 transition-all font-sans"
-                        href={item.href}
-                     >
-                        {item.text}
-                     </a>
-                  )}
-               </li>
-            ))
-      }
-   </ul>
-</nav>
+      {pathname === "/" ? (
+        <>
+          <nav class="hidden items-center gap-2 lg:flex" aria-label="Navegación principal">
+            {navItems.map((item) => (
+              <a href={item.href} class="pill transition hover:border-[var(--border-strong)] hover:text-[var(--text-primary)]">
+                {item.text}
+              </a>
+            ))}
+          </nav>
 
-<script>
-   // Smooth scrolling default behavior override to ensuring finding targets
-   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-      anchor.addEventListener("click", (e) => {
-         e.preventDefault();
-         const href = anchor.getAttribute("href");
-         if (!href) return;
+          <div class="hidden items-center gap-2 lg:flex">
+            {socials.map((social) => (
+              <a
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={social.label}
+                class="grid h-11 w-11 place-items-center rounded-full border border-[var(--border-soft)] bg-[var(--bg-soft)] text-xl text-[var(--text-secondary)] transition hover:border-[var(--border-strong)] hover:text-[var(--text-primary)]"
+              >
+                <i class={social.icon} aria-hidden="true"></i>
+              </a>
+            ))}
+            <ThemeToggle />
+            <a href="#contact" class="button-primary">Hablemos</a>
+          </div>
 
-         const target = document.querySelector(href);
-         if (target) {
-            // Fix for form section scrolling - scroll to container to show title
-            if (href === "#form") {
-               const section = target.closest("section");
-               if (section) {
-                  section.scrollIntoView({ behavior: "smooth" });
-                  return;
-               }
-            }
+          <div class="flex items-center gap-2 lg:hidden">
+            <ThemeToggle />
+            <button
+              type="button"
+              class="grid h-11 w-11 place-items-center rounded-full border border-[var(--border-soft)] bg-[var(--bg-soft)] text-2xl text-[var(--text-primary)]"
+              aria-expanded="false"
+              aria-controls="mobile-nav"
+              aria-label="Abrir menú de navegación"
+              data-nav-toggle
+            >
+              <i class="bx bx-menu" aria-hidden="true"></i>
+            </button>
+          </div>
+        </>
+      ) : (
+        <div class="flex items-center gap-2">
+          <a href="/#projects" class="button-secondary hidden sm:inline-flex">Volver al portafolio</a>
+          <ThemeToggle />
+        </div>
+      )}
+    </div>
+  </div>
 
-            target.scrollIntoView({
-               behavior: "smooth",
-            });
-         } else if (href === "#technologies") {
-            // Fallback for Technologies section identification
-            const headings = Array.from(document.querySelectorAll("h2"));
-            const techHeading = headings.find(
-               (h) =>
-                  h.textContent.includes("Stack") ||
-                  h.textContent.includes("Tecnologías"),
-            );
-            techHeading
-               ?.closest("section")
-               ?.scrollIntoView({ behavior: "smooth" });
-         }
-      });
-   });
-</script>
+  {pathname === "/" && (
+    <div
+      id="mobile-nav"
+      class="fixed inset-0 z-50 bg-[rgba(17,19,24,0.42)] px-4 pb-4 pt-24 backdrop-blur-md opacity-0 pointer-events-none transition data-[open]:pointer-events-auto data-[open]:opacity-100 lg:hidden"
+      data-nav-panel
+    >
+      <div class="page-wrap">
+        <div class="section-card flex flex-col gap-6 p-5">
+          <div class="flex items-center justify-between gap-4">
+            <div>
+              <p class="text-sm font-semibold text-[var(--text-primary)]">Navegación</p>
+              <p class="text-sm text-[var(--text-secondary)]">Accesos rápidos para moverte por el portafolio.</p>
+            </div>
+            <button
+              type="button"
+              class="grid h-10 w-10 place-items-center rounded-full border border-[var(--border-soft)] bg-[var(--bg-soft)] text-xl"
+              aria-label="Cerrar menú"
+              data-nav-close
+            >
+              <i class="bx bx-x" aria-hidden="true"></i>
+            </button>
+          </div>
+
+          <nav class="grid gap-2" aria-label="Navegación móvil">
+            {navItems.map((item) => (
+              <a href={item.href} class="button-secondary justify-between" data-nav-close>
+                <span>{item.text}</span>
+                <i class="bx bx-arrow-back bx-rotate-180 text-base" aria-hidden="true"></i>
+              </a>
+            ))}
+          </nav>
+
+          <div class="flex flex-wrap items-center gap-3">
+            {socials.map((social) => (
+              <a
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="button-ghost"
+                data-nav-close
+              >
+                <i class={social.icon} aria-hidden="true"></i>
+                {social.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  )}
+</header>

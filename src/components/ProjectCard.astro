@@ -1,86 +1,79 @@
 ---
-import SafeImage from './SafeImage.astro';
-import TechChip from './TechChip.astro';
+import SafeImage from "./SafeImage.astro";
+import TechChip from "./TechChip.astro";
 
 interface Props {
-   id:          string;
-   title:       string;
-   type:        string;
-   role:        string;
-   description: string;
-   highlights:  string[];
-   stack:       string[];
-   image:       string;
-   color:       string;
+  id: string;
+  title: string;
+  type: string;
+  role: string;
+  description: string;
+  highlights: string[];
+  stack: string[];
+  image: string;
+  color: string;
 }
 
-const { id, title, type, role, description, stack, image, color } = Astro.props;
+const { title, type, role, description, highlights, stack, image, color } = Astro.props;
 ---
 
 <a
-   href={`/${image}`}
-   class='group relative flex flex-col w-full rounded-3xl overflow-hidden border border-white/5 bg-[#0d0d0f] shadow-lg hover:shadow-2xl hover:border-white/15 transition-all duration-500'
-   transition:name={`image-${image}`}
-   style={`--card-color: ${color}`}
+  href={`/${image}`}
+  class="group section-card flex h-full flex-col overflow-hidden transition duration-300 hover:-translate-y-1 hover:border-[var(--border-strong)]"
+  transition:name={`image-${image}`}
+  style={`--project-color:${color};`}
+  aria-label={`Abrir caso de estudio de ${title}`}
 >
-   <!-- ── Imagen con gradiente ───────────────────────────── -->
-   <div class='relative w-full h-52 overflow-hidden shrink-0'>
-      <img
-         src={`/${image}.webp`}
-         alt={title}
-         class='w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105 opacity-70 group-hover:opacity-55'
-      />
----
-      <!-- Gradiente al fondo de la imagen -->
-      <SafeImage
-         imageName={image}
-         alt={title}
-         class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105 opacity-70 group-hover:opacity-55"
-      />
-         style={`background-color: ${color}30; border: 1px solid ${color}60;`}
+  <div class="relative overflow-hidden">
+    <SafeImage
+      imageName={image}
+      alt={`Vista previa del proyecto ${title}`}
+      class="h-48 w-full object-cover object-top transition duration-500 group-hover:scale-[1.04] sm:h-52"
+      loading="lazy"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-[rgba(17,19,24,0.74)] via-transparent to-transparent"></div>
+    <div class="absolute inset-x-3.5 top-3.5 flex items-start justify-between gap-3">
+      <span
+        class="inline-flex rounded-full px-2.5 py-1 text-[0.67rem] font-bold uppercase tracking-[0.16em]"
+        style={`background:${color}18; color:${color}; border:1px solid ${color}44;`}
       >
-         {type}
+        {type}
       </span>
-   </div>
+      <span class="rounded-full bg-[rgba(17,19,24,0.56)] px-2.5 py-1 text-[0.7rem] font-semibold text-white backdrop-blur">
+        Caso de estudio
+      </span>
+    </div>
+  </div>
 
-   <!-- ── Cuerpo de la tarjeta ───────────────────────────── -->
-   <div class='flex flex-col flex-1 px-6 pt-4 pb-6 gap-3'>
+  <div class="flex flex-1 flex-col gap-4 p-5">
+    <div>
+      <p class="text-sm font-semibold" style={`color:${color};`}>{role}</p>
+      <h3 class="mt-2.5 text-[1.08rem] font-extrabold leading-6 text-[var(--text-primary)]">{title}</h3>
+      <p class="mt-2.5 text-sm leading-6 text-[var(--text-secondary)]">{description}</p>
+    </div>
 
-      <!-- Título -->
-      <h3 class='text-lg font-bold text-white leading-snug tracking-tight group-hover:text-zinc-100 transition-colors line-clamp-2'>
-         {title}
-      </h3>
+    <ul class="grid gap-2">
+      {highlights.slice(0, 2).map((highlight) => (
+        <li class="flex gap-3 text-sm leading-6 text-[var(--text-primary)]">
+          <span
+            class="mt-1.5 h-2.5 w-2.5 rounded-full"
+            style={`background:${color}; box-shadow:0 0 0 5px ${color}22;`}
+            aria-hidden="true"
+          ></span>
+          <span>{highlight}</span>
+        </li>
+      ))}
+    </ul>
 
-      <!-- Rol -->
-      <p class='text-xs font-medium tracking-wide uppercase' style={`color: ${color}`}>
-         {role}
-      </p>
+    <div class="mt-auto flex flex-wrap gap-2">
+      {stack.slice(0, 5).map((tech) => (
+        <TechChip tech={tech} />
+      ))}
+    </div>
 
-      <!-- Descripción -->
-      <p class='text-zinc-400 text-sm leading-relaxed line-clamp-3 group-hover:text-zinc-300 transition-colors flex-1'>
-         {description}
-      </p>
-
-      <!-- Stack chips -->
-      <div class='flex flex-wrap gap-1.5 pt-1'>
-         {stack.map((tech) => (
-            <TechChip tech={tech} />
-         ))}
-      </div>
-
-      <!-- CTA -->
-      <div class='inline-flex items-center gap-2 text-sm font-medium mt-1 transition-all duration-300' style={`color: ${color}`}>
-         Ver caso de estudio
-         <svg xmlns='http://www.w3.org/2000/svg' width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' class='transition-transform group-hover:translate-x-1'>
-            <path d='M5 12h14'/><path d='m12 5 7 7-7 7'/>
-         </svg>
-      </div>
-
-   </div>
-
-   <!-- Acento de color inferior -->
-   <div
-      class='absolute bottom-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500'
-      style={`background: linear-gradient(to right, transparent, ${color}, transparent)`}
-   ></div>
+    <div class="flex items-center gap-2 text-sm font-bold" style={`color:${color};`}>
+      Ver detalle
+      <i class="bx bx-right-arrow-alt text-xl transition duration-300 group-hover:translate-x-1" aria-hidden="true"></i>
+    </div>
+  </div>
 </a>
