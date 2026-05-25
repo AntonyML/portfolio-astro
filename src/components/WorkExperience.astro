@@ -1,11 +1,12 @@
 ---
 import { buttons, experience } from "../assets/data";
 import TechChip from "./TechChip.astro";
+import SafeImage from "./SafeImage.astro";
 ---
 
 <section id="experience" class="section-space scroll-mt-24">
   <div class="page-wrap">
-    <div class="mb-6">
+    <div class="mb-4">
       <p class="eyebrow">Experiencia profesional</p>
       <h2 class="section-title max-w-4xl">Experiencia real construyendo software para operación de negocio.</h2>
       <p class="section-copy">
@@ -37,6 +38,15 @@ import TechChip from "./TechChip.astro";
           </div>
 
           <p class="text-[0.98rem] leading-7 text-[var(--text-secondary)]">{job.description}</p>
+
+          <div class="my-4 overflow-hidden rounded-[0.5rem]">
+            <SafeImage
+              imageName={job.image}
+              alt={`Proyecto: ${job.projectTitle}`}
+              class="h-auto w-full object-cover"
+              loading="lazy"
+            />
+          </div>
 
           <ul class="mt-4 grid gap-2.5">
             {job.highlights.slice(0, 2).map((highlight) => (
