@@ -151,6 +151,13 @@ function initContactForm() {
   });
 }
 
+document.addEventListener("astro:after-swap", () => {
+  const saved = localStorage.getItem(THEME_KEY);
+  const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const theme = saved === "light" || saved === "dark" ? saved : systemDark ? "dark" : "light";
+  applyTheme(theme);
+});
+
 document.addEventListener("astro:page-load", () => {
   initThemeToggle();
   initMobileNav();
