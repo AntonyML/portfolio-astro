@@ -12,22 +12,20 @@ const navItems = [
   { text: "Inicio", href: "#home" },
   { text: "Experiencia", href: "#experience" },
   { text: "Proyectos", href: "#projects" },
-  { text: "Stack", href: "#stack" },
-  { text: "Sobre mí", href: "#about" },
+  { text: "Perfil", href: "#about" },
   { text: "Contacto", href: "#contact" },
 ];
 ---
 
 <header class="site-nav">
   <div class="page-wrap">
-    <div class="section-card surface-outline flex items-center justify-between gap-4 px-4 py-2.5 md:px-5">
-      <a href="/" class="flex min-w-0 items-center gap-3" aria-label="Ir al inicio del portafolio">
-        <span class="grid h-11 w-11 place-items-center rounded-2xl border border-[var(--border-soft)] bg-[var(--bg-soft)] font-['Space_Mono'] text-sm font-bold uppercase tracking-[0.18em] text-[var(--text-primary)]">
+    <div class="section-card surface-outline flex items-center justify-between gap-4 px-4 py-2 md:px-5">
+      <a href="/" class="flex min-w-0 items-center gap-2.5" aria-label="Ir al inicio del portafolio">
+        <span class="grid h-9 w-9 place-items-center rounded-xl border border-[var(--border-soft)] bg-[var(--bg-soft)] font-['Space_Mono'] text-xs font-bold uppercase tracking-[0.18em] text-[var(--text-primary)]">
           AM
         </span>
         <span class="min-w-0">
-          <span class="block truncate text-sm font-semibold text-[var(--text-primary)] md:text-base">Antony Monge</span>
-          <span class="block truncate text-xs text-[var(--text-muted)]">Software Engineer · Portfolio</span>
+          <span class="block truncate text-sm font-semibold text-[var(--text-primary)]">Antony Monge</span>
         </span>
       </a>
 
@@ -48,7 +46,7 @@ const navItems = [
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={social.label}
-                class="grid h-11 w-11 place-items-center rounded-full border border-[var(--border-soft)] bg-[var(--bg-soft)] text-xl text-[var(--text-secondary)] transition hover:border-[var(--border-strong)] hover:text-[var(--text-primary)]"
+                class="grid h-9 w-9 place-items-center rounded-full border border-[var(--border-soft)] bg-[var(--bg-soft)] text-lg text-[var(--text-secondary)] transition hover:border-[var(--border-strong)] hover:text-[var(--text-primary)]"
               >
                 <i class={social.icon} aria-hidden="true"></i>
               </a>
@@ -61,7 +59,7 @@ const navItems = [
             <ThemeToggle />
             <button
               type="button"
-              class="grid h-11 w-11 place-items-center rounded-full border border-[var(--border-soft)] bg-[var(--bg-soft)] text-2xl text-[var(--text-primary)]"
+              class="grid h-9 w-9 place-items-center rounded-full border border-[var(--border-soft)] bg-[var(--bg-soft)] text-xl text-[var(--text-primary)]"
               aria-expanded="false"
               aria-controls="mobile-nav"
               aria-label="Abrir menú de navegación"

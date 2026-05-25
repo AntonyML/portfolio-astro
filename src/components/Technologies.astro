@@ -1,24 +1,28 @@
 ---
-import { technologies } from "../assets/data";
-import TechnologyCard from "./TechnologyCard.astro";
+import { skills } from "../assets/data";
 ---
 
-<section id="stack" class="section-space scroll-mt-24">
+<section id="skills" class="section-space scroll-mt-24">
   <div class="page-wrap">
-    <div class="section-card p-5 sm:p-6 lg:p-8">
-      <div class="mb-8 flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
-        <div>
-          <p class="eyebrow">Stack y prácticas</p>
-          <h2 class="section-title max-w-4xl">Tecnologías elegidas por criterio, no por moda.</h2>
-        </div>
-        <p class="max-w-lg text-[0.98rem] leading-7 text-[var(--text-secondary)]">
-          Herramientas, frameworks y patrones que utilizo para construir software robusto, usable y preparado para evolucionar.
+    <div class="section-card p-5 sm:p-6 lg:p-6">
+      <div class="mb-6">
+        <p class="eyebrow">Habilidades</p>
+        <h2 class="section-title max-w-4xl">Stack organizado para leer rápido y entender mejor mi perfil.</h2>
+        <p class="section-copy">
+          Tecnologías orientadas a producto y sistemas empresariales, con foco en implementación práctica y entrega mantenible.
         </p>
       </div>
 
-      <div class="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-        {technologies.map((tech) => (
-          <TechnologyCard text={tech.text} logo={tech.logo} />
+      <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        {skills.map((group) => (
+          <section class="rounded-[1.35rem] border border-[var(--border-soft)] bg-[var(--bg-soft)] p-4 sm:p-5">
+            <h3 class="text-sm font-extrabold uppercase tracking-[0.16em] text-[var(--text-primary)]">{group.title}</h3>
+            <div class="mt-4 flex flex-wrap gap-2">
+              {group.items.map((item) => (
+                <span class="pill">{item}</span>
+              ))}
+            </div>
+          </section>
         ))}
       </div>
     </div>

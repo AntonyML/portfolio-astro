@@ -15,6 +15,23 @@ export interface Technology {
   logo: string;
 }
 
+export interface SkillCategory {
+  title: string;
+  items: string[];
+}
+
+export interface EducationItem {
+  title: string;
+  institution: string;
+  period: string;
+}
+
+export interface Credentials {
+  education: EducationItem[];
+  certifications: string[];
+  languages: string[];
+}
+
 // path de imagen que debe terminar en .webp
 export type WebPPath = `${string}.webp`;
 

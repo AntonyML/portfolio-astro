@@ -6,18 +6,18 @@ const socials = [
 ];
 ---
 
-<footer class="pb-8 pt-2">
+<footer class="pt-3 pb-6">
   <div class="page-wrap">
-    <div class="section-card flex flex-col gap-5 px-5 py-5 sm:px-6">
-      <div class="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
-        <div class="max-w-2xl">
+    <div class="section-card flex flex-col gap-4 px-5 py-4 sm:px-6">
+      <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+        <div class="max-w-xl">
           <p class="font-['Space_Mono'] text-sm font-bold uppercase tracking-[0.16em] text-[var(--text-muted)]">Antony Monge</p>
-          <p class="mt-2.5 text-[0.98rem] leading-7 text-[var(--text-secondary)]">
-            Portafolio diseñado para mostrar criterio de producto, ingeniería y ejecución. Construido con Astro y una capa visual optimizada para claridad, accesibilidad y rendimiento.
+          <p class="mt-2 text-[0.92rem] leading-6 text-[var(--text-secondary)]">
+            Ingeniero de Software enfocado en sistemas empresariales y desarrollo Full-Stack.
           </p>
         </div>
 
-        <div class="flex flex-wrap items-center gap-2.5">
+        <div class="flex flex-wrap items-center gap-2">
           {socials.map((social) => (
             <a
               href={social.href}
@@ -32,7 +32,7 @@ const socials = [
         </div>
       </div>
 
-      <div class="flex flex-col gap-3 border-t border-[var(--border-soft)] pt-4 text-sm text-[var(--text-muted)] sm:flex-row sm:items-center sm:justify-between">
+      <div class="flex flex-col gap-2 border-t border-[var(--border-soft)] pt-3 text-xs text-[var(--text-muted)] sm:flex-row sm:items-center sm:justify-between">
         <p>&copy; 2026 Antony Monge. Todos los derechos reservados.</p>
         <a href="#home" class="muted-link">Volver arriba</a>
       </div>

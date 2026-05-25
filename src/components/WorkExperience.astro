@@ -5,11 +5,11 @@ import TechChip from "./TechChip.astro";
 
 <section id="experience" class="section-space scroll-mt-24">
   <div class="page-wrap">
-    <div class="mb-8">
+    <div class="mb-6">
       <p class="eyebrow">Experiencia profesional</p>
-      <h2 class="section-title max-w-4xl">Consultoría aplicada a sistemas que viven en producción.</h2>
+      <h2 class="section-title max-w-4xl">Experiencia real construyendo software para operación de negocio.</h2>
       <p class="section-copy">
-        Proyectos remunerados y responsabilidades directas sobre procesos críticos, con foco en estabilidad, mantenibilidad y claridad operativa.
+        Mi parte más sólida hoy está en consultoría freelance internacional: sistemas de escritorio para ventas, inventario, usuarios y control operativo en entornos reales.
       </p>
     </div>
 
@@ -22,7 +22,7 @@ import TechChip from "./TechChip.astro";
                 class="inline-flex items-center rounded-full px-3 py-1 text-[0.68rem] font-bold uppercase tracking-[0.16em]"
                 style={`background: ${job.color}15; color: ${job.color}; border: 1px solid ${job.color}45;`}
               >
-                Consultoría internacional
+                Proyecto internacional
               </span>
               <div>
                 <h3 class="text-[1.08rem] font-extrabold leading-6 text-[var(--text-primary)]">{job.projectTitle}</h3>
@@ -39,7 +39,7 @@ import TechChip from "./TechChip.astro";
           <p class="text-[0.98rem] leading-7 text-[var(--text-secondary)]">{job.description}</p>
 
           <ul class="mt-4 grid gap-2.5">
-            {job.highlights.slice(0, 3).map((highlight) => (
+            {job.highlights.slice(0, 2).map((highlight) => (
               <li class="flex gap-3 text-sm leading-6 text-[var(--text-primary)]">
                 <span
                   class="mt-1.5 h-2.5 w-2.5 rounded-full"
@@ -60,7 +60,7 @@ import TechChip from "./TechChip.astro";
 
             <div class="flex flex-wrap items-center gap-3">
               <a href={`/${job.image}`} class="button-secondary">
-                Ver caso de estudio
+                Ver proyecto
                 <i class="bx bx-right-arrow-alt text-xl" aria-hidden="true"></i>
               </a>
               {job.github && (

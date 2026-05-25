@@ -8,10 +8,12 @@ import TechChip from "../components/TechChip.astro";
 import SafeImage from "../components/SafeImage.astro";
 
 export function getStaticPaths() {
-  return [
+  const paths = [
     ...projects.map((project) => ({ params: { id: project.image } })),
     ...experience.map((job) => ({ params: { id: job.image } })),
   ];
+
+  return Array.from(new Map(paths.map((item) => [item.params.id, item])).values());
 }
 
 const baseCard = projects.find((project) => project.image === id);

@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Lenguajes",
+    "items": ["C#", "TypeScript", "Java"]
+  },
+  {
+    "title": "Frameworks",
+    "items": [".NET", "NestJS", "React", "Next.js", "Spring Boot"]
+  },
+  {
+    "title": "Bases de datos",
+    "items": ["PostgreSQL", "SQL Server", "MySQL", "Oracle", "D1 Cloudflare"]
+  },
+  {
+    "title": "Arquitectura",
+    "items": ["Microservicios", "Clean Architecture", "Hexagonal", "Event-Driven", "SOLID"]
+  },
+  {
+    "title": "DevOps y herramientas",
+    "items": ["Git", "GitHub", "Jenkins CI/CD", "Docker", "Cloudflare", "Linux", "JMeter"]
+  },
+  {
+    "title": "Metodologías",
+    "items": ["Scrum", "PMBOK", "Gestión de backlog en Taiga"]
+  }
+]
