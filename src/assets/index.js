@@ -124,7 +124,7 @@ function initContactForm() {
     setStatus("Enviando mensaje...");
 
     try {
-      const response = await fetch("https://contact-worke.antony-mongelopez.workers.dev", {
+      const response = await fetch(URLEMAIL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, message }),
