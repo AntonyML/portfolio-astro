@@ -8,86 +8,97 @@ import SafeImage from "./SafeImage.astro";
   <div class="page-wrap">
     <div class="mb-6">
       <p class="eyebrow">Experiencia profesional</p>
-      <h2 class="section-title max-w-4xl">Software que funciona en operación real.</h2>
+      <h2 class="section-title max-w-4xl">Software en operación real.</h2>
       <p class="section-copy">
-        Mi especialidad es construir sistemas empresariales de escritorio para clientes internacionales. Punto de venta, inventario, usuarios y procesos de negocio que operan en producción.
+        Mi especialidad es construir sistemas empresariales de escritorio para
+        clientes internacionales. Punto de venta, inventario, usuarios y
+        procesos de negocio que operan en producción.
       </p>
     </div>
 
     <div class="grid gap-3 lg:grid-cols-2">
-      {experience.map((job) => (
-        <article class="section-card flex h-full flex-col overflow-hidden p-4 sm:p-5">
-          <div class="mb-3 flex flex-wrap items-start justify-between gap-2 border-b border-[var(--border-soft)] pb-3">
-            <div class="space-y-2.5">
-              <span
-                class="inline-flex items-center rounded-full px-3 py-1 text-[0.68rem] font-bold uppercase tracking-[0.16em]"
-                style={`background: ${job.color}15; color: ${job.color}; border: 1px solid ${job.color}45;`}
-              >
-                Proyecto internacional
-              </span>
-              <div>
-                <h3 class="text-[1.08rem] font-extrabold leading-6 text-[var(--text-primary)]">{job.projectTitle}</h3>
-                <p class="mt-1 text-sm text-[var(--text-secondary)]">{job.role} · {job.origin}</p>
+      {
+        experience.map((job) => (
+          <article class="section-card flex h-full flex-col overflow-hidden p-4 sm:p-5">
+            <div class="mb-3 flex flex-wrap items-start justify-between gap-2 border-b border-[var(--border-soft)] pb-3">
+              <div class="space-y-2.5">
+                <span
+                  class="inline-flex items-center rounded-full px-3 py-1 text-[0.68rem] font-bold uppercase tracking-[0.16em]"
+                  style={`background: ${job.color}15; color: ${job.color}; border: 1px solid ${job.color}45;`}
+                >
+                  Proyecto internacional
+                </span>
+                <div>
+                  <h3 class="text-[1.08rem] font-extrabold leading-6 text-[var(--text-primary)]">
+                    {job.projectTitle}
+                  </h3>
+                  <p class="mt-1 text-sm text-[var(--text-secondary)]">
+                    {job.role} · {job.origin}
+                  </p>
+                </div>
+              </div>
+
+              <div class="rounded-2xl border border-[var(--border-soft)] bg-[var(--bg-soft)] px-3.5 py-2.5 text-right">
+                <p class="mt-1 text-sm font-semibold text-[var(--text-primary)]">
+                  {job.period}
+                </p>
               </div>
             </div>
 
-            <div class="rounded-2xl border border-[var(--border-soft)] bg-[var(--bg-soft)] px-3.5 py-2.5 text-right">
-              <p class="text-xs uppercase tracking-[0.16em] text-[var(--text-muted)]">Periodo</p>
-              <p class="mt-1 text-sm font-semibold text-[var(--text-primary)]">{job.period}</p>
+            <p class="text-[0.95rem] leading-6 text-[var(--text-secondary)]">
+              {job.description}
+            </p>
+
+            <div class="my-3 overflow-hidden rounded-[0.5rem]">
+              <SafeImage
+                imageName={job.image}
+                alt={`Proyecto: ${job.projectTitle}`}
+                class="h-40 w-full object-cover"
+                loading="lazy"
+              />
             </div>
-          </div>
 
-          <p class="text-[0.95rem] leading-6 text-[var(--text-secondary)]">{job.description}</p>
-
-          <div class="my-3 overflow-hidden rounded-[0.5rem]">
-            <SafeImage
-              imageName={job.image}
-              alt={`Proyecto: ${job.projectTitle}`}
-              class="h-40 w-full object-cover"
-              loading="lazy"
-            />
-          </div>
-
-          <ul class="mt-3 grid gap-2">
-            {job.highlights.slice(0, 2).map((highlight) => (
-              <li class="flex gap-3 text-sm leading-6 text-[var(--text-primary)]">
-                <span
-                  class="mt-1.5 h-2.5 w-2.5 rounded-full"
-                  style={`background:${job.color}; box-shadow: 0 0 0 5px ${job.color}22;`}
-                  aria-hidden="true"
-                ></span>
-                <span>{highlight}</span>
-              </li>
-            ))}
-          </ul>
-
-          <div class="mt-4 flex flex-1 flex-col justify-end gap-3">
-            <div class="flex flex-wrap gap-1.5">
-              {job.stack.map((tech) => (
-                <TechChip tech={tech} />
+            <ul class="mt-3 grid gap-2">
+              {job.highlights.slice(0, 2).map((highlight) => (
+                <li class="flex gap-3 text-sm leading-6 text-[var(--text-primary)]">
+                  <span
+                    class="mt-1.5 h-2.5 w-2.5 rounded-full"
+                    style={`background:${job.color}; box-shadow: 0 0 0 5px ${job.color}22;`}
+                    aria-hidden="true"
+                  />
+                  <span>{highlight}</span>
+                </li>
               ))}
-            </div>
+            </ul>
 
-            <div class="flex flex-wrap items-center gap-2">
-              <a href={`/${job.image}`} class="button-secondary">
-                Ver proyecto
-                <i class="bx bx-right-arrow-alt text-xl" aria-hidden="true"></i>
-              </a>
-              {job.github && (
-                <a
-                  href={job.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="button-ghost"
-                >
-                  <i class={buttons[0].github} aria-hidden="true"></i>
-                  Repositorio
+            <div class="mt-4 flex flex-1 flex-col justify-end gap-3">
+              <div class="flex flex-wrap gap-1.5">
+                {job.stack.map((tech) => (
+                  <TechChip tech={tech} />
+                ))}
+              </div>
+
+              <div class="flex flex-wrap items-center gap-2">
+                <a href={`/${job.image}`} class="button-secondary">
+                  Ver proyecto
+                  <i class="bx bx-right-arrow-alt text-xl" aria-hidden="true" />
                 </a>
-              )}
+                {job.github && (
+                  <a
+                    href={job.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="button-ghost"
+                  >
+                    <i class={buttons[0].github} aria-hidden="true" />
+                    Repositorio
+                  </a>
+                )}
+              </div>
             </div>
-          </div>
-        </article>
-      ))}
+          </article>
+        ))
+      }
     </div>
   </div>
 </section>

@@ -2,7 +2,7 @@
   {
     "id": "simpe-bridge",
     "title": "SINPE Bridge — Sistema de Pagos",
-    "type": "Caso real · Flujo de pago SINPE",
+    "type": "Flujo de pago SINPE",
     "role": "Ingeniero de Software",
     "description": "Módulos que coordinan captura de mensajes, tokens, validación y conciliación de pagos SINPE para comercios. Backend central + app móvil + gateway de seguridad.",
     "highlights": [
@@ -25,7 +25,7 @@
   {
     "id": "hogar-ancianos",
     "title": "Sistema para Hogar de Ancianos",
-    "type": "Caso real · Sistema empresarial",
+    "type": "Sistema empresarial",
     "role": "Ingeniero de Software",
     "description": "Plataforma de escritorio que centraliza la operación diaria del hogar. Módulos por área clínica, auditoría, control de acceso y expedientes virtuales.",
     "highlights": [
@@ -51,7 +51,7 @@
   {
     "id": "ict-tourism",
     "title": "ICT Tourism Analytics",
-    "type": "Proyecto académico · Análisis de datos",
+    "type": "Análisis de datos",
     "role": "Ingeniero de Software",
     "description": "Dashboard analítico en Python + Streamlit que convierte datos turísticos históricos en decisiones. Pipeline de limpieza, pronósticos, estadística e optimización.",
     "highlights": [
