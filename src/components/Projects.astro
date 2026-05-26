@@ -7,13 +7,13 @@ import ProjectCard from "./ProjectCard.astro";
   <div class="page-wrap">
     <div class="mb-6">
       <p class="eyebrow">Proyectos destacados</p>
-      <h2 class="section-title max-w-3xl">Tres proyectos que resumen bien cómo trabajo.</h2>
+      <h2 class="section-title max-w-3xl">Tres proyectos que muestran cómo trabajo.</h2>
       <p class="section-copy max-w-2xl">
-        No son ejercicios de laboratorio. Son casos basados en necesidades reales, decisiones prácticas y software pensado para usarse.
+        Necesidades reales. Decisiones prácticas. Software hecho para funcionar.
       </p>
     </div>
 
-    <div class="grid gap-4 lg:grid-cols-3">
+    <div class="grid gap-3 lg:grid-cols-3">
       {projects.map((card) => (
         <ProjectCard
           id={card.id}

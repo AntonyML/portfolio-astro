@@ -4,7 +4,7 @@
     "title": "SINPE Bridge — Sistema de Pagos",
     "type": "Caso real · Flujo de pago SINPE",
     "role": "Ingeniero de Software",
-    "description": "Conjunto de módulos que coordinan captura de mensajes, generación de tokens, validación, conciliación y seguimiento de pagos SINPE para comercios.",
+    "description": "Módulos que coordinan captura de mensajes, tokens, validación y conciliación de pagos SINPE para comercios. Backend central + app móvil + gateway de seguridad.",
     "highlights": [
       "Diseñé arquitectura por módulos con responsabilidades separadas: captura, seguridad, lógica de negocio y persistencia",
       "Desarrollé backend central con FastAPI + PostgreSQL para validar, correlacionar y conciliar pagos",
@@ -27,7 +27,7 @@
     "title": "Sistema para Hogar de Ancianos",
     "type": "Caso real · Sistema empresarial",
     "role": "Ingeniero de Software",
-    "description": "Plataforma para centralizar la operación diaria del hogar de ancianos, reemplazando registros en papel y flujos dispersos por módulos por área de atención.",
+    "description": "Plataforma de escritorio que centraliza la operación diaria del hogar. Módulos por área clínica, auditoría, control de acceso y expedientes virtuales.",
     "highlights": [
       "Desarrollé módulos para Enfermería, Fisioterapia, Terapia Psicológica y Trabajo Social",
       "Implementé control de entradas, salidas, auditoría y seguimiento de expedientes virtuales",
@@ -53,7 +53,7 @@
     "title": "ICT Tourism Analytics",
     "type": "Proyecto académico · Análisis de datos",
     "role": "Ingeniero de Software",
-    "description": "Aplicación modular en Python + Streamlit que convierte datos turísticos históricos del ICT en un flujo analítico completo para apoyar la toma de decisiones.",
+    "description": "Dashboard analítico en Python + Streamlit que convierte datos turísticos históricos en decisiones. Pipeline de limpieza, pronósticos, estadística e optimización.",
     "highlights": [
       "Construí un pipeline de carga, limpieza y normalización de series históricas del ICT con formatos distintos",
       "Integré análisis descriptivo, pronóstico, control estadístico, simulación Monte Carlo y optimización lineal",

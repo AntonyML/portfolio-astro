@@ -10,13 +10,13 @@
     "origin": "Costa Rica · trabajo remoto internacional",
     "period": "Mar 2022 — Ene 2024",
     "color": "#4CAF50",
-    "description": "Desarrollé e implementé una solución de escritorio para ventas e inventario orientada a operación comercial real y uso continuo en producción.",
+    "description": "Sistema de escritorio para ventas e inventario. Módulos completos de artículos, clientes, proveedores, vendedores y facturación orientados a operación real.",
     "context": "Proyecto internacional freelance enfocado en digitalizar ventas, inventario y gestión comercial en un entorno de escritorio con SQL Server y lógica de negocio orientada al dominio.",
     "impact": "El sistema permitió ordenar procesos comerciales, centralizar información clave y sostener operación diaria con una herramienta hecha a medida.",
     "highlights": [
       "Construí módulos para artículos, clientes, proveedores, vendedores y facturación",
       "Diseñé la lógica de negocio para ventas, consultas y ajustes de inventario",
-      "Implementé persistencia con SQL Server y soporte para operación en producción"
+      "Base de datos SQL Server con soporte continuo en producción"
     ],
     "stack": ["C#", ".NET", "SQL Server"],
     "github": "https://github.com/AntonyML/Sistema-de-Ventas"
@@ -32,13 +32,13 @@
     "origin": "Costa Rica · trabajo remoto internacional",
     "period": "Jun 2023 — Dic 2024",
     "color": "#3F51B5",
-    "description": "Desarrollé un sistema de escritorio para inventario, ventas y usuarios con foco en seguridad operativa, trazabilidad y control de acceso.",
+    "description": "Sistema de escritorio para inventario, ventas y usuarios con seguridad operativa. Auditoría de sesiones, control de acceso, gestión de roles y trazabilidad completa.",
     "context": "Proyecto freelance para una operación con requerimientos de mayor control interno, auditoría y validación sobre acciones sensibles dentro del sistema.",
     "impact": "La solución reforzó el control sobre usuarios, movimientos y eventos críticos, reduciendo dependencia de procesos manuales y mejorando trazabilidad.",
     "highlights": [
-      "Implementé auditoría de sesiones, cambios en tablas y acciones no autorizadas",
-      "Desarrollé gestión de usuarios con roles, recuperación de contraseñas y validaciones por campo",
-      "Usé PostgreSQL como base de datos para una solución preparada para crecer"
+      "Auditoría de sesiones, cambios de datos y acciones no autorizadas",
+      "Gestión de usuarios con roles, recuperación de contraseñas y validaciones completas",
+      "PostgreSQL configurada para crecimiento y escalabilidad operativa"
     ],
     "stack": ["C#", ".NET", "PostgreSQL"],
     "github": "https://github.com/AntonyML/Armeria-Prime-Management-System"
