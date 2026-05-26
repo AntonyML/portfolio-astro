@@ -58,26 +58,54 @@ html[data-theme="light"] {
 }
 
 html[data-theme="dark"] {
-  --bg: #111318;
-  --bg-elevated: rgba(18, 22, 28, 0.76);
-  --bg-card: rgba(20, 24, 31, 0.88);
-  --bg-card-strong: #171c24;
-  --bg-soft: rgba(255, 255, 255, 0.04);
-  --bg-muted: rgba(111, 194, 255, 0.1);
-  --text-primary: #f4f2ed;
-  --text-secondary: #d1d8e0;
-  --text-muted: #9aa4b2;
-  --border-soft: rgba(255, 255, 255, 0.1);
-  --border-strong: rgba(255, 255, 255, 0.16);
-  --accent: #83cfff;
-  --accent-strong: #d8f0ff;
-  --accent-soft: rgba(131, 207, 255, 0.16);
-  --success: #49d0a8;
-  --surface-glow: radial-gradient(circle at top, rgba(111, 194, 255, 0.16), transparent 52%);
-  --site-grid: linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-  --shadow-card: 0 28px 80px rgba(0, 0, 0, 0.26);
-  --shadow-button: -6px 6px 0 0 rgba(216, 240, 255, 0.18);
+  /* Fondos y Superficies (Sólidos, sin verse planos) */
+  --bg: #0F1115;
+  --bg-elevated: #202734;
+  --bg-card: #171C24;
+  --bg-card-strong: #202734;
+
+  /* Fondos suaves usando tu Azul Frío (#5C6B8A) con opacidad */
+  --bg-soft: rgba(92, 107, 138, 0.15);
+  --bg-muted: rgba(92, 107, 138, 0.25);
+
+  /* Tipografía */
+  --text-primary: #EAF0F7;
+  --text-secondary: #D4E5F7;
+  --text-muted: #A8C5E0;
+  /* Tu texto secundario para tags/detalles suavizado */
+
+  /* Estructura y Divisores */
+  --border-soft: #2D3848;
+  --border-strong: #5C6B8A;
+  /* Usamos tu color primario para bordes con énfasis */
+
+  /* Acentos y CTA ( calidez) */
+  --accent: #F07838;
+  /* Acción clave */
+  --accent-strong: #F5C9A8;
+  /* Highlight puntual para contraste cálido */
+  --accent-soft: rgba(240, 120, 56, 0.15);
+  /* Fondo suave para botones ghost o estados hover */
+
+  /* Estados y Alertas */
+  --success: #2fb895;
+  /* Verde fresco para estado "disponible" */
+  --error: #BA4C40;
+  /* Terracota para énfasis/alerta */
+
+  /* Efectos: Brillo, Grid y Sombras */
+  --surface-glow: radial-gradient(circle at top, rgba(92, 107, 138, 0.25), transparent 52%);
+  /* Luz azul fría */
+
+  --site-grid: linear-gradient(rgba(45, 56, 72, 0.4) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(45, 56, 72, 0.4) 1px, transparent 1px);
+  /* Grid con el color de tus bordes */
+
+  --shadow-card: 0 28px 80px rgba(0, 0, 0, 0.45);
+  /* Sombra profunda para despegar las cards del fondo oscuro */
+
+  /* La sombra del botón usa tu color terracota de alerta para un contraste brutal */
+  --shadow-button: -6px 6px 0 0 rgba(186, 76, 64, 0.4);
 }
 
 *,
@@ -97,8 +125,9 @@ body {
   font-family: var(--font-body);
   background:
     var(--surface-glow),
-    radial-gradient(circle at 100% 0%, rgba(255, 222, 0, 0.09), transparent 30%),
-    radial-gradient(circle at 0% 12%, rgba(243, 142, 132, 0.08), transparent 22%),
+    /* Usamos variables para que en modo oscuro no manchen tu fondo frío */
+    radial-gradient(circle at 100% 0%, var(--bg-muted), transparent 30%),
+    radial-gradient(circle at 0% 12%, var(--bg-soft), transparent 22%),
     var(--bg);
   color: var(--text-primary);
   text-rendering: optimizeLegibility;
@@ -211,7 +240,7 @@ button {
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: var(--text-secondary);
 }
 
 .eyebrow::before {
@@ -423,10 +452,10 @@ html[data-theme="dark"] .theme-toggle__icon--sun {
 }
 
 .status-text[data-status="error"] {
-  color: #d6485e;
+  color: var(--error, #BA4C40);
 }
 
-.detail-section + .detail-section {
+.detail-section+.detail-section {
   margin-top: 1rem;
 }
 
