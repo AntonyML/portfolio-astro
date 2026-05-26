@@ -139,8 +139,10 @@ function initContactForm() {
       setStatus("Mensaje enviado con éxito. Te responderé lo antes posible.", "success");
       submitButton.textContent = "Enviado";
     } catch (error) {
-      const detail = error instanceof Error ? error.message : "Error desconocido";
-      setStatus(`No se pudo enviar el mensaje: ${detail}`, "error");
+      setStatus(
+        "No pudimos enviar tu mensaje en este momento. Intenta nuevamente o escríbeme directamente a antony.mongelopez@ucr.ac.cr",
+        "error"
+      );
       submitButton.textContent = defaultLabel;
     } finally {
       submitButton.disabled = false;
