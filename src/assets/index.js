@@ -1,5 +1,6 @@
 const THEME_KEY = "portfolio-theme";
 const THEME_META_SELECTOR = "[data-dynamic-theme-color]";
+const URLEMAIL= "https://email-portfolio.tonyml.com";
 
 function applyTheme(theme) {
   const root = document.documentElement;
