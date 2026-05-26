@@ -7,26 +7,30 @@ import ProjectCard from "./ProjectCard.astro";
   <div class="page-wrap">
     <div class="mb-6">
       <p class="eyebrow">Proyectos destacados</p>
-      <h2 class="section-title max-w-3xl">Tres proyectos que muestran cómo trabajo.</h2>
+      <h2 class="section-title max-w-4xl">
+        Proyectos que muestran cómo trabajo.
+      </h2>
       <p class="section-copy max-w-2xl">
         Necesidades reales. Decisiones prácticas. Software hecho para funcionar.
       </p>
     </div>
 
     <div class="grid gap-3 lg:grid-cols-3">
-      {projects.map((card) => (
-        <ProjectCard
-          id={card.id}
-          title={card.title}
-          type={card.type}
-          role={card.role}
-          description={card.description}
-          highlights={card.highlights}
-          stack={card.stack}
-          image={card.image}
-          color={card.color}
-        />
-      ))}
+      {
+        projects.map((card) => (
+          <ProjectCard
+            id={card.id}
+            title={card.title}
+            type={card.type}
+            role={card.role}
+            description={card.description}
+            highlights={card.highlights}
+            stack={card.stack}
+            image={card.image}
+            color={card.color}
+          />
+        ))
+      }
     </div>
   </div>
 </section>
