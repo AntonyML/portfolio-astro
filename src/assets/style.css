@@ -411,6 +411,28 @@ html[data-theme="dark"] .theme-toggle__icon--sun {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+/* Foto de perfil hero — centrado en rostro, responsiva */
+.hero-profile-img {
+  width: 100%;
+  height: 18rem;
+  object-fit: cover;
+  object-position: 50% 18%;
+  border-radius: 1.2rem;
+  display: block;
+}
+
+@media (min-width: 640px) {
+  .hero-profile-img {
+    height: 21rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-profile-img {
+    height: 24rem;
+  }
+}
+
 .info-grid {
   display: grid;
   gap: 1.25rem;
@@ -459,11 +481,17 @@ html[data-theme="dark"] .theme-toggle__icon--sun {
   margin-top: 1rem;
 }
 
-@media (max-width: 1023px) {
+/* Tablet (768-1023px): hero en 2 columnas pero más compacto */
+@media (min-width: 768px) and (max-width: 1023px) {
   .hero-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.72fr);
+    gap: 1.25rem;
+    align-items: start;
   }
+}
 
+/* Stat grid: 2 columnas en pantallas < 1024px */
+@media (max-width: 1023px) {
   .hero-stat-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -471,7 +499,7 @@ html[data-theme="dark"] .theme-toggle__icon--sun {
 
 @media (max-width: 767px) {
   .page-wrap {
-    width: min(100% - 1rem, 76rem);
+    width: min(100% - 2.5rem, 76rem);
   }
 
   .section-card {
@@ -487,8 +515,84 @@ html[data-theme="dark"] .theme-toggle__icon--sun {
     padding-bottom: 1.75rem;
   }
 
+  /* Hero: 1 columna en móvil */
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  /* Imagen aparece PRIMERO en móvil */
+  .hero-image-aside {
+    order: -1;
+  }
+
+  /* Foto más compacta en móvil */
+  .hero-profile-img {
+    height: 20rem;
+  }
+
+  /* Stat grid: 3 tarjetas en fila en móvil ancho */
   .hero-stat-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* Evitar desborde de texto en título hero */
+  .hero-title {
+    font-size: clamp(1.65rem, 6.5vw, 2.4rem);
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  /* Eyebrow y lead más compactos */
+  .hero-lead {
+    font-size: 0.93rem;
+    line-height: 1.65;
+  }
+}
+
+/* Teléfonos muy pequeños (< 480px) */
+@media (max-width: 479px) {
+  .page-wrap {
+    width: min(100% - 2rem, 76rem);
+  }
+
+  /* Título hero: escala con el viewport en pantallas pequeñas */
+  .hero-title {
+    font-size: clamp(1.55rem, 7.8vw, 1.9rem);
+    line-height: 1.05;
+  }
+
+  .hero-lead {
+    font-size: 0.88rem;
+  }
+
+  /* Foto más pequeña en pantallas diminutas */
+  .hero-profile-img {
+    height: 15rem;
+  }
+
+  /* Stats en 1 columna en pantallas muy chicas */
+  .hero-stat-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Botones más compactos */
+  .button-primary,
+  .button-secondary,
+  .button-ghost {
+    min-height: 2.6rem;
+    padding: 0.65rem 0.85rem;
+    font-size: 0.92rem;
+  }
+
+  /* Eyebrow más compacto */
+  .eyebrow {
+    font-size: 0.63rem;
+  }
+
+  /* Section titles más pequeños */
+  .section-title {
+    font-size: clamp(1.3rem, 5.5vw, 1.85rem);
   }
 }
 
