@@ -25,3 +25,9 @@ pnpm-debug.log*
 
 # cloudflare tunnel config
 .start_tunnel.bat
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example
