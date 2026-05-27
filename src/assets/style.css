@@ -499,7 +499,7 @@ html[data-theme="dark"] .theme-toggle__icon--sun {
 
 @media (max-width: 767px) {
   .page-wrap {
-    width: min(100% - 2.5rem, 76rem);
+    width: min(100% - 2rem, 76rem) !important;
   }
 
   .section-card {
@@ -512,82 +512,216 @@ html[data-theme="dark"] .theme-toggle__icon--sun {
 
   .hero-section {
     padding-top: 0.5rem;
-    padding-bottom: 1.75rem;
+    padding-bottom: 1.5rem !important;
   }
 
   /* Hero: 1 columna en móvil */
   .hero-grid {
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
   }
 
-  /* Imagen aparece PRIMERO en móvil */
+  .hero-grid > div:first-child {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1rem !important;
+  }
+
+  /* Ocultar la sidebar-aside original y eyebrow original en móvil */
   .hero-image-aside {
-    order: -1;
+    display: none !important;
   }
 
-  /* Foto más compacta en móvil */
-  .hero-profile-img {
-    height: 20rem;
+  .eyebrow {
+    display: none !important;
   }
 
-  /* Stat grid: 3 tarjetas en fila en móvil ancho */
-  .hero-stat-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  /* ──── HERO MOBILE IDENTITY ROW ──── */
+  .hero-mobile-identity {
+    display: flex !important;
+    align-items: center !important;
+    gap: 1rem !important;
+    margin-top: -0.25rem !important;
+    margin-bottom: 0.25rem !important;
   }
 
-  /* Evitar desborde de texto en título hero */
+  .hero-mobile-avatar-container {
+    width: 96px !important;
+    height: 96px !important;
+    border-radius: 50% !important;
+    overflow: hidden !important;
+    flex-shrink: 0 !important;
+    border: 2px solid var(--border-soft) !important;
+  }
+
+  .hero-mobile-avatar-container .hero-profile-img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: 50% 18% !important;
+    border-radius: 50% !important;
+    display: block !important;
+  }
+
+  .hero-mobile-info {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.25rem !important;
+  }
+
+  .hero-mobile-name {
+    font-family: var(--font-heading) !important;
+    font-size: 0.85rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    color: var(--text-primary) !important;
+    margin: 0 !important;
+    line-height: 1.2 !important;
+  }
+
+  .hero-mobile-role {
+    font-size: 0.78rem !important;
+    color: var(--text-secondary) !important;
+    margin: 0 !important;
+    line-height: 1.2 !important;
+  }
+
+  /* ──── BADGE DISPONIBLE ──── */
+  .hero-availability-badge {
+    padding: 0.25rem 0.625rem !important;
+    font-size: 0.75rem !important;
+    align-self: flex-start !important;
+    max-width: fit-content !important;
+  }
+
+  /* ──── TITLE ──── */
   .hero-title {
     font-size: clamp(1.65rem, 6.5vw, 2.4rem);
-    overflow-wrap: break-word;
-    word-break: break-word;
+    overflow-wrap: break-word !important;
+    word-break: break-word !important;
+    line-height: 1.06 !important;
   }
 
-  /* Eyebrow y lead más compactos */
+  /* ──── LEAD ──── */
   .hero-lead {
-    font-size: 0.93rem;
-    line-height: 1.65;
+    font-size: 0.88rem !important;
+    line-height: 1.6 !important;
+    max-width: 100% !important;
+  }
+
+  /* ──── ACCESSIBILITY TAP TARGETS ──── */
+  .button-primary,
+  .button-secondary,
+  .button-ghost {
+    min-height: 3rem !important;
+    padding: 0.75rem 1rem !important;
+  }
+
+  /* ──── STAT PILLS (reemplaza hero-stat-grid en móvil) ──── */
+  .hero-stat-grid {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 0.5rem !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none !important;
+    padding-bottom: 2px !important;
+    width: 100% !important;
+  }
+
+  .hero-stat-grid::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .hero-stat-grid > div {
+    display: flex !important;
+    flex-direction: column-reverse !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+    flex: 0 0 auto !important;
+    min-width: 0 !important;
+    width: calc((100vw - 2rem - 1rem) / 3) !important;
+    max-width: 120px !important;
+    padding: 0.5rem 0.6rem !important;
+    border-radius: var(--radius-md) !important;
+    border: 1px solid var(--border-soft) !important;
+    background: var(--bg-soft) !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+  }
+
+  .hero-stat-grid > div > p:nth-child(2) {
+    font-size: 1.15rem !important;
+    font-weight: 800 !important;
+    margin: 0 0 0.15rem 0 !important;
+    line-height: 1.1 !important;
+    color: var(--text-primary) !important;
+  }
+
+  .hero-stat-grid > div > p:nth-child(1) {
+    font-size: 0.65rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.05em !important;
+    text-transform: uppercase !important;
+    color: var(--text-muted) !important;
+    margin: 0 !important;
+    line-height: 1.2 !important;
+  }
+
+  .hero-stat-grid > div > p:nth-child(3) {
+    display: none !important;
   }
 }
 
 /* Teléfonos muy pequeños (< 480px) */
 @media (max-width: 479px) {
   .page-wrap {
-    width: min(100% - 2rem, 76rem);
+    width: min(100% - 2rem, 76rem) !important;
   }
 
-  /* Título hero: escala con el viewport en pantallas pequeñas */
+  .hero-mobile-avatar-container {
+    width: 80px !important;
+    height: 80px !important;
+  }
+
+  .hero-mobile-name {
+    font-size: 0.8rem !important;
+  }
+
+  .hero-mobile-role {
+    font-size: 0.72rem !important;
+  }
+
   .hero-title {
-    font-size: clamp(1.55rem, 7.8vw, 1.9rem);
-    line-height: 1.05;
+    font-size: clamp(1.45rem, 7vw, 1.9rem) !important;
+    line-height: 1.05 !important;
   }
 
   .hero-lead {
-    font-size: 0.88rem;
+    font-size: 0.88rem !important;
   }
 
-  /* Foto más pequeña en pantallas diminutas */
-  .hero-profile-img {
-    height: 15rem;
+  .hero-stat-grid > div {
+    width: calc((100vw - 2rem - 1rem) / 3) !important;
+    padding: 0.4rem 0.5rem !important;
   }
 
-  /* Stats en 1 columna en pantallas muy chicas */
-  .hero-stat-grid {
-    grid-template-columns: 1fr;
+  .hero-stat-grid > div > p:nth-child(2) {
+    font-size: 0.95rem !important;
   }
 
-  /* Botones más compactos */
+  .hero-stat-grid > div > p:nth-child(1) {
+    font-size: 0.58rem !important;
+  }
+
   .button-primary,
   .button-secondary,
   .button-ghost {
-    min-height: 2.6rem;
-    padding: 0.65rem 0.85rem;
-    font-size: 0.92rem;
-  }
-
-  /* Eyebrow más compacto */
-  .eyebrow {
-    font-size: 0.63rem;
+    min-height: 3rem !important;
+    padding: 0.65rem 0.85rem !important;
+    font-size: 0.92rem !important;
   }
 
   /* Section titles más pequeños */

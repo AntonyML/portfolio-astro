@@ -7,9 +7,24 @@ const totalCaseStudies = 2;
   <div class="page-wrap">
     <div class="hero-grid items-center">
       <div class="flex flex-col gap-6">
-        <div class="inline-flex w-fit items-center gap-2 rounded-full border border-[var(--border-soft)] bg-[var(--bg-card)] px-3 py-1.5 text-[0.85rem] text-[var(--text-secondary)] shadow-[var(--shadow-card)]">
+        <div class="hero-availability-badge inline-flex w-fit items-center gap-2 rounded-full border border-[var(--border-soft)] bg-[var(--bg-card)] px-3 py-1.5 text-[0.85rem] text-[var(--text-secondary)] shadow-[var(--shadow-card)]">
           <span class="h-2 w-2 rounded-full bg-[var(--success)]"></span>
           Disponible para trabajar
+        </div>
+
+        <div class="hero-mobile-identity">
+          <div class="hero-mobile-avatar-container">
+            <SafeImage
+              imageName="image-profile"
+              alt="Retrato de Antony Monge"
+              class="hero-profile-img"
+              loading="eager"
+            />
+          </div>
+          <div class="hero-mobile-info">
+            <p class="hero-mobile-name">Antony Jafeth Monge López</p>
+            <p class="hero-mobile-role">Ingeniero de Software</p>
+          </div>
         </div>
 
         <div class="space-y-3">
