@@ -14,10 +14,12 @@ const isUrl = logo?.startsWith("http");
 <span class="inline-flex items-center gap-2 rounded-full border border-[var(--border-soft)] bg-[var(--bg-soft)] px-3 py-1.5 text-xs font-semibold text-[var(--text-secondary)]">
   {logo && (
     isUrl ? (
-      <SafeImage
-        imageName={logo.replace(".webp", "").replace("/", "")}
+      <img
+        src={logo}
         alt=""
         class="h-4 w-4 object-contain"
+        loading="lazy"
+        decoding="async"
         aria-hidden="true"
       />
     ) : (

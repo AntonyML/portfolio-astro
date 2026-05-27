@@ -1,15 +1,15 @@
 [
   {
     "title": "Lenguajes",
-    "items": ["C#", "TypeScript", "Java"]
+    "items": ["C#", "TypeScript", "Java", "Python", "Kotlin"]
   },
   {
     "title": "Frameworks",
-    "items": [".NET", "NestJS", "React", "Next.js", "Spring Boot"]
+    "items": [".NET", "NestJS", "React", "Next.js", "Spring Boot", "Flutter", "Electron", "Astro", "FastAPI"]
   },
   {
     "title": "Bases de datos",
-    "items": ["PostgreSQL", "SQL Server", "MySQL", "Oracle", "D1 Cloudflare"]
+    "items": ["PostgreSQL", "SQL Server", "MySQL", "Oracle", "D1 Cloudflare", "SUPABASE"]
   },
   {
     "title": "Arquitectura",
@@ -21,6 +21,6 @@
   },
   {
     "title": "Metodologías",
-    "items": ["Scrum", "PMBOK", "Gestión de backlog en Taiga"]
+    "items": ["Scrum", "PMBOK", "Gestión en Taiga"]
   }
 ]
