@@ -4,14 +4,23 @@ import ThemeToggle from "./ThemeToggle.astro";
 const { pathname } = Astro.url;
 
 const socials = [
-  { label: "GitHub", icon: "bx bxl-github", href: "https://github.com/AntonyML" },
-  { label: "LinkedIn", icon: "bx bxl-linkedin-square", href: "https://www.linkedin.com/in/antony-monge-lopez/" },
+  {
+    label: "GitHub",
+    icon: "bx bxl-github",
+    href: "https://github.com/AntonyML",
+  },
+  {
+    label: "LinkedIn",
+    icon: "bx bxl-linkedin-square",
+    href: "https://www.linkedin.com/in/antony-monge-lopez/",
+  },
 ];
 
 const navItems = [
   { text: "Inicio", href: "#home" },
   { text: "Experiencia", href: "#experience" },
   { text: "Proyectos", href: "#projects" },
+  { text: "Educación", href: "#credentials" },
   { text: "Perfil", href: "#about" },
   { text: "Contacto", href: "#contact" },
 ];
@@ -19,113 +28,149 @@ const navItems = [
 
 <header class="site-nav">
   <div class="page-wrap">
-    <div class="section-card surface-outline flex items-center justify-between gap-4 px-4 py-2 md:px-5">
-      <a href="/" class="flex min-w-0 items-center gap-2.5" aria-label="Ir al inicio del portafolio">
-        <span class="grid h-9 w-9 place-items-center rounded-xl border border-[var(--border-soft)] bg-[var(--bg-soft)] font-['Space_Mono'] text-xs font-bold uppercase tracking-[0.18em] text-[var(--text-primary)]">
+    <div
+      class="section-card surface-outline flex items-center justify-between gap-4 px-4 py-2 md:px-5"
+    >
+      <a
+        href="/"
+        class="flex min-w-0 items-center gap-2.5"
+        aria-label="Ir al inicio del portafolio"
+      >
+        <span
+          class="grid h-9 w-9 place-items-center rounded-xl border border-[var(--border-soft)] bg-[var(--bg-soft)] font-['Space_Mono'] text-xs font-bold uppercase tracking-[0.18em] text-[var(--text-primary)]"
+        >
           AM
         </span>
         <span class="min-w-0">
-          <span class="block truncate text-sm font-semibold text-[var(--text-primary)]">Antony Monge</span>
+          <span
+            class="block truncate text-sm font-semibold text-[var(--text-primary)]"
+            >Antony Monge</span
+          >
         </span>
       </a>
 
-      {pathname === "/" ? (
-        <>
-          <nav class="hidden items-center gap-2 lg:flex" aria-label="Navegación principal">
-            {navItems.map((item) => (
-              <a href={item.href} class="pill transition hover:border-[var(--border-strong)] hover:text-[var(--text-primary)]">
-                {item.text}
-              </a>
-            ))}
-          </nav>
-
-          <div class="hidden items-center gap-2 lg:flex">
-            {socials.map((social) => (
-              <a
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={social.label}
-                class="grid h-9 w-9 place-items-center rounded-full border border-[var(--border-soft)] bg-[var(--bg-soft)] text-lg text-[var(--text-secondary)] transition hover:border-[var(--border-strong)] hover:text-[var(--text-primary)]"
-              >
-                <i class={social.icon} aria-hidden="true"></i>
-              </a>
-            ))}
-            <ThemeToggle />
-            <a href="#contact" class="button-primary">Hablemos</a>
-          </div>
-
-          <div class="flex items-center gap-2 lg:hidden">
-            <ThemeToggle />
-            <button
-              type="button"
-              class="grid h-9 w-9 place-items-center rounded-full border border-[var(--border-soft)] bg-[var(--bg-soft)] text-xl text-[var(--text-primary)]"
-              aria-expanded="false"
-              aria-controls="mobile-nav"
-              aria-label="Abrir menú de navegación"
-              data-nav-toggle
+      {
+        pathname === "/" ? (
+          <>
+            <nav
+              class="hidden items-center gap-2 lg:flex"
+              aria-label="Navegación principal"
             >
-              <i class="bx bx-menu" aria-hidden="true"></i>
-            </button>
+              {navItems.map((item) => (
+                <a
+                  href={item.href}
+                  class="pill transition hover:border-[var(--border-strong)] hover:text-[var(--text-primary)]"
+                >
+                  {item.text}
+                </a>
+              ))}
+            </nav>
+
+            <div class="hidden items-center gap-2 lg:flex">
+              {socials.map((social) => (
+                <a
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.label}
+                  class="grid h-9 w-9 place-items-center rounded-full border border-[var(--border-soft)] bg-[var(--bg-soft)] text-lg text-[var(--text-secondary)] transition hover:border-[var(--border-strong)] hover:text-[var(--text-primary)]"
+                >
+                  <i class={social.icon} aria-hidden="true" />
+                </a>
+              ))}
+              <ThemeToggle />
+              <a href="#contact" class="button-primary">
+                Hablemos
+              </a>
+            </div>
+
+            <div class="flex items-center gap-2 lg:hidden">
+              <ThemeToggle />
+              <button
+                type="button"
+                class="grid h-9 w-9 place-items-center rounded-full border border-[var(--border-soft)] bg-[var(--bg-soft)] text-xl text-[var(--text-primary)]"
+                aria-expanded="false"
+                aria-controls="mobile-nav"
+                aria-label="Abrir menú de navegación"
+                data-nav-toggle
+              >
+                <i class="bx bx-menu" aria-hidden="true" />
+              </button>
+            </div>
+          </>
+        ) : (
+          <div class="flex items-center gap-2">
+            <a href="/#projects" class="button-secondary hidden sm:inline-flex">
+              Volver al portafolio
+            </a>
+            <ThemeToggle />
           </div>
-        </>
-      ) : (
-        <div class="flex items-center gap-2">
-          <a href="/#projects" class="button-secondary hidden sm:inline-flex">Volver al portafolio</a>
-          <ThemeToggle />
-        </div>
-      )}
+        )
+      }
     </div>
   </div>
 
-  {pathname === "/" && (
-    <div
-      id="mobile-nav"
-      class="fixed inset-0 z-50 bg-[rgba(17,19,24,0.42)] px-4 pb-4 pt-24 backdrop-blur-md opacity-0 pointer-events-none transition data-[open]:pointer-events-auto data-[open]:opacity-100 lg:hidden"
-      data-nav-panel
-    >
-      <div class="page-wrap">
-        <div class="section-card flex flex-col gap-6 p-5">
-          <div class="flex items-center justify-between gap-4">
-            <div>
-              <p class="text-sm font-semibold text-[var(--text-primary)]">Navegación</p>
-              <p class="text-sm text-[var(--text-secondary)]">Accesos rápidos para moverte por el portafolio.</p>
-            </div>
-            <button
-              type="button"
-              class="grid h-10 w-10 place-items-center rounded-full border border-[var(--border-soft)] bg-[var(--bg-soft)] text-xl"
-              aria-label="Cerrar menú"
-              data-nav-close
-            >
-              <i class="bx bx-x" aria-hidden="true"></i>
-            </button>
-          </div>
-
-          <nav class="grid gap-2" aria-label="Navegación móvil">
-            {navItems.map((item) => (
-              <a href={item.href} class="button-secondary justify-between" data-nav-close>
-                <span>{item.text}</span>
-                <i class="bx bx-arrow-back bx-rotate-180 text-base" aria-hidden="true"></i>
-              </a>
-            ))}
-          </nav>
-
-          <div class="flex flex-wrap items-center gap-3">
-            {socials.map((social) => (
-              <a
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="button-ghost"
+  {
+    pathname === "/" && (
+      <div
+        id="mobile-nav"
+        class="fixed inset-0 z-50 bg-[rgba(17,19,24,0.42)] px-4 pb-4 pt-24 backdrop-blur-md opacity-0 pointer-events-none transition data-[open]:pointer-events-auto data-[open]:opacity-100 lg:hidden"
+        data-nav-panel
+      >
+        <div class="page-wrap">
+          <div class="section-card flex flex-col gap-6 p-5">
+            <div class="flex items-center justify-between gap-4">
+              <div>
+                <p class="text-sm font-semibold text-[var(--text-primary)]">
+                  Navegación
+                </p>
+                <p class="text-sm text-[var(--text-secondary)]">
+                  Accesos rápidos para moverte por el portafolio.
+                </p>
+              </div>
+              <button
+                type="button"
+                class="grid h-10 w-10 place-items-center rounded-full border border-[var(--border-soft)] bg-[var(--bg-soft)] text-xl"
+                aria-label="Cerrar menú"
                 data-nav-close
               >
-                <i class={social.icon} aria-hidden="true"></i>
-                {social.label}
-              </a>
-            ))}
+                <i class="bx bx-x" aria-hidden="true" />
+              </button>
+            </div>
+
+            <nav class="grid gap-2" aria-label="Navegación móvil">
+              {navItems.map((item) => (
+                <a
+                  href={item.href}
+                  class="button-secondary justify-between"
+                  data-nav-close
+                >
+                  <span>{item.text}</span>
+                  <i
+                    class="bx bx-arrow-back bx-rotate-180 text-base"
+                    aria-hidden="true"
+                  />
+                </a>
+              ))}
+            </nav>
+
+            <div class="flex flex-wrap items-center gap-3">
+              {socials.map((social) => (
+                <a
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="button-ghost"
+                  data-nav-close
+                >
+                  <i class={social.icon} aria-hidden="true" />
+                  {social.label}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  )}
+    )
+  }
 </header>
