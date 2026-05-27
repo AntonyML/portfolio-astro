@@ -411,6 +411,11 @@ html[data-theme="dark"] .theme-toggle__icon--sun {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+/* Hero mobile identity: SOLO visible en móvil, oculto por defecto */
+.hero-mobile-identity {
+  display: none;
+}
+
 /* Foto de perfil hero — centrado en rostro, responsiva */
 .hero-profile-img {
   width: 100%;
@@ -532,7 +537,8 @@ html[data-theme="dark"] .theme-toggle__icon--sun {
     display: none !important;
   }
 
-  .eyebrow {
+  /* Ocultar eyebrow SOLO en el hero (el nombre completo queda en el avatar row) */
+  .hero-section .eyebrow {
     display: none !important;
   }
 
@@ -616,6 +622,27 @@ html[data-theme="dark"] .theme-toggle__icon--sun {
   .button-ghost {
     min-height: 3rem !important;
     padding: 0.75rem 1rem !important;
+  }
+
+  /* ──── SECCIONES: headers más compactos en móvil ──── */
+  .section-space .mb-6 {
+    margin-bottom: 0.85rem;
+  }
+
+  .section-title {
+    font-size: clamp(1.3rem, 5.5vw, 1.85rem);
+    line-height: 1.1;
+  }
+
+  .section-copy {
+    font-size: 0.88rem;
+    line-height: 1.55;
+    margin-top: 0.4rem;
+  }
+
+  /* WorkExperience: período badge no se rompe */
+  .section-card .rounded-2xl {
+    white-space: nowrap;
   }
 
   /* ──── STAT PILLS (reemplaza hero-stat-grid en móvil) ──── */
