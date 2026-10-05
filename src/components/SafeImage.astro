@@ -1,9 +1,24 @@
 ---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import type { HTMLAttributes } from "astro/types";
+import fallbackImage from "../../public/no-image.webp";
+
+type Props = Omit<HTMLAttributes<"img">, "src" | "alt" | "width" | "height"> & {
+  imageName: string | undefined;
+  alt?: string;
+  width?: number | `${number}`;
+  height?: number | `${number}`;
+};
+
 const { imageName, alt = "", loading = "lazy", ...rest } = Astro.props;
 
-// Busca todas las imágenes .webp en public/
-const images = import.meta.glob('/public/*.webp', { eager: true });
+// Importa los metadatos para que Astro conozca las dimensiones de cada imagen.
+const images = import.meta.glob<ImageMetadata>('/public/*.webp', {
+  eager: true,
+  import: 'default',
+});
 const imagePath = `/public/${imageName}.webp`;
-const src = images[imagePath] ? `/${imageName}.webp` : '/no-image.webp';
+const src = images[imagePath] ?? fallbackImage;
 ---
-<img src={src} alt={alt} {...rest} loading={loading} />
+<Image src={src} alt={alt} format="webp" {...rest} loading={loading} />
