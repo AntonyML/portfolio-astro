@@ -2,32 +2,16 @@
   --font-heading: "Space Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   --font-body: "Manrope", "Inter", ui-sans-serif, system-ui, sans-serif;
 
-  --color-canvas-oat: #f4efea;
-  --color-paper-white: #ffffff;
-  --color-smoke-gray: #ede6df;
-  --color-ink: #383838;
-  --color-coal: #101010;
-  --color-slate: #6b6d74;
-  --color-sky-blue: #6fc2ff;
-  --color-mellow-yellow: #ffde00;
-  --color-ocean-teal: #16aa98;
-  --color-seafoam: #53dbc9;
-  --color-coral-red: #f38e84;
-  --color-sunset-orange: #f5b161;
-  --color-indigo-violet: #b291de;
-  --color-lime-green: #b3c419;
-  --color-grape-purple: #7597ee;
-  --color-cerulean-blue: #54b4de;
-  --color-aqua-teal: #38c1b0;
-  --color-concrete-gray: #84a6bc;
-  --color-golden-rod: #e1c427;
-  --color-blush-pink: #ff7169;
-  --color-pumpkin-orange: #ff9538;
-  --color-frost-blue: #ebf9ff;
-
-  --shadow-button: -6px 6px 0 0 rgba(56, 56, 56, 0.9);
-  --shadow-card: 0 30px 80px rgba(17, 19, 24, 0.08);
-  --ring-focus: 0 0 0 4px rgba(111, 194, 255, 0.28);
+  /* Roles compartidos: todos los componentes reciben la paleta del tema. */
+  --bg-elevated: var(--bg-card-strong);
+  --bg-soft: var(--secondary-soft);
+  --bg-muted: var(--primary-soft);
+  --ring-focus: 0 0 0 3px var(--focus);
+  --surface-glow: radial-gradient(circle at top, var(--glow), transparent 56%);
+  --site-grid: linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  --image-frame-ratio: 16 / 9;
+  --image-frame-background: linear-gradient(135deg, var(--secondary-soft), var(--bg-card-strong) 50%, var(--primary-soft));
   --radius-xs: 0.4rem;
   --radius-sm: 0.75rem;
   --radius-md: 1.25rem;
@@ -37,75 +21,89 @@
 
 :root,
 html[data-theme="light"] {
-  --bg: var(--color-canvas-oat);
-  --bg-elevated: rgba(255, 255, 255, 0.78);
-  --bg-card: rgba(255, 255, 255, 0.92);
+  /* Superficies */
+  --bg: #f4efea;
+  --bg-card: #ffffff;
   --bg-card-strong: #ffffff;
-  --bg-soft: rgba(255, 255, 255, 0.64);
-  --bg-muted: rgba(235, 249, 255, 0.75);
+
+  /* Primario: acciones, enlaces y énfasis. Texto separado para contraste. */
+  --primary: #6fc2ff;
+  --primary-hover: #58b4f5;
+  --on-primary: #101010;
+  --primary-text: #0868ad;
+  --primary-soft: #e7f3fc;
+  --primary-border: #a5cbe7;
+
+  /* Secundario: navegación, chips y acciones de apoyo. */
+  --secondary: #edf2f6;
+  --secondary-hover: #dde8f0;
+  --on-secondary: #293b4d;
+  --secondary-text: #40566c;
+  --secondary-soft: #f0f4f8;
+
+  /* Texto y estructura */
   --text-primary: #202226;
   --text-secondary: #545861;
-  --text-muted: #70757f;
-  --border-soft: rgba(32, 34, 38, 0.12);
-  --border-strong: rgba(32, 34, 38, 0.2);
-  --accent: var(--color-sky-blue);
-  --accent-strong: #0d75c6;
-  --accent-soft: rgba(111, 194, 255, 0.18);
-  --success: #1d8f72;
-  --surface-glow: radial-gradient(circle at top, rgba(111, 194, 255, 0.22), transparent 56%);
-  --site-grid: linear-gradient(rgba(32, 34, 38, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(32, 34, 38, 0.045) 1px, transparent 1px);
+  --text-muted: #626c78;
+  --border-soft: #d8e1e8;
+  --border-strong: #8192a3;
+
+  /* Estados e interacción */
+  --success: #14745b;
+  --error: #a63232;
+  --focus: var(--primary-text);
+  --selection-bg: #c8e9ff;
+  --overlay: rgba(32, 34, 38, 0.42);
+  --surface-outline: var(--border-soft);
+
+  /* Efectos de la misma paleta */
+  --glow: rgba(111, 194, 255, 0.22);
+  --grid-line: rgba(64, 86, 108, 0.045);
+  --shadow-card: 0 30px 80px rgba(32, 34, 38, 0.08);
+  --shadow-button: -6px 6px 0 0 rgba(8, 104, 173, 0.24);
 }
 
 html[data-theme="dark"] {
-  /* Fondos y Superficies (Sólidos, sin verse planos) */
-  --bg: #0F1115;
-  --bg-elevated: #202734;
-  --bg-card: #171C24;
+  /* Superficies */
+  --bg: #0f1115;
+  --bg-card: #171c24;
   --bg-card-strong: #202734;
 
-  /* Fondos suaves usando tu Azul Frío (#5C6B8A) con opacidad */
-  --bg-soft: rgba(92, 107, 138, 0.15);
-  --bg-muted: rgba(92, 107, 138, 0.25);
+  /* Primario */
+  --primary: #f07838;
+  --primary-hover: #ff8b4b;
+  --on-primary: #101010;
+  --primary-text: #f5c9a8;
+  --primary-soft: #35291f;
+  --primary-border: #805a40;
 
-  /* Tipografía */
-  --text-primary: #EAF0F7;
-  --text-secondary: #D4E5F7;
-  --text-muted: #A8C5E0;
-  /* Tu texto secundario para tags/detalles suavizado */
+  /* Secundario */
+  --secondary: #202734;
+  --secondary-hover: #314159;
+  --on-secondary: #eaf0f7;
+  --secondary-text: #a8c5e0;
+  --secondary-soft: #1d2633;
 
-  /* Estructura y Divisores */
-  --border-soft: #2D3848;
-  --border-strong: #5C6B8A;
-  /* Usamos tu color primario para bordes con énfasis */
+  /* Texto y estructura */
+  --text-primary: #eaf0f7;
+  --text-secondary: #d4e5f7;
+  --text-muted: #a8c5e0;
+  --border-soft: #2d3848;
+  --border-strong: #5c6b8a;
 
-  /* Acentos y CTA ( calidez) */
-  --accent: #F07838;
-  /* Acción clave */
-  --accent-strong: #F5C9A8;
-  /* Highlight puntual para contraste cálido */
-  --accent-soft: rgba(240, 120, 56, 0.15);
-  /* Fondo suave para botones ghost o estados hover */
+  /* Estados e interacción */
+  --success: #47c9a6;
+  --error: #f29389;
+  --focus: var(--primary);
+  --selection-bg: #61422f;
+  --overlay: rgba(15, 17, 21, 0.72);
+  --surface-outline: var(--border-strong);
 
-  /* Estados y Alertas */
-  --success: #2fb895;
-  /* Verde fresco para estado "disponible" */
-  --error: #BA4C40;
-  /* Terracota para énfasis/alerta */
-
-  /* Efectos: Brillo, Grid y Sombras */
-  --surface-glow: radial-gradient(circle at top, rgba(92, 107, 138, 0.25), transparent 52%);
-  /* Luz azul fría */
-
-  --site-grid: linear-gradient(rgba(45, 56, 72, 0.4) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(45, 56, 72, 0.4) 1px, transparent 1px);
-  /* Grid con el color de tus bordes */
-
+  /* Efectos */
+  --glow: rgba(92, 107, 138, 0.25);
+  --grid-line: rgba(45, 56, 72, 0.4);
   --shadow-card: 0 28px 80px rgba(0, 0, 0, 0.45);
-  /* Sombra profunda para despegar las cards del fondo oscuro */
-
-  /* La sombra del botón usa tu color terracota de alerta para un contraste brutal */
-  --shadow-button: -6px 6px 0 0 rgba(186, 76, 64, 0.4);
+  --shadow-button: -6px 6px 0 0 rgba(240, 120, 56, 0.28);
 }
 
 *,
@@ -125,7 +123,6 @@ body {
   font-family: var(--font-body);
   background:
     var(--surface-glow),
-    /* Usamos variables para que en modo oscuro no manchen tu fondo frío */
     radial-gradient(circle at 100% 0%, var(--bg-muted), transparent 30%),
     radial-gradient(circle at 0% 12%, var(--bg-soft), transparent 22%),
     var(--bg);
@@ -152,6 +149,15 @@ img {
   display: block;
 }
 
+.project-image {
+  width: 100%;
+  height: auto;
+  aspect-ratio: var(--image-frame-ratio);
+  object-fit: contain;
+  object-position: center;
+  background: var(--image-frame-background);
+}
+
 a,
 button,
 input,
@@ -169,7 +175,7 @@ button {
 }
 
 ::selection {
-  background: rgba(111, 194, 255, 0.3);
+  background: var(--selection-bg);
   color: var(--text-primary);
 }
 
@@ -240,14 +246,14 @@ button {
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--text-secondary);
+  color: var(--secondary-text);
 }
 
 .eyebrow::before {
   content: "";
   width: 2.25rem;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  background: linear-gradient(90deg, transparent, var(--primary), transparent);
 }
 
 .section-title {
@@ -286,39 +292,60 @@ button {
 }
 
 .button-primary {
-  background: var(--accent);
-  color: var(--color-coal);
+  background: var(--primary);
+  color: var(--on-primary);
   font-weight: 800;
 }
 
 .button-primary:hover,
 .button-primary:focus-visible {
+  background: var(--primary-hover);
   transform: translate(4px, -4px);
   box-shadow: var(--shadow-button);
 }
 
+.button-primary:focus-visible {
+  box-shadow: var(--shadow-button), var(--ring-focus);
+}
+
 .button-secondary {
-  background: var(--bg-card-strong);
+  background: var(--secondary);
   border-color: var(--border-soft);
-  color: var(--text-primary);
+  color: var(--on-secondary);
   font-weight: 700;
 }
 
 .button-secondary:hover,
 .button-secondary:focus-visible {
   border-color: var(--border-strong);
-  background: var(--bg-muted);
+  background: var(--secondary-hover);
 }
 
 .button-ghost {
-  color: var(--text-secondary);
+  color: var(--secondary-text);
   font-weight: 700;
 }
 
 .button-ghost:hover,
 .button-ghost:focus-visible {
-  color: var(--text-primary);
-  background: var(--bg-soft);
+  color: var(--primary-text);
+  background: var(--secondary-soft);
+}
+
+.accent-label {
+  color: var(--primary-text);
+}
+
+.accent-marker {
+  flex-shrink: 0;
+  background: var(--primary);
+  box-shadow: 0 0 0 5px var(--primary-soft);
+}
+
+.theme-badge {
+  border: 1px solid var(--primary-border);
+  background: var(--primary-soft);
+  color: var(--primary-text);
 }
 
 .pill {
@@ -453,7 +480,7 @@ html[data-theme="dark"] .theme-toggle__icon--sun {
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid var(--surface-outline);
   opacity: 0.32;
   pointer-events: none;
 }
@@ -479,7 +506,7 @@ html[data-theme="dark"] .theme-toggle__icon--sun {
 }
 
 .status-text[data-status="error"] {
-  color: var(--error, #BA4C40);
+  color: var(--error);
 }
 
 .detail-section+.detail-section {

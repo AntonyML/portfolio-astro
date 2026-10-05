@@ -101,11 +101,35 @@ Utiliza la URL que muestre Wrangler en la terminal.
 
 Para cambiar los textos de presentación y los enlaces de contacto, edita los componentes correspondientes en `src/components/`, especialmente `ProfilePicture.astro`, `About.astro`, `Navbar.astro` y `Form.astro`. Los estilos generales están en `src/assets/style.css` y `tailwind.config.cjs`.
 
+### Paleta global
+
+Los colores se definen en `src/assets/style.css`, con una paleta para `html[data-theme="light"]` y otra para `html[data-theme="dark"]`. Los componentes usan variables por función, compartidas por el hero, las tarjetas, la navegación, el formulario y las páginas de detalle.
+
+| Función | Variable | Claro | Oscuro |
+| --- | --- | --- | --- |
+| Fondo de página | `--bg` | `#f4efea` | `#0f1115` |
+| Tarjetas | `--bg-card` | `#ffffff` | `#171c24` |
+| Superficies elevadas y etiquetas sobre imágenes | `--bg-card-strong` | `#ffffff` | `#202734` |
+| Primario: acciones | `--primary` | `#6fc2ff` | `#f07838` |
+| Primario: enlaces y énfasis de texto | `--primary-text` | `#0868ad` | `#f5c9a8` |
+| Secundario: acciones de apoyo | `--secondary` | `#edf2f6` | `#202734` |
+| Secundario: texto de navegación y apoyo | `--secondary-text` | `#40566c` | `#a8c5e0` |
+| Éxito | `--success` | `#14745b` | `#47c9a6` |
+| Error | `--error` | `#a63232` | `#f29389` |
+
+Cada tema también define texto, bordes, variantes suaves, estados hover, selección, foco y sombras. `--on-primary` y `--on-secondary` controlan el texto sobre los botones; `--primary-text` permite usar un acento legible en textos pequeños sin reutilizar el color del fondo del botón.
+
+Usa las clases compartidas `button-primary`, `button-secondary`, `theme-badge`, `accent-label` y `accent-marker` para conservar la misma jerarquía visual. Evita colores inline por proyecto. Las etiquetas sobre imágenes mantienen su fondo sólido y su posición inferior izquierda.
+
 ### Imágenes y páginas de detalle
 
 Guarda las imágenes de proyectos y experiencia en `public/` con extensión `.webp`. El campo `image` de los JSON contiene el nombre **sin extensión**; por ejemplo, `image-simpe-bridge` corresponde a `public/image-simpe-bridge.webp` y a la página `/image-simpe-bridge/`.
 
 La ruta `[id].astro` genera las páginas a partir de ese campo y elimina rutas duplicadas. `SafeImage` utiliza `public/no-image.webp` como respaldo cuando no encuentra una imagen.
+
+Las imágenes de proyectos y experiencia comparten un marco **16:9** en las tarjetas y en el detalle. La clase `project-image` centra la imagen completa con `object-fit: contain`, sin recortarla ni deformarla; el espacio sobrante muestra un degradado de la paleta del tema. La proporción y el fondo se definen en `--image-frame-ratio` y `--image-frame-background`, en `src/assets/style.css`. No hace falta modificar el archivo original si tiene otra proporción.
+
+El detalle usa una columna más amplia para la vista previa y permite abrir la imagen en tamaño original. `SafeImage` respeta el atributo `loading` recibido; por defecto usa `lazy`, y las imágenes principales del detalle usan `eager`.
 
 El validador rechaza archivos `.png`, `.jpg`, `.jpeg`, `.gif`, `.svg` y `.bmp` en `public/`, excepto dentro de `public/favicon/` y para `public/social-card.svg`.
 

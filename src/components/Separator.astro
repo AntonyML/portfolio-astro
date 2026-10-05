@@ -21,27 +21,27 @@ const isBottom = position === 'bottom';
    /* ── Top: línea arriba, luz hacia abajo ── */
    .separator.top {
       border-top: 1px solid transparent;
-      border-image-source: linear-gradient(to right, transparent, #f3f4f640, transparent);
+      border-image-source: linear-gradient(to right, transparent, var(--border-strong), transparent);
       border-image-slice: 1;
       height: 3rem;
-      background-image: radial-gradient(ellipse at top center, #f3f4f618 0%, transparent 70%);
+      background-image: radial-gradient(ellipse at top center, var(--secondary-soft) 0%, transparent 70%);
    }
 
    /* ── Center: línea en el medio, luz simétrica ── */
    .separator.center {
       border-top: 1px solid transparent;
-      border-image-source: linear-gradient(to right, transparent, #f3f4f630, transparent);
+      border-image-source: linear-gradient(to right, transparent, var(--border-strong), transparent);
       border-image-slice: 1;
       height: 2rem;
-      background-image: radial-gradient(ellipse at top center, #f3f4f612 0%, transparent 80%);
+      background-image: radial-gradient(ellipse at top center, var(--secondary-soft) 0%, transparent 80%);
    }
 
    /* ── Bottom: línea abajo, luz hacia arriba ── */
    .separator.bottom {
       border-bottom: 1px solid transparent;
-      border-image-source: linear-gradient(to right, transparent, #f3f4f640, transparent);
+      border-image-source: linear-gradient(to right, transparent, var(--border-strong), transparent);
       border-image-slice: 1;
       height: 3rem;
-      background-image: radial-gradient(ellipse at bottom center, #f3f4f618 0%, transparent 70%);
+      background-image: radial-gradient(ellipse at bottom center, var(--secondary-soft) 0%, transparent 70%);
    }
 </style>

@@ -13,7 +13,7 @@ module.exports = {
             // 2xl	1536px
          },
          colors: {
-            context: 'var(--context-color)'
+            context: 'var(--primary-text)'
          }
       },
    },

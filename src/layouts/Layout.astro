@@ -38,10 +38,8 @@ const ogImageUrl = new URL(image, site).toString();
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="Antony Monge" />
     <meta name="application-name" content="Antony Monge Portfolio" />
-    <meta name="msapplication-TileColor" content="#111318" />
-    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f4efea" />
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#111318" />
-    <meta name="theme-color" content="#111318" data-dynamic-theme-color />
+    <meta name="msapplication-TileColor" content="#f4efea" />
+    <meta name="theme-color" content="#f4efea" data-dynamic-theme-color />
 
     <link rel="canonical" href={canonicalUrl} />
     <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
@@ -88,8 +86,9 @@ const ogImageUrl = new URL(image, site).toString();
         root.dataset.theme = theme;
         root.style.colorScheme = theme;
         const themeMeta = document.querySelector("[data-dynamic-theme-color]");
-        if (themeMeta) {
-          themeMeta.setAttribute("content", theme === "dark" ? "#111318" : "#f4efea");
+        const themeColor = getComputedStyle(root).getPropertyValue("--bg").trim();
+        if (themeMeta && themeColor) {
+          themeMeta.setAttribute("content", themeColor);
         }
       })();
     </script>

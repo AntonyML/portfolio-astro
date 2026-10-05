@@ -11,31 +11,27 @@ interface Props {
   highlights: string[];
   stack: string[];
   image: string;
-  color: string;
 }
 
-const { title, type, role, description, highlights, stack, image, color } = Astro.props;
+const { title, type, role, description, highlights, stack, image } = Astro.props;
 ---
 
 <a
   href={`/${image}`}
   class="group section-card flex h-full flex-col overflow-hidden transition duration-300 hover:-translate-y-1 hover:border-[var(--border-strong)]"
   transition:name={`image-${image}`}
-  style={`--project-color:${color};`}
   aria-label={`Abrir caso de estudio de ${title}`}
 >
   <div class="relative overflow-hidden">
     <SafeImage
       imageName={image}
       alt={`Vista previa del proyecto ${title}`}
-      class="h-44 w-full object-cover object-top transition duration-500 group-hover:scale-[1.04] sm:h-48"
+      class="project-image"
       loading="lazy"
     />
-    <div class="absolute inset-0 bg-gradient-to-t from-[rgba(17,19,24,0.74)] via-transparent to-transparent"></div>
-    <div class="absolute inset-x-3.5 top-3.5 flex items-start justify-between gap-3">
+    <div class="absolute inset-x-3 bottom-3 flex">
       <span
-        class="inline-flex rounded-full px-2.5 py-1 text-[0.67rem] font-bold uppercase tracking-[0.16em]"
-        style={`background:${color}18; color:${color}; border:1px solid ${color}44;`}
+        class="inline-flex max-w-full rounded-full border border-[var(--border-strong)] bg-[var(--bg-card-strong)] px-2 py-1 text-[0.65rem] font-bold uppercase leading-snug tracking-[0.05em] text-[var(--text-primary)]"
       >
         {type}
       </span>
@@ -44,7 +40,7 @@ const { title, type, role, description, highlights, stack, image, color } = Astr
 
   <div class="flex flex-1 flex-col gap-3 p-4">
     <div>
-      <p class="text-sm font-semibold" style={`color:${color};`}>{role}</p>
+      <p class="accent-label text-sm font-semibold">{role}</p>
       <h3 class="mt-2 text-[1.08rem] font-extrabold leading-6 text-[var(--text-primary)]">{title}</h3>
       <p class="mt-2 text-sm leading-6 text-[var(--text-secondary)]">{description}</p>
     </div>
@@ -53,8 +49,7 @@ const { title, type, role, description, highlights, stack, image, color } = Astr
       {highlights.slice(0, 2).map((highlight) => (
         <li class="flex gap-3 text-sm leading-6 text-[var(--text-primary)]">
           <span
-            class="mt-1.5 h-2.5 w-2.5 rounded-full"
-            style={`background:${color}; box-shadow:0 0 0 5px ${color}22;`}
+            class="accent-marker mt-1.5 h-2.5 w-2.5 rounded-full"
             aria-hidden="true"
           ></span>
           <span>{highlight}</span>
@@ -68,7 +63,7 @@ const { title, type, role, description, highlights, stack, image, color } = Astr
       ))}
     </div>
 
-    <div class="flex items-center gap-2 text-sm font-bold" style={`color:${color};`}>
+    <div class="accent-label flex items-center gap-2 text-sm font-bold">
       Ver proyecto
       <i class="bx bx-right-arrow-alt text-xl transition duration-300 group-hover:translate-x-1" aria-hidden="true"></i>
     </div>

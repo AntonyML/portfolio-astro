@@ -8,8 +8,9 @@ function applyTheme(theme) {
   root.style.colorScheme = theme;
 
   const meta = document.querySelector(THEME_META_SELECTOR);
-  if (meta) {
-    meta.setAttribute("content", theme === "dark" ? "#111318" : "#f4efea");
+  const themeColor = getComputedStyle(root).getPropertyValue("--bg").trim();
+  if (meta && themeColor) {
+    meta.setAttribute("content", themeColor);
   }
 
   document.querySelectorAll("[data-theme-toggle]").forEach((button) => {

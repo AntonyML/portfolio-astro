@@ -38,7 +38,6 @@ const card = baseCard ?? {
   highlights: job!.highlights,
   stack: job!.stack,
   image: job!.image,
-  color: job!.color,
   github: job!.github ?? "",
   websites: job!.websites ?? [],
 };
@@ -62,6 +61,7 @@ const detailSections = [
 const dualRepos = "githubFront" in card || "githubBack" in card;
 const images = import.meta.glob('/public/*.webp', { eager: true });
 const socialImage = images[`/public/${id}.webp`] ? `/${id}.webp` : "/social-card.svg";
+const previewImageUrl = images[`/public/${id}.webp`] ? `/${id}.webp` : "/no-image.webp";
 ---
 
 <Layout
@@ -80,12 +80,11 @@ const socialImage = images[`/public/${id}.webp`] ? `/${id}.webp` : "/social-card
         {job && !baseCard ? "Volver a experiencia" : "Volver a proyectos"}
       </a>
 
-      <div class="grid gap-5 xl:grid-cols-[minmax(0,1.05fr)_20rem]">
+      <div class="grid items-start gap-5 lg:grid-cols-2">
         <section class="section-card p-5 sm:p-6">
           <div class="flex flex-wrap items-center gap-2">
             <span
-              class="inline-flex rounded-full px-3 py-1 text-[0.72rem] font-bold uppercase tracking-[0.16em]"
-              style={`background:${card.color}18; color:${card.color}; border:1px solid ${card.color}44;`}
+              class="theme-badge inline-flex rounded-full px-3 py-1 text-[0.72rem] font-bold uppercase tracking-[0.16em]"
             >
               {card.type}
             </span>
@@ -108,7 +107,6 @@ const socialImage = images[`/public/${id}.webp`] ? `/${id}.webp` : "/social-card
                     target="_blank"
                     rel="noopener noreferrer"
                     class="button-primary"
-                    style={`background:${card.color};`}
                   >
                     <i class={buttons[0].github} aria-hidden="true"></i>
                     Frontend
@@ -132,7 +130,6 @@ const socialImage = images[`/public/${id}.webp`] ? `/${id}.webp` : "/social-card
                 target="_blank"
                 rel="noopener noreferrer"
                 class="button-primary"
-                style={`background:${card.color};`}
               >
                 <i class={buttons[0].github} aria-hidden="true"></i>
                 Ver repositorio
@@ -158,9 +155,18 @@ const socialImage = images[`/public/${id}.webp`] ? `/${id}.webp` : "/social-card
           <SafeImage
             imageName={id}
             alt={`Vista del proyecto ${card.title}`}
-            class="h-full min-h-[15rem] w-full rounded-[1.35rem] object-cover object-top lg:min-h-[18rem]"
+            class="project-image rounded-[1.35rem]"
             loading="eager"
           />
+          <a
+            href={previewImageUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="muted-link mt-3 inline-flex items-center gap-2 text-sm font-semibold"
+          >
+            <i class="bx bx-expand-alt" aria-hidden="true"></i>
+            Ver imagen en tamaño original
+          </a>
         </aside>
       </div>
 
@@ -186,8 +192,7 @@ const socialImage = images[`/public/${id}.webp`] ? `/${id}.webp` : "/social-card
               {card.highlights.map((highlight) => (
                 <li class="flex gap-3 text-sm leading-7 text-[var(--text-primary)]">
                   <span
-                    class="mt-2 h-2.5 w-2.5 rounded-full"
-                    style={`background:${card.color}; box-shadow:0 0 0 5px ${card.color}22;`}
+                    class="accent-marker mt-2 h-2.5 w-2.5 rounded-full"
                     aria-hidden="true"
                   ></span>
                   <span>{highlight}</span>
