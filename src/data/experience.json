@@ -56,15 +56,23 @@
     "flag": "",
     "origin": "Costa Rica · desarrollo independiente",
     "color": "#16aa98",
-    "description": "Sitio institucional para FEMUCARIBE con navegación responsiva, presentación de cantones miembros y páginas de créditos e información legal.",
-    "context": "Desarrollo de un sitio institucional como servicio profesional independiente para FEMUCARIBE. La aplicación es estática y utiliza Astro, TypeScript, HTML semántico y CSS nativo.",
-    "impact": "Organiza la presentación institucional y la información de los cantones miembros en una web adaptable. Los créditos del sitio identifican el servicio de diseño y desarrollo independiente.",
+    "description": "Base de sitio institucional desarrollada para FEMUCARIBE como servicio profesional independiente, con identidad municipal y presentación de seis cantones asociados. Sus componentes compartidos adaptan la navegación al espacio disponible y conservan el funcionamiento básico sin JavaScript.",
+    "context": "Servicio de diseño y desarrollo independiente para la Federación Municipal del Caribe Costarricense y Asociados. El alcance implementado comprende la página principal, créditos y aviso legal; búsqueda, acceso a plataforma y varios recursos institucionales se muestran como pendientes mientras el sitio se desarrolla por etapas.",
+    "challenge": "Trasladar una identidad institucional extensa a una interfaz que conserve lectura, enlaces y foco en pantallas pequeñas, con texto ampliado y sin depender de JavaScript. La navegación también debe comunicar qué recursos están disponibles y cuáles siguen pendientes de contenido o destino.",
+    "solution": "Construí un layout público compartido con componentes para identidad, navegación, presentación y pie institucional. Usé HTML nativo como base y consultas de contenedor para responder al espacio real del componente. Pequeñas mejoras de JavaScript coordinan expansión, cierre y foco de los menús; los destinos ausentes se representan como recursos pendientes en lugar de enlaces ficticios.",
+    "architecture": "Astro genera una salida estática con TypeScript estricto, estilos scoped y CSS Modules. PublicLayout compone la barra institucional, la navegación y el pie; InformationLayout comparte cabecera, breadcrumb y navegación entre Créditos y Aviso legal. El aviso incorpora su propio índice temático. ResponsiveDisclosure concentra la interacción sobre details/summary nativos: ResizeObserver coordina cambios de tamaño, Escape y clic exterior cierran menús y se gestiona el retorno del foco. Los contratos de los componentes validan sus destinos. Escudos y tipografía se sirven desde recursos del proyecto, y el layout serializa el schema WebSite escapando su contenido para insertarlo en HTML.",
+    "testing": "El repositorio contiene pruebas Vitest para contratos, destinos inválidos y estados de recursos pendientes. Los escenarios Playwright en Chromium cubren navegación y foco, funcionamiento sin JavaScript, pantallas desde 280 px, orientación horizontal y texto al 200 %. Las páginas informativas tienen casos sobre contenido legal, cookies, almacenamiento del navegador y solicitudes externas.",
+    "impact": "Deja una base institucional coherente para ampliar contenido por etapas, con navegación compartida y comportamientos de adaptación y accesibilidad respaldados por casos de prueba. Los recursos pendientes mantienen un estado explícito hasta disponer de contenido y destinos reales.",
     "highlights": [
-      "Desarrollé la presentación institucional y la navegación adaptable para distintos dispositivos",
-      "Integré contenido de cantones miembros, créditos e información legal",
-      "Organicé el sitio con Astro, TypeScript, HTML semántico y CSS nativo"
+      "Diseñé componentes institucionales reutilizables con contratos de destinos y estados explícitos para recursos pendientes",
+      "Implementé menús sobre details/summary nativos, con cierre por Escape, clic exterior y recuperación del foco",
+      "Adapté la navegación al ancho real del contenedor mediante container queries y grillas de CSS",
+      "Integré identidad de seis cantones, contenido de gobernanza y layouts comunes para créditos e información legal",
+      "Mantuve escudos y tipografía como recursos locales, con licencia tipográfica y datos estructurados del sitio",
+      "Definí pruebas de contratos y navegación con teclado, JavaScript deshabilitado, pantallas estrechas y texto ampliado"
     ],
-    "stack": ["Astro", "TypeScript", "HTML", "CSS", "Vitest", "Playwright"],
+    "stack": ["Astro", "TypeScript", "HTML", "CSS Modules", "Vitest", "Playwright"],
+    "artifacts": ["Layouts institucionales", "Contratos de componentes", "Disclosure y gestión de foco", "Créditos y aviso legal", "Suites Vitest y Playwright"],
     "github": "https://github.com/AntonyML/LadingPageFEMUCARIBE"
   }
 ]

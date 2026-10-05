@@ -88,6 +88,12 @@ export interface Experience {
   color: string;
   description: string;
   context: string;
+  challenge?: string;
+  solution?: string;
+  architecture?: string;
+  testing?: string;
+  management?: string;
+  artifacts?: string[];
   impact: string;
   highlights: string[];
   stack: string[];

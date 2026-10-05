@@ -73,59 +73,70 @@
   },
   {
     "id": "aegissetup",
-    "title": "AegisSetup — Instalación de SIDC",
+    "title": "AegisSetup — Despliegue y diagnóstico de SIDC",
     "type": "Automatización de despliegues",
     "role": "Ingeniero de Software",
-    "description": "Instalador para Windows que automatiza la preparación de SIDC: base de datos SQL Server, conexión ODBC de 32 bits, componentes OCX y Crystal Reports.",
+    "description": "Herramienta de despliegue y reparación para SIDC, una aplicación heredada de Windows con VB6, SQL Server y Crystal Reports. Coordina dependencias de 32 bits y verifica la conexión y la interpretación de fechas que utiliza realmente el ejecutable.",
     "highlights": [
-      "Automaticé la restauración de SQL Server y la configuración de ODBC para la aplicación",
-      "Integré la instalación de componentes OCX y Crystal Reports en un flujo guiado",
-      "Incorporé verificaciones de conexión y protección local de credenciales con Windows DPAPI"
+      "Automaticé la preparación de SQL Server desde un respaldo, leyendo archivos lógicos y comprobando la base restaurada con DBCC CHECKDB",
+      "Integré el runtime de Crystal y los controles OCX en el binario, con registro COM de 32 bits y detección de archivos iguales o faltantes",
+      "Configuré el idioma del DSN y añadí comprobaciones de fechas día/mes/año mediante la sesión ADODB/MSDASQL del ejecutable",
+      "Implementé regeneración desde el ejecutable original, respetando el tamaño de sus bloques y registrando huellas SHA-256 en un manifiesto",
+      "Organicé un checklist por dependencias que explica qué falta, cómo resolverlo y qué etapa impide comenzar",
+      "Separé reparación y diagnóstico, elevación para operaciones de escritura y desinstalación con revisión previa del plan"
     ],
-    "stack": ["Go", "SQL Server", "Cobra", "Bubble Tea", "Windows DPAPI", "Docker"],
+    "stack": ["Go", "SQL Server", "Cobra", "Bubble Tea", "ODBC", "Crystal Reports", "Windows DPAPI", "Supabase", "Docker"],
     "image": "image-aegissetup",
     "color": "#0D75C6",
     "github": "https://github.com/AntonyML/aegissetup",
-    "challenge": "Preparar una instalación de SIDC requiere coordinar una base SQL Server con dependencias de escritorio de 32 bits. Hacer cada paso de forma manual complica la repetibilidad y el diagnóstico de una instalación.",
-    "solution": "Desarrollé una herramienta de instalación que reúne la restauración de la base de datos, la configuración ODBC y la preparación de los componentes necesarios para ejecutar SIDC en Windows.",
-    "architecture": "CLI en Go con Cobra e interfaz de terminal Bubble Tea. La preparación del entorno y las verificaciones de conexión se integran en el proceso de instalación; Windows DPAPI protege las credenciales locales.",
-    "impact": "Permite preparar instalaciones de SIDC con un procedimiento guiado y verificable. El aporte del proyecto es la automatización del despliegue de una aplicación existente.",
-    "artifacts": ["Instalador Windows", "Restauración SQL Server", "Configuración ODBC", "Verificación de conexión"]
+    "challenge": "Una instalación podía tener SQL Server accesible y aun así fallar al abrir SIDC o generar reportes: la aplicación utiliza COM y ODBC de 32 bits, conserva conexiones dentro de ejecutables y plantillas, y envía fechas como texto. El diagnóstico requiere comprobar la ruta de conexión que usa la aplicación, la compatibilidad de sus dependencias y la configuración regional de esa sesión.",
+    "solution": "Construí una herramienta de instalación por etapas, reparación y diagnóstico. Preparé la base y el entorno Windows, adapté conexiones del ejecutable y de Crystal desde los archivos existentes y añadí comprobaciones de sesión de 32 bits, fechas y apertura de reportes con límites de tiempo. El entorno de impresión se diagnostica; el checklist diferencia requisitos de entrada de elementos que crea la instalación y conserva disponible la explicación de los bloqueos.",
+    "architecture": "La CLI con Cobra y la TUI con Bubble Tea consumen módulos de configuración, requisitos, preparación del entorno y diagnóstico. Setup restaura la base, configura el DSN de 32 bits y registra componentes COM; el diagnóstico comprueba SQL, la conexión ADODB extraída del ejecutable, fechas DMY, Crystal y entorno de impresión. La regeneración parte de una copia original, valida el espacio disponible en los bloques binarios y produce un manifiesto de hashes. CLI y TUI comparten la tabla de requisitos y los módulos, con secuencias propias. La autenticación SQL o Windows depende del entorno; un almacén auxiliar utiliza DPAPI. La TUI incorpora autenticación de operador con Supabase y renovación de sesión. AegisSetup administra el despliegue y la compatibilidad de SIDC, cuya lógica de negocio pertenece a la aplicación existente.",
+    "testing": "El repositorio contiene pruebas de runtimes y registro COM, preservación del tamaño de ejecutables y reportes, repetibilidad de parches, configuración regional del DSN y rechazo de conversiones de fecha incorrectas. También cubre reglas del checklist, navegación TUI, elevación, límites de desinstalación y autenticación con servidores HTTP simulados. La integración de fechas con ADODB de 32 bits requiere habilitación explícita; la validación completa en una PC limpia permanece documentada como comprobación pendiente de entorno.",
+    "impact": "Convierte la preparación de una aplicación heredada en un procedimiento diagnosticable y repetible. Permite distinguir problemas de conectividad, compatibilidad de 32 bits, conexiones de reportes y configuración regional, y conservar la procedencia de los artefactos regenerados mediante su manifiesto.",
+    "artifacts": ["Instalador Windows", "CLI y TUI operativa", "Checklist por dependencias", "Diagnóstico ADODB y Crystal", "Manifiesto de regeneración", "Kit SQL Server en Docker"]
   },
   {
     "id": "server-femucaribe",
-    "title": "ServerFemucaribe — Automatización de infraestructura",
-    "type": "Operación de infraestructura",
+    "title": "ServerFemucaribe — Operación remota para agentes",
+    "type": "Arquitectura de automatización",
     "role": "Ingeniero de Software",
-    "description": "Herramientas PowerShell para operar infraestructura institucional mediante SSH, ejecutar consultas SQL de solo lectura y organizar tareas de respaldo.",
+    "description": "Capa de operación remota para que agentes ejecuten tareas por SSH sin recibir la contraseña del servidor. Separa el alta de acceso realizada por el humano de la automatización por clave e incorpora una vía de diagnóstico SQL con validación local.",
     "highlights": [
-      "Integré comandos remotos, sesiones interactivas y transferencia de archivos mediante OpenSSH",
-      "Implementé consultas SQL con lista blanca, límite de filas y enmascarado de columnas sensibles",
-      "Documenté procedimientos de respaldo para los servicios de la infraestructura"
+      "Separé el bootstrap humano de claves Ed25519 de la ejecución del agente: la contraseña se introduce en la terminal del humano",
+      "Centralicé destinos e identidades en una configuración compartida para operar servidores y equipos sin duplicar conexiones",
+      "Diseñé wrappers no interactivos que devuelven salida y código de error, con BatchMode para evitar prompts de contraseña",
+      "Separé las sesiones TTY bajo intervención humana de los comandos automatizados y las transferencias SCP",
+      "Implementé validación SQL antes de tocar la red, límite de filas, modo DryRun y enmascarado de columnas identificadas como sensibles",
+      "Preparé el acceso SQL con autenticación integrada de Windows para reutilizar la identidad SSH sin introducir una contraseña SQL"
     ],
-    "stack": ["PowerShell", "OpenSSH", "SQL Server", "PostgreSQL"],
+    "stack": ["PowerShell", "OpenSSH", "Ed25519", "SQL Server", "SCP"],
     "image": "image-server-femucaribe",
     "color": "#3F51B5",
     "github": "",
     "repositoryLabel": "Herramientas de uso interno",
-    "challenge": "La operación de servidores institucionales requiere procedimientos consistentes para acceso remoto, consultas de diagnóstico y respaldos, con control sobre la información que se consulta o registra.",
-    "solution": "Organicé herramientas operativas en PowerShell para ejecutar tareas por SSH y realizar consultas SQL de solo lectura con restricciones explícitas y registros de actividad.",
-    "architecture": "Scripts de operación con PowerShell y OpenSSH, junto con utilidades SQL basadas en sqlcmd. Las consultas permitidas, el límite de resultados y el enmascarado de columnas restringen la información expuesta durante el diagnóstico.",
-    "impact": "Centraliza procedimientos de administración y consulta de infraestructura. Es un desarrollo operativo independiente del sitio web institucional de FEMUCARIBE.",
-    "artifacts": ["Herramientas PowerShell", "Operación SSH", "Consultas SQL de solo lectura", "Procedimientos de respaldo"]
+    "challenge": "Dar acceso operativo a agentes de software exige resolver quién prepara la autenticación, qué información recibe el agente y cómo distinguir una tarea automatizable de una interacción que necesita al humano. Las contraseñas no deben terminar en el contexto de conversación, en argumentos de comandos ni en variables persistentes; además, el diagnóstico de una base de producción requiere controles propios antes de enviar consultas.",
+    "solution": "Diseñé un contrato de operación con dos etapas: el humano prepara el acceso e instala la clave pública; después, el agente utiliza wrappers que seleccionan destino e identidad y ejecutan comandos por clave. Los flujos interactivos se delegan al humano. Para SQL, añadí una vía específica que valida la sentencia localmente, limita resultados y utiliza autenticación integrada de Windows; si esta autenticación falla, el flujo reporta el error sin buscar una contraseña alternativa.",
+    "architecture": "Un núcleo PowerShell carga la configuración y resuelve el destino y su identidad. Los adaptadores de comandos y SCP usan OpenSSH con IdentitiesOnly y BatchMode, mientras una vía separada abre sesiones con TTY para intervención humana. La capa SQL restringe las formas de consulta, rechaza operaciones de escritura y permite validación en seco antes de abrir la conexión. Transporta el texto SQL codificado para conservar las comillas, lo ejecuta con sqlcmd -E y elimina el archivo temporal remoto en finally. La presentación enmascara las columnas reconocidas por la proyección de la consulta y registra el texto SQL y metadatos, con filtrado de patrones de credenciales. Runbooks y reglas por rol definen las responsabilidades de los agentes y del humano.",
+    "testing": "El alta de acceso incorpora una comprobación de autenticación por clave y los wrappers propagan los códigos de salida. El diagnóstico SQL incluye un modo DryRun que valida la sentencia sin enviarla al servidor. La documentación marca la integración de sqlcmd -E como pendiente de comprobación en el entorno; la existencia del wrapper no se presenta como una prueba de funcionamiento en producción.",
+    "impact": "Establece una forma repetible de delegar tareas remotas a agentes sin entregarles la contraseña del servidor. La separación entre bootstrap, ejecución automatizada, intervención humana y diagnóstico SQL hace explícitas las responsabilidades y el tratamiento de los errores de autenticación.",
+    "artifacts": ["Bootstrap humano Ed25519", "Wrappers SSH y SCP", "Configuración multidestino", "Validador SQL y DryRun", "Registro de consultas", "Runbooks y reglas para agentes"]
   },
   {
     "id": "cvmeld",
-    "title": "CVMeld — CV y búsqueda laboral con IA",
+    "title": "CVMeld — Plataforma de empleabilidad con IA",
     "type": "Plataforma de empleabilidad",
     "role": "Ingeniero de Software Full-Stack",
-    "description": "Plataforma con IA para crear CV compatibles con ATS, adaptarlos a ofertas, generar cartas de presentación y preparar entrevistas.",
+    "description": "Plataforma bilingüe que transforma un perfil profesional en un CV base recuperable y versiones adaptadas a cada oferta. Integra PDF, biblioteca personal, créditos y administración de IA; su API añade ranking, postulaciones, seguimiento y preparación de entrevistas.",
     "highlights": [
-      "Integré creación de CV, adaptación a vacantes y generación de cartas de presentación",
-      "Desarrollé búsqueda de ofertas, evaluación de compatibilidad y seguimiento de postulaciones",
-      "Conecté un frontend Next.js con una API FastAPI y generación de documentos PDF"
+      "Modelé un perfil profesional reutilizable, con CV en español e inglés y recuperación de la versión base anterior",
+      "Implementé adaptaciones por URL o descripción que conservan la base y registran versiones con oferta, palabras clave y análisis de compatibilidad",
+      "Separé el JSON validado de su PDF: reparación dirigida de respuestas, compilación Typst en segundo plano y descargas firmadas desde R2",
+      "Construí ingesta de ofertas con normalización, deduplicación por URL y contenido, controles SSRF y asociaciones por usuario",
+      "Integré autorización de consumo, liquidación atómica de créditos y cuotas, e idempotencia para reintentos con la misma clave",
+      "Desarrollé módulos API de ranking híbrido, generación y revisión de postulaciones, seguimiento e entrevistas con ejemplos STAR y simulación textual"
     ],
-    "stack": ["Next.js", "React", "TypeScript", "FastAPI", "Python", "PostgreSQL", "Tailwind CSS", "LiteLLM", "Typst", "Cloudflare R2"],
+    "stack": ["Next.js", "React", "TypeScript", "FastAPI", "Python", "PostgreSQL", "Tailwind CSS", "Pydantic", "SQLAlchemy", "LiteLLM", "Typst", "Cloudflare R2"],
     "image": "image-cvmeld",
     "color": "#16aa98",
     "github": "",
@@ -134,22 +145,26 @@
     "websites": [
       { "label": "Ver CVMeld", "href": "https://cvmeld.com/es" }
     ],
-    "challenge": "Una búsqueda laboral exige preparar documentos, ajustarlos a cada oferta y llevar seguimiento de las postulaciones. Esos pasos suelen quedar repartidos entre herramientas y archivos distintos.",
-    "solution": "Construí una plataforma que reúne el CV base, la adaptación a vacantes, las cartas de presentación, la búsqueda de ofertas y la preparación de entrevistas en un mismo producto.",
-    "architecture": "Frontend Next.js y React con TypeScript y Tailwind CSS, API FastAPI en Python y persistencia PostgreSQL. LiteLLM integra los flujos de IA; Typst genera PDF y Cloudflare R2 almacena documentos.",
-    "impact": "Permite trabajar sobre un perfil profesional base y preparar cada postulación con sus documentos y seguimiento. Los repositorios de frontend y backend forman una sola solución.",
-    "artifacts": ["Aplicación web", "API FastAPI", "CV compatible con ATS", "Generación de PDF", "Seguimiento de postulaciones"]
+    "challenge": "Adaptar un CV exige relacionar una trayectoria profesional con los requisitos de cada vacante sin perder el documento original ni mezclar recursos entre usuarios. La generación con IA introduce respuestas que deben validarse, costes y tiempos variables; el producto necesita controlar el acceso, contabilizar consumo y permitir recuperar documentos incluso si falla su renderizado.",
+    "solution": "Organicé el flujo web alrededor de un perfil persistente, una base activa recuperable y adaptaciones independientes por oferta. El JSON del documento se conserva antes de compilar su PDF, de modo que un fallo de renderizado no elimina el contenido y permite reconstruirlo sin repetir la inferencia. La biblioteca permite consultar, recuperar y eliminar documentos con descargas firmadas. Añadí planes, créditos, sesiones revocables y administración de proveedores; en la API implementé además ranking, cartas, seguimiento y entrevistas, como módulos diferenciados del generador web actual.",
+    "architecture": "Frontend Next.js y React con TypeScript, Tailwind CSS y traducciones con next-intl; API FastAPI con Pydantic y SQLAlchemy async sobre PostgreSQL. La generación resuelve proveedores configurados por etapa mediante LiteLLM, sanea y valida el JSON y aplica una reparación dirigida cuando falla el esquema. El JSON persistido es la fuente del documento; Typst compila el PDF en segundo plano, con archivos por usuario en R2 y URLs firmadas. Los endpoints verifican sesión activa y propiedad de los recursos. El consumo pasa por autorización previa y liquidación con bloqueo de la cuenta de créditos, registro contable e idempotencia por usuario, clave y payload. La ingesta normaliza y deduplica ofertas y comprueba URLs y redirecciones contra SSRF. Los módulos API de empleabilidad combinan ranking determinista y cualitativo, etapas de revisión y registro de resultados.",
+    "testing": "Las pruebas pytest cubren versiones de CV y conservación de la base, propiedad de recursos y bloqueo de URLs privadas, validación y reparación de respuestas de IA, fallos de PDF, almacenamiento R2, sesiones, créditos y cuotas. Hay casos de ranking, postulaciones, resultados y entrevistas con proveedores simulados. Playwright contempla autenticación, restricciones de rutas, idioma, estados del feed y reconexión.",
+    "impact": "Permite reutilizar un perfil, conservar una base recuperable y organizar documentos específicos para cada vacante. Separar datos, generación y PDF facilita recuperar entregables sin repetir llamadas de IA, mientras créditos, cuotas y registros de consumo dan al administrador herramientas para controlar la operación del servicio.",
+    "artifacts": ["Generador web bilingüe", "Perfil profesional estructurado", "CV base y versiones adaptadas", "Biblioteca de documentos", "PDF Typst y descargas R2", "Administración de proveedores y créditos", "API de ranking y postulaciones", "API de entrevistas y seguimiento"]
   },
   {
     "id": "delicias-de-la-urba",
     "title": "Delicias de la Urba — Menú digital",
     "type": "Sitio gastronómico",
     "role": "Desarrollador Web",
-    "description": "Sitio web de comida rápida con menú digital por categorías, precios en colones y pedidos directos por WhatsApp.",
+    "description": "Menú digital de Delicias de la Urba con catálogo tipado, precios en colones y navegación que identifica la categoría consultada. Integra accesos a WhatsApp para iniciar la conversación de pedido desde distintos puntos de la página.",
     "highlights": [
-      "Organicé el menú por categorías con precios y navegación directa a los productos",
-      "Integré enlaces para iniciar pedidos mediante WhatsApp",
-      "Configuré metadatos SEO y datos estructurados del establecimiento gastronómico"
+      "Modelé el catálogo con interfaces TypeScript; una misma fuente alimenta productos, categorías y ofertas para buscadores",
+      "Implementé navegación fija por categorías y seguimiento de la sección visible con IntersectionObserver",
+      "Organicé el menú en una, dos o tres columnas según el espacio disponible, con nombre y precio diferenciados",
+      "Distribuí los accesos a WhatsApp entre cabecera, presentación, pie de página y un botón flotante en móvil",
+      "Generé datos estructurados FoodEstablishment con menú, ofertas en CRC y horarios, junto con metadatos canonical y sociales",
+      "Añadí una franja de productos destacados con pausa al pasar el cursor y ajuste para la preferencia de movimiento reducido"
     ],
     "stack": ["Astro", "TypeScript", "CSS"],
     "image": "image-delicias-urba",
@@ -158,43 +173,51 @@
     "websites": [
       { "label": "Ver menú digital", "href": "https://deliciasdelaurba.tonyml.com/" }
     ],
-    "challenge": "Presentar la oferta de un negocio de comida de forma clara y facilitar que el visitante encuentre productos, consulte precios y contacte al establecimiento para pedir.",
-    "solution": "Desarrollé un sitio con un menú digital categorizado y acceso directo a WhatsApp, manteniendo la información de productos y precios en una fuente de datos del proyecto.",
-    "architecture": "Sitio construido con Astro, TypeScript y CSS. Los datos del menú alimentan la presentación y el layout incluye metadatos y datos estructurados FoodEstablishment.",
-    "impact": "Reúne la consulta del menú y el contacto para pedidos en una misma web, accesible desde dispositivos móviles.",
-    "artifacts": ["Menú digital", "Catálogo por categorías", "Pedidos por WhatsApp", "Datos estructurados SEO"]
+    "challenge": "Presentar una oferta amplia de comida rápida en una página fácil de recorrer desde el teléfono, conservando los precios legibles y el contacto para pedidos al alcance durante la consulta. El contenido visible y la información entregada a buscadores necesitan mantenerse consistentes al cambiar el catálogo.",
+    "solution": "Separé el catálogo de su presentación mediante interfaces TypeScript y componentes Astro. Las once categorías alimentan el menú y sus accesos; el layout reutiliza esos productos para construir las ofertas del schema. Los enlaces convencionales permiten recorrer las secciones y una mejora progresiva identifica la categoría visible. WhatsApp actúa como canal externo de conversación para coordinar el pedido.",
+    "architecture": "Astro genera una página estática compuesta por presentación, franja de destacados, navegación de categorías, tarjetas de menú y accesos de contacto. Un módulo TypeScript concentra productos, precios y enlaces del negocio. CSS nativo resuelve las grillas y la navegación fija; IntersectionObserver actualiza la categoría activa con un script pequeño, sin hidratar un framework de interfaz. El layout deriva FoodEstablishment y Offer del catálogo y configura canonical, Open Graph y Twitter Cards. La preferencia de movimiento reducido detiene la animación de la franja de destacados.",
+    "testing": "El proyecto dispone de comandos de compilación y previsualización con Astro para revisar el catálogo y la navegación. El repositorio no incluye una suite automatizada de pruebas.",
+    "impact": "Reúne el menú y sus precios en un enlace público y mantiene disponible el acceso al canal de pedidos durante la consulta. Compartir la fuente de datos entre tarjetas y ofertas estructuradas facilita actualizar el catálogo sin mantener dos versiones de la información.",
+    "artifacts": ["Catálogo tipado", "Navegación con seguimiento de sección", "Grilla de menú adaptable", "Accesos a WhatsApp", "Schema FoodEstablishment y Offer"]
   },
   {
     "id": "aegisba",
     "title": "AegisBA Enterprise — Respaldos de SQL Server",
     "type": "Automatización de respaldos",
     "role": "Ingeniero de Software",
-    "description": "Agente de respaldos SQL Server con verificación de integridad, retención, sincronización a Cloudflare R2 y servidores Windows, y registro de eventos en Supabase.",
+    "description": "Agente de respaldos SQL Server verificados, con perfiles y sincronización de la última copia pendiente a destinos remotos. Separa el éxito local de los fallos de red mediante estado persistente, limpieza de temporales y trazabilidad de corridas.",
     "highlights": [
-      "Automaticé respaldos de SQL Server con verificación de integridad y políticas de retención",
-      "Integré sincronización hacia Cloudflare R2 y servidores Windows",
-      "Incorporé registro de eventos en Supabase y protección de credenciales con Windows DPAPI"
+      "Implementé un pipeline que comprueba espacio, respalda a un temporal, ejecuta RESTORE VERIFYONLY y calcula SHA-256 antes de publicar el archivo final",
+      "Separé la copia local de sus sincronizaciones para conservar un resultado verificable cuando falla un destino remoto",
+      "Añadí idempotencia diaria por perfil, bloqueos de ejecución y reintento de la última copia pendiente antes del siguiente respaldo",
+      "Incorporé backoff exponencial con jitter para R2 y verificación de tamaño y SHA-256 para destinos Windows por UNC",
+      "Registré corridas y artefactos en Supabase y añadí acumulación y reenvío de eventos ante errores recuperables",
+      "Desarrollé configuración portable cifrada con AES-GCM y PBKDF2, cuya importación vuelve a proteger las credenciales R2 con DPAPI local"
     ],
     "stack": ["Go", "SQL Server", "Cloudflare R2", "Supabase", "Cobra", "Bubble Tea", "Windows DPAPI"],
     "image": "image-aegisba",
     "color": "#4CAF50",
     "github": "https://github.com/AntonyML/AegisBA",
-    "challenge": "Los respaldos de una base empresarial necesitan una ejecución periódica, comprobaciones de integridad, retención y copias en destinos separados, además de información para revisar el resultado de cada operación.",
-    "solution": "Desarrollé un agente que coordina el respaldo de SQL Server, su verificación y la sincronización a los destinos configurados, con eventos registrados para seguimiento operativo.",
-    "architecture": "Aplicación Go con Cobra y Bubble Tea, integración con SQL Server, almacenamiento Cloudflare R2 y registro de eventos en Supabase. Utiliza Windows DPAPI para las credenciales y el Programador de tareas de Windows para la ejecución periódica.",
-    "impact": "Permite operar respaldos con retención, destinos de sincronización y seguimiento de eventos dentro del ecosistema de SIDC.",
-    "artifacts": ["Agente de respaldos", "Verificación de integridad", "Políticas de retención", "Sincronización R2", "Registro de eventos"]
+    "challenge": "La operación debe diferenciar una copia terminada de un archivo parcial y un respaldo local válido de una transferencia remota pendiente. También necesita controlar espacio, retención, concurrencia y ejecuciones repetidas, y conservar información para localizar el fallo de una corrida cuando la nube no está disponible.",
+    "solution": "Construí un pipeline que verifica el respaldo antes de publicarlo y actualiza el estado de cada perfil después de obtener la copia local. Los adaptadores remotos transfieren archivos y reportan fallos; la capa de aplicación decide reintentos, retención y tratamiento de la última copia pendiente. El agente limpia temporales huérfanos al iniciar, ofrece un comando separado para sincronizar pendientes y permite operar mediante TUI o tareas programadas desatendidas.",
+    "architecture": "La capa de aplicación concentra los casos de uso y recibe interfaces de motor SQL, almacenamiento y eventos; Cobra y Bubble Tea son adaptadores de entrada. El respaldo pasa por comprobación de espacio, archivo temporal, verificación SQL, hash y publicación final. El estado conserva idempotencia y la última copia remota pendiente por perfil. Los backends implementan R2, UNC y almacenamiento Supabase, mientras un módulo independiente clasifica errores y calcula backoff con jitter. R2 comprueba el tamaño remoto y UNC verifica tamaño y SHA-256. Los errores de observabilidad no abortan el respaldo. DPAPI protege las credenciales R2 locales; un bundle con AES-GCM y PBKDF2 permite trasladar configuración y volver a cifrarla al importar. El Programador de tareas invoca procesos desatendidos de duración limitada.",
+    "testing": "La suite incluye pruebas de aplicación con dependencias inyectadas, integración local con un motor SQLite de pruebas y fallos controlados de interrupción, corrupción, espacio insuficiente y temporales huérfanos. Cubre conservación de copias anteriores, pendientes remotos, idempotencia por perfil, bloqueos, migración de estado y reintentos con reloj y jitter simulados. La portabilidad prueba contraseña incorrecta y alteración del bundle. La integración SQL Server comprueba respaldo, verificación y restauración equivalente; esta integración y las pruebas remotas de Supabase requieren activación explícita.",
+    "impact": "Permite distinguir una copia local confirmada de una sincronización pendiente y conservar información para recuperar la operación. Los perfiles y la separación de adaptadores permiten configurar destinos y programación manteniendo la lógica de respaldo independiente de la interfaz de terminal.",
+    "artifacts": ["Agente Windows CLI y TUI", "Perfiles y tareas programadas", "Respaldos verificados", "Sincronización R2 y UNC", "Registro de corridas y artefactos", "Bundle de configuración cifrado"]
   },
   {
     "id": "aegisdesk",
     "title": "AegisDesk — Soporte y gestión de instalaciones",
     "type": "Plataforma de soporte",
     "role": "Ingeniero de Software Full-Stack",
-    "description": "Plataforma de soporte para aplicaciones de escritorio con tickets, panel de administración, shell Windows y estados de mantenimiento firmados con caché offline.",
+    "description": "Plataforma que conecta el soporte de aplicaciones de escritorio con el enrolamiento y la administración de instalaciones. Un shell Windows verifica configuración y avisos firmados, aplica una política offline y acompaña el lanzamiento de la aplicación existente.",
     "highlights": [
-      "Desarrollé un portal de tickets y un panel para administrar instalaciones y mantenimiento",
-      "Integré un shell Windows con estados firmados mediante Ed25519 y caché offline",
-      "Construí el backend sobre Cloudflare Workers y D1 con controles de Access y Turnstile"
+      "Implementé enrolamiento atómico con códigos de un solo uso y tokens de instalación cuyo hash se almacena en D1",
+      "Vinculé estados y configuración a cada instalación mediante JWT Ed25519, verificando firma, emisor, audiencia y protocolo en el shell",
+      "Definí vigencia y gracia offline, rechazo de políticas anteriores y mitigación del retroceso del reloj local",
+      "Añadí administración por roles y organización con Cloudflare Access y controles CSRF en operaciones de escritura",
+      "Construí tickets con catálogo de incidencias, idempotencia, límites de solicitudes y validación de acción y hostname de Turnstile",
+      "Registré aceptación de términos por versión y huella SHA-256, con reenvío pendiente y limpieza programada de datos operativos"
     ],
     "stack": ["Go", "TypeScript", "Hono", "Drizzle", "Cloudflare Workers", "D1 Cloudflare", "Cloudflare Access", "Turnstile", "Ed25519"],
     "image": "image-aegisdesk",
@@ -204,10 +227,11 @@
       { "label": "Portal de tickets", "href": "https://aegisdesk.tonyml.com/tickets" },
       { "label": "Panel de administración", "href": "https://aegisdesk.tonyml.com/panel" }
     ],
-    "challenge": "El soporte de aplicaciones instaladas necesita coordinar solicitudes, instalaciones y ciclos de mantenimiento, conservando un comportamiento definido cuando el equipo no tiene conexión.",
-    "solution": "Desarrollé una plataforma que conecta un portal de tickets, un panel de administración y un shell Windows para gestionar el soporte y los estados de las instalaciones.",
-    "architecture": "Shell Windows en Go y backend TypeScript con Hono y Drizzle sobre Cloudflare Workers y D1. Los estados de mantenimiento se firman con Ed25519; Access protege la administración y Turnstile participa en los controles de acceso al flujo público.",
-    "impact": "Centraliza soporte y gestión de instalaciones en una sola solución. El portal de tickets y el panel son dos accesos al mismo proyecto; el panel requiere autorización.",
-    "artifacts": ["Portal de tickets", "Panel de administración", "Shell Windows", "Estados firmados", "Caché offline"]
+    "challenge": "Una aplicación instalada necesita soporte, identificación del equipo y una política definida cuando no puede consultar al servidor. Hay que coordinar instalaciones y mantenimiento, distinguir un fallo de red de una decisión administrativa y comprobar que cada estado pertenece a la instalación correcta. El panel también necesita limitar los datos y acciones al alcance del operador y su organización.",
+    "solution": "Desarrollé un shell que enrola la instalación, sincroniza configuración firmada y consulta avisos calculados por el servidor antes del lanzamiento. Conserva el último estado disponible dentro de límites temporales y solicita soporte cuando la configuración deja de ser utilizable; los cambios remotos de política se incorporan al sincronizar. El backend sirve el portal de tickets y un panel con permisos por organización, registra acciones operativas y gestiona consentimiento de mantenimiento y retención.",
+    "architecture": "Un Worker con Hono compone rutas públicas, del shell y administrativas. Los servicios de enrolamiento, configuración, ciclos, tickets y directorio encapsulan operaciones; repositorios y Drizzle acceden a D1. El enrolamiento consume el código y crea instalación, ciclo y evento en un lote condicionado para evitar registros huérfanos por reutilización. La configuración y los estados se firman con Ed25519 y se vinculan a la instalación. El shell Go verifica respuestas, utiliza ETag y aplica vigencia, gracia offline y rechazo de políticas anteriores. Su token se guarda con DPAPI y permisos locales restringidos. Cloudflare Access identifica administradores y las membresías determinan rol y organización. El shell presenta soporte y consentimiento de mantenimiento e invoca el ejecutable configurado, conservando la lógica de SIDC en la aplicación existente.",
+    "testing": "Vitest y D1 con migraciones de prueba cubren enrolamiento concurrente, códigos reutilizados, roles, aislamiento organizacional, configuración firmada, ciclos, tickets, CSRF, abuso y retención. Los tests de tickets comprueban el resumen del catálogo y el rechazo de texto libre enviado al endpoint. En Go hay casos de firmas inválidas, políticas anteriores, reloj atrasado, conservación de estados deshabilitados o revocados offline, gracia y caducidad, caché corrupta y token fuera del JSON. También se prueban aceptación de términos y validación del ejecutable objetivo.",
+    "impact": "Reúne solicitudes, instalaciones y decisiones de mantenimiento en una sola solución, con un comportamiento offline explícito y trazabilidad operativa. El portal y el panel comparten backend, y la intermediación del lanzamiento mantiene separadas las responsabilidades del soporte y de la aplicación institucional.",
+    "artifacts": ["Shell Windows", "Portal de tickets", "Panel de instalaciones", "Contrato de configuración firmada", "Migraciones D1", "Registro de aceptación de términos"]
   }
 ]
