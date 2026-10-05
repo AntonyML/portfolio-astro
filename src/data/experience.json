@@ -1,7 +1,7 @@
 [
   {
     "id": "sistema-ventas-rd",
-    "projectTitle": "Software Freelance · Sistema de Punto de Ventas",
+    "projectTitle": "Software Freelance · Sistema de Punto de Venta",
     "image": "image-sistema-ventas",
     "role": "Ingeniero de Software",
     "client": "Cliente en República Dominicana",
@@ -16,14 +16,14 @@
     "highlights": [
       "Construí módulos para artículos, clientes, proveedores, vendedores y facturación",
       "Diseñé la lógica de negocio para ventas, consultas y ajustes de inventario",
-      "Base de datos SQL Server con soporte continuo en producción"
+      "Base de datos SQL Server con soporte continuo para la operación diaria"
     ],
     "stack": ["C#", ".NET", "SQL Server"],
     "github": "https://github.com/AntonyML/Sistema-de-Ventas"
   },
   {
     "id": "gestion-municiones",
-    "projectTitle": "Software Freelance · POS e Inventario para Armería",
+    "projectTitle": "Software Freelance · Punto de Venta e Inventario para Armería",
     "image": "image-armeria-prime",
     "role": "Ingeniero de Software",
     "client": "Cliente en República Dominicana",
