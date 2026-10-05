@@ -10,7 +10,7 @@ import SafeImage from "./SafeImage.astro";
       <p class="eyebrow">Experiencia profesional</p>
       <h2 class="section-title max-w-4xl">Software en operación real.</h2>
       <p class="section-copy">
-        Desarrollo de software empresarial internacional
+        Desarrollo de software para clientes e instituciones
       </p>
     </div>
 
@@ -24,7 +24,7 @@ import SafeImage from "./SafeImage.astro";
                   class="inline-flex items-center rounded-full px-3 py-1 text-[0.68rem] font-bold uppercase tracking-[0.16em]"
                   style={`background: ${job.color}15; color: ${job.color}; border: 1px solid ${job.color}45;`}
                 >
-                  Proyecto internacional
+                  {job.scopeLabel ?? "Proyecto internacional"}
                 </span>
                 <div>
                   <h3 class="text-[1.08rem] font-extrabold leading-6 text-[var(--text-primary)]">
@@ -36,11 +36,13 @@ import SafeImage from "./SafeImage.astro";
                 </div>
               </div>
 
-              <div class="rounded-2xl border border-[var(--border-soft)] bg-[var(--bg-soft)] px-3.5 py-2.5 text-right">
-                <p class="mt-1 text-sm font-semibold text-[var(--text-primary)]">
-                  {job.period}
-                </p>
-              </div>
+              {job.period && (
+                <div class="rounded-2xl border border-[var(--border-soft)] bg-[var(--bg-soft)] px-3.5 py-2.5 text-right">
+                  <p class="mt-1 text-sm font-semibold text-[var(--text-primary)]">
+                    {job.period}
+                  </p>
+                </div>
+              )}
             </div>
 
             <p class="text-[0.95rem] leading-6 text-[var(--text-secondary)]">

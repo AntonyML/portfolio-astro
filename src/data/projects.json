@@ -70,5 +70,144 @@
     "testing": "Se verifica el periodo completo de la serie, se muestran años faltantes cuando existen, se comparan modelos por error y se documentan supuestos y límites de cada técnica. Reproducibilidad garantizada mediante constantes y semilla fija donde aplica.",
     "impact": "Convierte un repositorio histórico en una herramienta útil para planificación. En lugar de depender solo de intuición, el usuario puede observar tendencias, medir variabilidad, simular incertidumbre y fundamentar asignaciones de recursos.",
     "artifacts": ["Dashboard histórico", "Comparación de pronósticos", "I-Chart SPC", "Simulación Monte Carlo", "Optimización lineal"]
+  },
+  {
+    "id": "aegissetup",
+    "title": "AegisSetup — Instalación de SIDC",
+    "type": "Automatización de despliegues",
+    "role": "Ingeniero de Software",
+    "description": "Instalador para Windows que automatiza la preparación de SIDC: base de datos SQL Server, conexión ODBC de 32 bits, componentes OCX y Crystal Reports.",
+    "highlights": [
+      "Automaticé la restauración de SQL Server y la configuración de ODBC para la aplicación",
+      "Integré la instalación de componentes OCX y Crystal Reports en un flujo guiado",
+      "Incorporé verificaciones de conexión y protección local de credenciales con Windows DPAPI"
+    ],
+    "stack": ["Go", "SQL Server", "Cobra", "Bubble Tea", "Windows DPAPI", "Docker"],
+    "image": "image-aegissetup",
+    "color": "#0D75C6",
+    "github": "https://github.com/AntonyML/aegissetup",
+    "challenge": "Preparar una instalación de SIDC requiere coordinar una base SQL Server con dependencias de escritorio de 32 bits. Hacer cada paso de forma manual complica la repetibilidad y el diagnóstico de una instalación.",
+    "solution": "Desarrollé una herramienta de instalación que reúne la restauración de la base de datos, la configuración ODBC y la preparación de los componentes necesarios para ejecutar SIDC en Windows.",
+    "architecture": "CLI en Go con Cobra e interfaz de terminal Bubble Tea. La preparación del entorno y las verificaciones de conexión se integran en el proceso de instalación; Windows DPAPI protege las credenciales locales.",
+    "impact": "Permite preparar instalaciones de SIDC con un procedimiento guiado y verificable. El aporte del proyecto es la automatización del despliegue de una aplicación existente.",
+    "artifacts": ["Instalador Windows", "Restauración SQL Server", "Configuración ODBC", "Verificación de conexión"]
+  },
+  {
+    "id": "server-femucaribe",
+    "title": "ServerFemucaribe — Automatización de infraestructura",
+    "type": "Operación de infraestructura",
+    "role": "Ingeniero de Software",
+    "description": "Herramientas PowerShell para operar infraestructura institucional mediante SSH, ejecutar consultas SQL de solo lectura y organizar tareas de respaldo.",
+    "highlights": [
+      "Integré comandos remotos, sesiones interactivas y transferencia de archivos mediante OpenSSH",
+      "Implementé consultas SQL con lista blanca, límite de filas y enmascarado de columnas sensibles",
+      "Documenté procedimientos de respaldo para los servicios de la infraestructura"
+    ],
+    "stack": ["PowerShell", "OpenSSH", "SQL Server", "PostgreSQL"],
+    "image": "image-server-femucaribe",
+    "color": "#3F51B5",
+    "github": "",
+    "repositoryLabel": "Herramientas de uso interno",
+    "challenge": "La operación de servidores institucionales requiere procedimientos consistentes para acceso remoto, consultas de diagnóstico y respaldos, con control sobre la información que se consulta o registra.",
+    "solution": "Organicé herramientas operativas en PowerShell para ejecutar tareas por SSH y realizar consultas SQL de solo lectura con restricciones explícitas y registros de actividad.",
+    "architecture": "Scripts de operación con PowerShell y OpenSSH, junto con utilidades SQL basadas en sqlcmd. Las consultas permitidas, el límite de resultados y el enmascarado de columnas restringen la información expuesta durante el diagnóstico.",
+    "impact": "Centraliza procedimientos de administración y consulta de infraestructura. Es un desarrollo operativo independiente del sitio web institucional de FEMUCARIBE.",
+    "artifacts": ["Herramientas PowerShell", "Operación SSH", "Consultas SQL de solo lectura", "Procedimientos de respaldo"]
+  },
+  {
+    "id": "cvmeld",
+    "title": "CVMeld — CV y búsqueda laboral con IA",
+    "type": "Plataforma de empleabilidad",
+    "role": "Ingeniero de Software Full-Stack",
+    "description": "Plataforma con IA para crear CV compatibles con ATS, adaptarlos a ofertas, generar cartas de presentación y preparar entrevistas.",
+    "highlights": [
+      "Integré creación de CV, adaptación a vacantes y generación de cartas de presentación",
+      "Desarrollé búsqueda de ofertas, evaluación de compatibilidad y seguimiento de postulaciones",
+      "Conecté un frontend Next.js con una API FastAPI y generación de documentos PDF"
+    ],
+    "stack": ["Next.js", "React", "TypeScript", "FastAPI", "Python", "PostgreSQL", "Tailwind CSS", "LiteLLM", "Typst", "Cloudflare R2"],
+    "image": "image-cvmeld",
+    "color": "#16aa98",
+    "github": "",
+    "githubFront": "https://github.com/AntonyML/open-ai-jobs-search-nextjs-frontend",
+    "githubBack": "https://github.com/AntonyML/open-ai-jobs-search-fastapi-backend",
+    "websites": [
+      { "label": "Ver CVMeld", "href": "https://cvmeld.com/es" }
+    ],
+    "challenge": "Una búsqueda laboral exige preparar documentos, ajustarlos a cada oferta y llevar seguimiento de las postulaciones. Esos pasos suelen quedar repartidos entre herramientas y archivos distintos.",
+    "solution": "Construí una plataforma que reúne el CV base, la adaptación a vacantes, las cartas de presentación, la búsqueda de ofertas y la preparación de entrevistas en un mismo producto.",
+    "architecture": "Frontend Next.js y React con TypeScript y Tailwind CSS, API FastAPI en Python y persistencia PostgreSQL. LiteLLM integra los flujos de IA; Typst genera PDF y Cloudflare R2 almacena documentos.",
+    "impact": "Permite trabajar sobre un perfil profesional base y preparar cada postulación con sus documentos y seguimiento. Los repositorios de frontend y backend forman una sola solución.",
+    "artifacts": ["Aplicación web", "API FastAPI", "CV compatible con ATS", "Generación de PDF", "Seguimiento de postulaciones"]
+  },
+  {
+    "id": "delicias-de-la-urba",
+    "title": "Delicias de la Urba — Menú digital",
+    "type": "Sitio gastronómico",
+    "role": "Desarrollador Web",
+    "description": "Sitio web de comida rápida con menú digital por categorías, precios en colones y pedidos directos por WhatsApp.",
+    "highlights": [
+      "Organicé el menú por categorías con precios y navegación directa a los productos",
+      "Integré enlaces para iniciar pedidos mediante WhatsApp",
+      "Configuré metadatos SEO y datos estructurados del establecimiento gastronómico"
+    ],
+    "stack": ["Astro", "TypeScript", "CSS"],
+    "image": "image-delicias-urba",
+    "color": "#E91E63",
+    "github": "https://github.com/AntonyML/ComidaUrba",
+    "websites": [
+      { "label": "Ver menú digital", "href": "https://deliciasdelaurba.tonyml.com/" }
+    ],
+    "challenge": "Presentar la oferta de un negocio de comida de forma clara y facilitar que el visitante encuentre productos, consulte precios y contacte al establecimiento para pedir.",
+    "solution": "Desarrollé un sitio con un menú digital categorizado y acceso directo a WhatsApp, manteniendo la información de productos y precios en una fuente de datos del proyecto.",
+    "architecture": "Sitio construido con Astro, TypeScript y CSS. Los datos del menú alimentan la presentación y el layout incluye metadatos y datos estructurados FoodEstablishment.",
+    "impact": "Reúne la consulta del menú y el contacto para pedidos en una misma web, accesible desde dispositivos móviles.",
+    "artifacts": ["Menú digital", "Catálogo por categorías", "Pedidos por WhatsApp", "Datos estructurados SEO"]
+  },
+  {
+    "id": "aegisba",
+    "title": "AegisBA Enterprise — Respaldos de SQL Server",
+    "type": "Automatización de respaldos",
+    "role": "Ingeniero de Software",
+    "description": "Agente de respaldos SQL Server con verificación de integridad, retención, sincronización a Cloudflare R2 y servidores Windows, y registro de eventos en Supabase.",
+    "highlights": [
+      "Automaticé respaldos de SQL Server con verificación de integridad y políticas de retención",
+      "Integré sincronización hacia Cloudflare R2 y servidores Windows",
+      "Incorporé registro de eventos en Supabase y protección de credenciales con Windows DPAPI"
+    ],
+    "stack": ["Go", "SQL Server", "Cloudflare R2", "Supabase", "Cobra", "Bubble Tea", "Windows DPAPI"],
+    "image": "image-aegisba",
+    "color": "#4CAF50",
+    "github": "https://github.com/AntonyML/AegisBA",
+    "challenge": "Los respaldos de una base empresarial necesitan una ejecución periódica, comprobaciones de integridad, retención y copias en destinos separados, además de información para revisar el resultado de cada operación.",
+    "solution": "Desarrollé un agente que coordina el respaldo de SQL Server, su verificación y la sincronización a los destinos configurados, con eventos registrados para seguimiento operativo.",
+    "architecture": "Aplicación Go con Cobra y Bubble Tea, integración con SQL Server, almacenamiento Cloudflare R2 y registro de eventos en Supabase. Utiliza Windows DPAPI para las credenciales y el Programador de tareas de Windows para la ejecución periódica.",
+    "impact": "Permite operar respaldos con retención, destinos de sincronización y seguimiento de eventos dentro del ecosistema de SIDC.",
+    "artifacts": ["Agente de respaldos", "Verificación de integridad", "Políticas de retención", "Sincronización R2", "Registro de eventos"]
+  },
+  {
+    "id": "aegisdesk",
+    "title": "AegisDesk — Soporte y gestión de instalaciones",
+    "type": "Plataforma de soporte",
+    "role": "Ingeniero de Software Full-Stack",
+    "description": "Plataforma de soporte para aplicaciones de escritorio con tickets, panel de administración, shell Windows y estados de mantenimiento firmados con caché offline.",
+    "highlights": [
+      "Desarrollé un portal de tickets y un panel para administrar instalaciones y mantenimiento",
+      "Integré un shell Windows con estados firmados mediante Ed25519 y caché offline",
+      "Construí el backend sobre Cloudflare Workers y D1 con controles de Access y Turnstile"
+    ],
+    "stack": ["Go", "TypeScript", "Hono", "Drizzle", "Cloudflare Workers", "D1 Cloudflare", "Cloudflare Access", "Turnstile", "Ed25519"],
+    "image": "image-aegisdesk",
+    "color": "#0D75C6",
+    "github": "https://github.com/AntonyML/AegisDesk",
+    "websites": [
+      { "label": "Portal de tickets", "href": "https://aegisdesk.tonyml.com/tickets" },
+      { "label": "Panel de administración", "href": "https://aegisdesk.tonyml.com/panel" }
+    ],
+    "challenge": "El soporte de aplicaciones instaladas necesita coordinar solicitudes, instalaciones y ciclos de mantenimiento, conservando un comportamiento definido cuando el equipo no tiene conexión.",
+    "solution": "Desarrollé una plataforma que conecta un portal de tickets, un panel de administración y un shell Windows para gestionar el soporte y los estados de las instalaciones.",
+    "architecture": "Shell Windows en Go y backend TypeScript con Hono y Drizzle sobre Cloudflare Workers y D1. Los estados de mantenimiento se firman con Ed25519; Access protege la administración y Turnstile participa en los controles de acceso al flujo público.",
+    "impact": "Centraliza soporte y gestión de instalaciones en una sola solución. El portal de tickets y el panel son dos accesos al mismo proyecto; el panel requiere autorización.",
+    "artifacts": ["Portal de tickets", "Panel de administración", "Shell Windows", "Estados firmados", "Caché offline"]
   }
 ]

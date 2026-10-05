@@ -35,6 +35,11 @@ export interface Credentials {
 // path de imagen que debe terminar en .webp
 export type WebPPath = `${string}.webp`;
 
+export interface WebsiteLink {
+  label: string;
+  href: string;
+}
+
 export interface Project {
   id: string;
   title: string;
@@ -46,8 +51,10 @@ export interface Project {
   image: WebPPath;
   color: string;
   github: string;
+  repositoryLabel?: string;
   githubFront?: string;
   githubBack?: string;
+  websites?: WebsiteLink[];
   // Engineering Case Study fields
   challenge?: string;
   solution?: string;
@@ -69,12 +76,15 @@ export interface Experience {
   id: string;
   projectTitle: string;
   image: WebPPath;
+  type?: string;
+  engagementLabel?: string;
+  scopeLabel?: string;
   role: string;
   client: string;
   country: string;
   flag: string;
   origin: string;
-  period: string;
+  period?: string;
   color: string;
   description: string;
   context: string;
@@ -82,4 +92,5 @@ export interface Experience {
   highlights: string[];
   stack: string[];
   github?: string;
+  websites?: WebsiteLink[];
 }

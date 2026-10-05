@@ -42,5 +42,29 @@
     ],
     "stack": ["C#", ".NET", "PostgreSQL"],
     "github": "https://github.com/AntonyML/Armeria-Prime-Management-System"
+  },
+  {
+    "id": "femucaribe-sitio-institucional",
+    "projectTitle": "FEMUCARIBE — Sitio institucional",
+    "image": "image-femucaribe-institucional",
+    "type": "Servicio profesional independiente",
+    "engagementLabel": "Servicio profesional",
+    "scopeLabel": "Proyecto institucional",
+    "role": "Proveedor de diseño y desarrollo web",
+    "client": "Federación Municipal del Caribe Costarricense y Asociados",
+    "country": "Costa Rica",
+    "flag": "",
+    "origin": "Costa Rica · desarrollo independiente",
+    "color": "#16aa98",
+    "description": "Sitio institucional para FEMUCARIBE con navegación responsiva, presentación de cantones miembros y páginas de créditos e información legal.",
+    "context": "Desarrollo de un sitio institucional como servicio profesional independiente para FEMUCARIBE. La aplicación es estática y utiliza Astro, TypeScript, HTML semántico y CSS nativo.",
+    "impact": "Organiza la presentación institucional y la información de los cantones miembros en una web adaptable. Los créditos del sitio identifican el servicio de diseño y desarrollo independiente.",
+    "highlights": [
+      "Desarrollé la presentación institucional y la navegación adaptable para distintos dispositivos",
+      "Integré contenido de cantones miembros, créditos e información legal",
+      "Organicé el sitio con Astro, TypeScript, HTML semántico y CSS nativo"
+    ],
+    "stack": ["Astro", "TypeScript", "HTML", "CSS", "Vitest", "Playwright"],
+    "github": "https://github.com/AntonyML/LadingPageFEMUCARIBE"
   }
 ]

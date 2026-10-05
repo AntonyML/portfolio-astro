@@ -26,7 +26,7 @@ if (!baseCard && !job) {
 const card = baseCard ?? {
   id: job!.id,
   title: job!.projectTitle,
-  type: "Consultoría · Contrato",
+  type: job!.type ?? "Consultoría · Contrato",
   role: job!.role,
   description: job!.description,
   highlights: job!.highlights,
@@ -34,6 +34,7 @@ const card = baseCard ?? {
   image: job!.image,
   color: job!.color,
   github: job!.github ?? "",
+  websites: job!.websites ?? [],
 };
 
 type DetailSection = {
@@ -53,13 +54,15 @@ const detailSections = [
 ].filter((section): section is DetailSection => Boolean(section));
 
 const dualRepos = "githubFront" in card || "githubBack" in card;
+const images = import.meta.glob('/public/*.webp', { eager: true });
+const socialImage = images[`/public/${id}.webp`] ? `/${id}.webp` : "/social-card.svg";
 ---
 
 <Layout
   title={`${card.title} | Caso de estudio`}
   description={card.description}
   canonicalPath={`/${id}/`}
-  image={`/${id}.webp`}
+  image={socialImage}
   ogType="article"
 >
   <Navbar />
@@ -81,7 +84,7 @@ const dualRepos = "githubFront" in card || "githubBack" in card;
               {card.type}
             </span>
             <span class="pill">{card.role}</span>
-            {job && <span class="pill">Proyecto pagado</span>}
+            {job && <span class="pill">{job.engagementLabel ?? "Proyecto pagado"}</span>}
           </div>
 
           <h1 class="mt-5 font-['Space_Mono'] text-[clamp(2.1rem,4.3vw,3.7rem)] font-bold uppercase leading-[0.98] tracking-[-0.05em] text-[var(--text-primary)]">
@@ -129,8 +132,19 @@ const dualRepos = "githubFront" in card || "githubBack" in card;
                 Ver repositorio
               </a>
             ) : (
-              <span class="button-secondary cursor-default opacity-70">Repositorio privado</span>
+              <span class="button-secondary cursor-default opacity-70">{"repositoryLabel" in card && card.repositoryLabel ? card.repositoryLabel : "Repositorio privado"}</span>
             )}
+            {card.websites?.map((website) => (
+              <a
+                href={website.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="button-secondary"
+              >
+                <i class={buttons[0].demo} aria-hidden="true"></i>
+                {website.label}
+              </a>
+            ))}
           </div>
         </section>
 
