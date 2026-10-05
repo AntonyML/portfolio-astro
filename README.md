@@ -28,41 +28,48 @@ Estructura relevante del repositorio:
 │   ├── layouts/
 │   └── pages/
 ├── scripts/
+├── bun.lock
 ├── package.json
 └── README.md
 ```
 
 ## **Requisitos**
-- Node.js 18+ recomendado
-- npm o pnpm
+- Bun 1.3.14 para instalar dependencias y ejecutar scripts.
+- Node.js 22.12.0 o superior para las herramientas de Astro y Wrangler.
 
 ## **Instalación y ejecución local**
 1. Instala dependencias:
 
 ```
-npm install
+bun install
 ```
+
+El archivo `bun.lock` se versiona para conservar las versiones de las dependencias. Para una instalación reproducible, usa `bun install --frozen-lockfile`.
 
 2. Levanta el servidor de desarrollo:
 
 ```
-
+bun run dev
 ```
 
-Accede al sitio en `http://localhost:4321` por defecto.
+Accede al sitio en `http://localhost:3000`, según la configuración del proyecto.
 
 ## **Comandos útiles**
-- `npm run dev` — Inicia servidor de desarrollo.
-- `npm run build` — Genera el sitio estático en `./dist`.
-- `npm run preview` — Previsualiza el build localmente.
-- `npm run astro -- --help` — Ayuda del CLI de Astro.
+- `bun run dev` — Inicia servidor de desarrollo.
+- `bun run build` — Genera el sitio estático en `./dist`.
+- `bun run preview` — Genera el build y lo previsualiza localmente con Wrangler.
+- `bun run astro --help` — Ayuda del CLI de Astro.
+- `bun run deploy` — Genera el build y lo despliega con Wrangler.
+- `bun run cf-typegen` — Genera los tipos del entorno de Cloudflare.
+
+Antes de cada build, Bun ejecuta automáticamente `prebuild` para validar las imágenes del proyecto. Si la validación falla, el build se detiene.
 
 ## **Despliegue**
 Este proyecto genera un sitio estático en la carpeta `dist` y se puede desplegar en cualquier proveedor de hosting estático (Netlify, Vercel, GitHub Pages, Cloudflare Pages, etc.).
 
 Pasos generales:
 
-1. Ejecutar `npm run build`.
+1. Ejecutar `bun run build`.
 2. Subir el contenido de `dist/` al hosting elegido o conectar el repositorio (Vercel/Netlify detectan Astro automáticamente).
 
 ## **Personalización**

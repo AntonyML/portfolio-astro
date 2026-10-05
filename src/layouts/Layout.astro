@@ -9,7 +9,7 @@ interface Props {
 }
 
 import "../assets/style.css";
-import { ViewTransitions } from "astro:transitions";
+import { ClientRouter } from "astro:transitions";
 
 const {
   title,
@@ -94,7 +94,7 @@ const ogImageUrl = new URL(image, site).toString();
       })();
     </script>
 
-    <ViewTransitions />
+    <ClientRouter />
   </head>
   <body>
     <a class="skip-link" href="#main-content">Saltar al contenido</a>

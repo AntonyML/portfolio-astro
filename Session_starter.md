@@ -8,7 +8,7 @@ Start sessions reading Session_starter.md, then README.md, then project files; u
 
 Follow established coding standards, architectural decisions, and design patterns; maintain consistent style; reference project portfolio-astro, type Node.js Application, stack - Node.js
 - JavaScript/TypeScript
-- NPM/Yarn
+- Bun
 - Express/Fastify.
 
 Expose workspace context using file references, selections, symbols; detect build systems, configs, scripts, testing frameworks, and adjust suggestions.
@@ -21,11 +21,10 @@ Maintain session memory, track technical constraints, solved problems, and MCP u
 
 Optimize prompts: be specific, define output format, split tasks, provide sample inputs/outputs, and allow Copilot to repeat tasks; support variables portfolio-astro, Node.js Application, 2026-01-17, - Node.js
 - JavaScript/TypeScript
-- NPM/Yarn
-- Express/Fastify, - `npm start`
-- `npm run dev`
-- `npm test`
-- `npm install`.
+- Bun
+- Express/Fastify, - `bun run dev`
+- `bun run build`
+- `bun install`.
 
 
 ## Tasks

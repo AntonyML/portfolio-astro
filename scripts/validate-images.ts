@@ -1,5 +1,4 @@
 /// <reference types="node" />
-// simple validation script executed via ts-node
 import { sync } from 'glob';
 
 
