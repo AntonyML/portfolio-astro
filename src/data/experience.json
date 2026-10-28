@@ -18,7 +18,11 @@
       "Diseñé la lógica de negocio para ventas, consultas y ajustes de inventario",
       "Base de datos SQL Server con soporte continuo para la operación diaria"
     ],
-    "stack": ["C#", ".NET", "SQL Server"],
+    "stack": [
+      "C#",
+      ".NET",
+      "SQL Server"
+    ],
     "github": "https://github.com/AntonyML/Sistema-de-Ventas"
   },
   {
@@ -40,12 +44,16 @@
       "Gestión de usuarios con roles, recuperación de contraseñas y validaciones completas",
       "PostgreSQL configurada para crecimiento y escalabilidad operativa"
     ],
-    "stack": ["C#", ".NET", "PostgreSQL"],
+    "stack": [
+      "C#",
+      ".NET",
+      "PostgreSQL"
+    ],
     "github": "https://github.com/AntonyML/Armeria-Prime-Management-System"
   },
   {
     "id": "femucaribe-sitio-institucional",
-    "projectTitle": "FEMUCARIBE — Sitio institucional",
+    "projectTitle": "FEMUCARIBE — Plataforma Institucional & Headless CMS",
     "image": "image-femucaribe-institucional",
     "type": "Servicio profesional independiente",
     "engagementLabel": "Servicio profesional",
@@ -56,23 +64,48 @@
     "flag": "",
     "origin": "Costa Rica · desarrollo independiente",
     "color": "#16aa98",
-    "description": "Base de sitio institucional desarrollada para FEMUCARIBE como servicio profesional independiente, con identidad municipal y presentación de seis cantones asociados. Sus componentes compartidos adaptan la navegación al espacio disponible y conservan el funcionamiento básico sin JavaScript.",
-    "context": "Servicio de diseño y desarrollo independiente para la Federación Municipal del Caribe Costarricense y Asociados. El alcance implementado comprende la página principal, créditos y aviso legal; búsqueda, acceso a plataforma y varios recursos institucionales se muestran como pendientes mientras el sitio se desarrolla por etapas.",
-    "challenge": "Trasladar una identidad institucional extensa a una interfaz que conserve lectura, enlaces y foco en pantallas pequeñas, con texto ampliado y sin depender de JavaScript. La navegación también debe comunicar qué recursos están disponibles y cuáles siguen pendientes de contenido o destino.",
-    "solution": "Construí un layout público compartido con componentes para identidad, navegación, presentación y pie institucional. Usé HTML nativo como base y consultas de contenedor para responder al espacio real del componente. Pequeñas mejoras de JavaScript coordinan expansión, cierre y foco de los menús; los destinos ausentes se representan como recursos pendientes en lugar de enlaces ficticios.",
-    "architecture": "Astro genera una salida estática con TypeScript estricto, estilos scoped y CSS Modules. PublicLayout compone la barra institucional, la navegación y el pie; InformationLayout comparte cabecera, breadcrumb y navegación entre Créditos y Aviso legal. El aviso incorpora su propio índice temático. ResponsiveDisclosure concentra la interacción sobre details/summary nativos: ResizeObserver coordina cambios de tamaño, Escape y clic exterior cierran menús y se gestiona el retorno del foco. Los contratos de los componentes validan sus destinos. Escudos y tipografía se sirven desde recursos del proyecto, y el layout serializa el schema WebSite escapando su contenido para insertarlo en HTML.",
-    "testing": "El repositorio contiene pruebas Vitest para contratos, destinos inválidos y estados de recursos pendientes. Los escenarios Playwright en Chromium cubren navegación y foco, funcionamiento sin JavaScript, pantallas desde 280 px, orientación horizontal y texto al 200 %. Las páginas informativas tienen casos sobre contenido legal, cookies, almacenamiento del navegador y solicitudes externas.",
-    "impact": "Deja una base institucional coherente para ampliar contenido por etapas, con navegación compartida y comportamientos de adaptación y accesibilidad respaldados por casos de prueba. Los recursos pendientes mantienen un estado explícito hasta disponer de contenido y destinos reales.",
+    "description": "Plataforma web institucional para la Federación Municipal del Caribe Costarricense. Integra portal ciudadano accesible, panel administrativo para proyectos y transparencia, y despliegue automático hacia la web pública.",
+    "context": "Servicio integral de desarrollo para la Federación Municipal del Caribe Costarricense. Abarca el portal ciudadano en Astro, la arquitectura Headless CMS en WordPress, plugins a medida para automatización y autenticación, y el pipeline de despliegue continuo.",
+    "challenge": "Construir una presencia digital moderna para la federación y sus seis municipalidades asociadas, que fuera rápida, accesible para cualquier ciudadano (Ley 7600) y fácil de administrar sin requerir conocimientos técnicos ni arriesgar la seguridad del portal.",
+    "solution": "Se desarrolló una solución integral desacoplada: un portal ciudadano en Astro que carga al instante y cumple con accesibilidad, conectado a un panel administrativo privado en WordPress. Se crearon plugins a medida para la autenticación institucional y el despliegue automático mediante GitHub Actions, permitiendo que cualquier actualización de proyectos o documentos se publique sola en la web en segundos.",
+    "architecture": "Arquitectura Headless dividida en dos planos: frontend estático generado con Astro y TypeScript para máxima velocidad y seguridad, y backend editorial en WordPress con Custom Post Types y REST API. Un plugin propio escucha eventos de publicación y dispara el pipeline de GitHub Actions (con control de enfriamiento de 45 segundos), consumiendo los datos mediante conectores con tolerancia a fallos y bypass de caché.",
+    "testing": "Pruebas de accesibilidad visual y navegación con teclado (Ley 7600); validación responsive en diversos tamaños de pantalla; verificación de disparos y debounce en el webhook de despliegue; y comprobación de actualización inmediata de contenidos en producción.",
+    "impact": "Brindó a FEMUCARIBE una plataforma líder en el sector municipal, con tiempos de carga instantáneos, total autonomía editorial para proyectos y rendición de cuentas, y una arquitectura segura a prueba de caídas.",
     "highlights": [
-      "Diseñé componentes institucionales reutilizables con contratos de destinos y estados explícitos para recursos pendientes",
-      "Implementé menús sobre details/summary nativos, con cierre por Escape, clic exterior y recuperación del foco",
-      "Adapté la navegación al ancho real del contenedor mediante container queries y grillas de CSS",
-      "Integré identidad de seis cantones, contenido de gobernanza y layouts comunes para créditos e información legal",
-      "Mantuve escudos y tipografía como recursos locales, con licencia tipográfica y datos estructurados del sitio",
-      "Definí pruebas de contratos y navegación con teclado, JavaScript deshabilitado, pantallas estrechas y texto ampliado"
+      "Diseñé e implementé la plataforma web institucional en Astro, con accesibilidad (Ley 7600) y lectura óptima en cualquier dispositivo",
+      "Estructuré el backend en WordPress Headless con módulos personalizados para Municipalidades, Cartera de Proyectos y Transparencia",
+      "Desarrollé un plugin para automatizar la compilación y despliegue continuo en GitHub Actions cada vez que se guarda contenido",
+      "Construí un plugin de inicio de sesión institucional accesible y adaptado para funcionarios municipales",
+      "Configuré sincronización directa y superación de caché en el servidor para reflejar publicaciones en menos de un minuto"
     ],
-    "stack": ["Astro", "TypeScript", "HTML", "CSS Modules", "Vitest", "Playwright"],
-    "artifacts": ["Layouts institucionales", "Contratos de componentes", "Disclosure y gestión de foco", "Créditos y aviso legal", "Suites Vitest y Playwright"],
-    "github": "https://github.com/AntonyML/LadingPageFEMUCARIBE"
+    "stack": [
+      "Astro",
+      "TypeScript",
+      "WordPress",
+      "PHP",
+      "GitHub Actions",
+      "REST API",
+      "WCAG / Ley 7600"
+    ],
+    "artifacts": [
+      "Portal Ciudadano Astro",
+      "Core Headless CMS (PHP)",
+      "Plugin Auto-Deploy GitHub Actions",
+      "Plugin Login Institucional",
+      "Pipeline CI/CD",
+      "Contratos de Accesibilidad"
+    ],
+    "github": "https://github.com/AntonyML/LadingPageFEMUCARIBE",
+    "period": "Jun 2026 — Ene 2027",
+    "websites": [
+      {
+        "label": "Portal Web Oficial",
+        "href": "https://femucaribe.go.cr"
+      },
+      {
+        "label": "Portal Administrativo CMS",
+        "href": "https://cms.femucaribe.go.cr"
+      }
+    ]
   }
 ]
