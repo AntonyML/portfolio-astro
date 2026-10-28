@@ -1,5 +1,204 @@
 [
   {
+    "id": "femucaribe-ecosistema",
+    "title": "FEMUCARIBE — Ecosistema Digital Institucional & Headless CMS",
+    "type": "Arquitectura Web & Headless CMS",
+    "role": "Arquitecto de Software & Desarrollador Principal",
+    "description": "Ecosistema web gubernamental de alto rendimiento para la Federación Municipal del Caribe Costarricense. Integra un frontend desacoplado en Astro con un WordPress Headless privado, sincronización automática vía GitHub Actions, bypass de proxy inverso y cumplimiento estricto de accesibilidad e identidad regional.",
+    "highlights": [
+      "Diseñé e implementé una arquitectura desacoplada (Headless) que aísla el portal público de la administración de contenidos, garantizando inmunidad ante ciberataques y rendimiento instantáneo",
+      "Desarrollé el portal ciudadano en Astro + TypeScript con soporte SSR/SSG híbrido, container queries, modo oscuro/claro y cumplimiento de la Ley 7600 y WCAG 2.1 AA",
+      "Modelé la gobernanza de datos en WordPress (Custom Post Types para Municipalidades, Proyectos de Inversión y Transparencia) exponiendo endpoints REST optimizados con serialización limpia",
+      "Implementé un pipeline de compilación y despliegue automático mediante GitHub Actions disparado por webhooks/repository_dispatch desde WordPress al publicar contenido",
+      "Resolví el bloqueo de caché del proxy inverso del hosting (Surecache/Nginx de 48h) mediante cache-busting dinámico con timestamp y cabeceras HTTP de revalidación"
+    ],
+    "stack": [
+      "Astro",
+      "TypeScript",
+      "WordPress",
+      "PHP",
+      "GitHub Actions",
+      "REST API",
+      "WCAG / Ley 7600",
+      "Linux"
+    ],
+    "image": "image-femucaribe-ecosystem",
+    "color": "#16aa98",
+    "github": "https://github.com/AntonyML/LadingPageFEMUCARIBE",
+    "websites": [
+      {
+        "label": "Portal Web Oficial",
+        "href": "https://femucaribe.go.cr"
+      },
+      {
+        "label": "Portal Administrativo CMS",
+        "href": "https://cms.femucaribe.go.cr"
+      }
+    ],
+    "challenge": "Las entidades públicas y federaciones municipales suelen enfrentarse a sitios web monolíticos vulnerables, lentos, costosos de mantener y difíciles de actualizar. En FEMUCARIBE se requería un portal representativo para 6 cantones caribeños que cumpliera con normativas de accesibilidad (Ley 7600), estándares de transparencia ante el Estado (SICOP/Contraloría) y una gestión editorial autónoma sin exponer la seguridad del servidor ni depender de desarrolladores para cambios cotidianos.",
+    "solution": "Se concibió un ecosistema dividido en dos planos totalmente desacoplados: una cara pública inmutable y de máxima velocidad generada con Astro, y una bóveda privada de gestión editorial montada sobre WordPress Headless. Para comunicar ambos mundos sin acoplamiento, se desarrolló un plugin que notifica a GitHub Actions cada vez que se guarda contenido, reconstruyendo y desplegando el sitio en ~45 segundos con datos frescos del CMS, respaldados por fallbacks locales tipados ante contingencias de red.",
+    "architecture": "Frontend desacoplado en Astro con TypeScript estricto, CSS Modules y accesibilidad nativa. Backend WordPress con MU-Plugins que registran CPTs federativos y serializan metadatos en la REST API. Disparador CI/CD en GitHub Actions accionado por repository_dispatch con debounce de 45 segundos para prevenir sobrecarga. Conectores cliente con cancelación por AbortController, tolerancia a fallos mediante datos locales y superación de proxy inverso Surecache mediante timestamps efímeros en peticiones de build time.",
+    "testing": "Pruebas automatizadas de compilación con fallback ante timeout del backend; validación de smoke tests de rutas públicas en producción (/municipalidades, /proyectos, /transparencia, /noticias); auditorías de accesibilidad visual y de navegación por teclado; pruebas de estrés y debounce sobre el webhook de despliegue; y comprobación de bypass de caché mediante inspección de cabeceras Surecache-Status.",
+    "impact": "Posicionó a FEMUCARIBE como la federación municipal referente a nivel nacional, combinando una experiencia ciudadana con tiempos de carga inferiores a 400 ms, autonomía total para la carga de proyectos y transparencia, y una arquitectura segura a prueba de caídas y ataques.",
+    "artifacts": [
+      "Portal Ciudadano Astro",
+      "Core Headless CMS (PHP)",
+      "Plugin Auto-Deploy GitHub Actions",
+      "Plugin Login Institucional Accesible",
+      "Pipeline CI/CD en GitHub Actions",
+      "Contrato de Fallbacks Tipados"
+    ]
+  },
+  {
+    "id": "femucaribe-landing",
+    "title": "FEMUCARIBE — Portal Ciudadano e Identidad Cantonal",
+    "type": "Frontend Institucional Accesible",
+    "role": "Ingeniero de Frontend & Accesibilidad",
+    "description": "Landing page gubernamental desarrollada en Astro para articular la identidad regional de los seis cantones del Caribe costarricense. Diseñada bajo diseño atómico, consultas de contenedor, contrastes elevados y cumplimiento estricto de la Ley 7600.",
+    "highlights": [
+      "Diseñé la arquitectura de interfaz con componentes modulares: GovernmentBar soberana, Navbar responsiva, fichas cantonales y portal de transparencia",
+      "Implementé controles accesibles mediante disclosure details/summary nativo con manejo de foco por teclado, ResizeObserver y cierre por Escape/clic exterior",
+      "Integré sistema de temas claro/oscuro de alto contraste con tokens CSS sincronizados y tipografía adaptativa",
+      "Consumí conectores asíncronos con resiliencia ante caídas de red que alternan fluidamente entre REST API remota y repositorios estáticos locales"
+    ],
+    "stack": [
+      "Astro",
+      "TypeScript",
+      "HTML",
+      "CSS",
+      "Vite",
+      "WCAG / Ley 7600"
+    ],
+    "image": "image-femucaribe-landing",
+    "color": "#10b981",
+    "github": "https://github.com/AntonyML/LadingPageFEMUCARIBE",
+    "websites": [
+      {
+        "label": "Sitio en Producción",
+        "href": "https://femucaribe.go.cr"
+      }
+    ],
+    "challenge": "Diseñar un portal gubernamental que equilibre la representación equitativa de seis municipalidades caribeñas con normativas estrictas de accesibilidad (Ley 7600, contrastes WCAG 2.1 AA, navegación por teclado), lectura impecable en celulares de cualquier gama y tiempos de respuesta inmediatos.",
+    "solution": "Se implementó un frontend estático en Astro con CSS Modules, container queries para adaptación granular sin saltos de layout, y componentes de disclosure basados en HTML nativo con enriquecimiento progresivo en JavaScript para gestión de foco y atajos de teclado.",
+    "architecture": "Estructura modular en Astro basada en layouts compartidos (PublicLayout), componentes atómicos tipados (GovernmentBar, Navbar, Fichas cantonales, Documentos SICOP) y conectores con AbortController (timeout de 15s) que consumen la REST API del CMS durante la fase de compilación (SSG).",
+    "testing": "Validación de reflow responsive de 280px a 4K; auditorías de accesibilidad con lectores de pantalla; verificación de foco con Tab y Escape en menús; pruebas de rendimiento Lighthouse (score 95+ en SEO, accesibilidad y rendimiento); y comprobación de enlaces con fallbacks sin JavaScript.",
+    "impact": "Entrega una experiencia rápida y 100% inclusiva que dignifica la presencia digital del Caribe costarricense, garantizando acceso a la información pública tanto a ciudadanos como a organismos fiscalizadores.",
+    "artifacts": [
+      "Layouts Institucionales",
+      "GovernmentBar Soberana",
+      "Fichas Cantonales Adaptativas",
+      "Tokens de Accesibilidad y Color",
+      "Conectores Asíncronos Resilientes"
+    ]
+  },
+  {
+    "id": "femucaribe-headless-core",
+    "title": "FEMUCARIBE Headless Core — Modelado de Datos y REST API",
+    "type": "Modelado Backend & API REST",
+    "role": "Arquitecto Backend",
+    "description": "Capa central de modelado de contenido federativo en WordPress (MU-Plugin). Estructura Custom Post Types para Municipalidades, Proyectos y Documentos oficiales, optimiza la entrega REST y gestiona políticas de caché de servidor.",
+    "highlights": [
+      "Modelé Custom Post Types para los cuatro ejes del portal: Municipalidades, Cartera de Proyectos UGP, Documentos de Transparencia y Noticias",
+      "Registré campos REST computados (muni_data, proj_data, doc_data) que eliminan la necesidad de consultas complejas a metadatos",
+      "Diseñé scripts de seeding para migrar datos históricos estructurados de la federación hacia el nuevo motor de base de datos",
+      "Configuré cabeceras HTTP de control de caché y mitigación de reverse proxy para garantizar datos inmediatos en los endpoints de compilación"
+    ],
+    "stack": [
+      "WordPress",
+      "PHP",
+      "MySQL",
+      "REST API",
+      "OpenSSH"
+    ],
+    "image": "image-femucaribe-headless",
+    "color": "#F59E0B",
+    "github": "",
+    "repositoryLabel": "Módulo MU-Plugin del Servidor",
+    "challenge": "WordPress por defecto está pensado para blogs tradicionales con páginas y entradas acopladas a temas gráficos. Para servir como backend de una federación, se necesitaba estructurar fichas cantonales, contratos de SICOP, proyectos de inversión y documentos oficiales en una API limpia, ligera y libre de sobrecarga de plugins monolíticos.",
+    "solution": "Se implementó un Must-Use Plugin (headless.php) que arranca antes que cualquier otro componente. Registra los CPTs (municipalidad, proyecto, documento), desactiva el renderizado frontal innecesario y mapea los metadatos en objetos REST limpios (muni_data, proj_data, doc_data). Además, neutraliza el caché agresivo del proxy inverso (Surecache) mediante cabeceras no-store, no-cache, must-revalidate.",
+    "architecture": "Patrón MU-Plugin en PHP 8.2+. Hooks en init para registro de CPTs con soportes explícitos (custom-fields, thumbnail); hooks en rest_api_init con register_rest_field para exposición de DTOs normalizados; y filtro en rest_pre_serve_request para inyección de cabeceras CORS permisivas y cabeceras estrictas de invalidación de caché.",
+    "testing": "Comprobación de esquemas JSON con curl; verificación de persistencia de metadatos vía WP-CLI (wp post meta get); validación de carga de 50 registros por petición; e inspección de cabeceras de respuesta contra el proxy inverso del hosting.",
+    "impact": "Transformó una instalación estándar de WordPress en un headless CMS corporativo robusto, con tiempos de respuesta de API de menos de 100 ms y contratos de datos inmutables para el frontend.",
+    "artifacts": [
+      "MU-Plugin headless.php",
+      "Modelado de CPTs Federativos",
+      "Serializadores REST DTO",
+      "Script de Seeding de Proyectos",
+      "Políticas HTTP Anti-Caché"
+    ]
+  },
+  {
+    "id": "femucaribe-deploy-plugin",
+    "title": "FEMUCARIBE Deploy — WordPress to GitHub Actions Dispatcher",
+    "type": "Plugin WordPress & Automatización CI/CD",
+    "role": "Ingeniero de Software",
+    "description": "Plugin de WordPress desacoplado que automatiza la compilación y despliegue del portal público en GitHub Actions mediante webhooks seguros, control de concurrencia y retroalimentación en el panel administrativo.",
+    "highlights": [
+      "Desarrollé el disparador de eventos repository_dispatch hacia la API REST de GitHub con autenticación por Token de Acceso Personal (PAT)",
+      "Implementé debounce y cooldown de 45 segundos mediante transients para evitar la saturación de workers de CI/CD ante guardados continuos",
+      "Diseñé una interfaz de configuración en Ajustes de WordPress y un botón de acción rápida en la barra de administración superior (Admin Bar)",
+      "Añadí persistencia y visualización del estado del último despliegue (código HTTP y timestamp) para trazabilidad del operador"
+    ],
+    "stack": [
+      "WordPress",
+      "PHP",
+      "GitHub Actions",
+      "REST API",
+      "Git"
+    ],
+    "image": "image-femucaribe-deploy",
+    "color": "#0D75C6",
+    "github": "https://github.com/AntonyML/plugin-femucaribe-deploy",
+    "repositoryLabel": "Repositorio del Plugin",
+    "challenge": "En una arquitectura Headless tradicional, los administradores de contenido sufren porque guardan cambios en WordPress pero no los ven reflejados en el sitio estático hasta que un desarrollador compila a mano. Se requería automatizar el despliegue sin sobrecargar los límites de GitHub Actions ni exponer credenciales del servidor.",
+    "solution": "Se desarrolló un plugin especializado en PHP que escucha el hook save_post de los tipos de contenido monitoreados (post, municipalidad, proyecto, documento). El plugin valida el estado, aplica un transient de enfriamiento de 45 segundos e invoca el endpoint de dispatches de GitHub, notificando el éxito o error directamente en la interfaz de WordPress.",
+    "architecture": "Estructura modular desacoplada en C:/DEV/plugins-wordpress/plugin-femucaribe-deploy. Incluye página de ajustes nativa con Settings API de WordPress, validación de permisos de usuario (manage_options), integración de nodo en WP Admin Bar (admin_bar_menu) y cliente HTTP con wp_remote_post configurado con cabeceras de autorización Bearer y agentes personalizados.",
+    "testing": "Pruebas unitarias de descarte para autosaves y revisiones; verificación de guardado de token cifrado/oculto; prueba de respuesta HTTP 204 ante dispatches simulados; y validación del mecanismo de cooldown evitando disparos duplicados en ráfagas de edición.",
+    "impact": "Eliminó completamente la intervención técnica humana para publicar contenido: los cambios editoriales se reflejan en la web pública en ~45 segundos con total seguridad y estabilidad operativa.",
+    "artifacts": [
+      "Plugin WordPress Standalone",
+      "Panel de Configuración de Despliegue",
+      "Botón Admin Bar de Despliegue Rápido",
+      "Controlador de Transients y Cooldown",
+      "Workflow Dispatch Contract"
+    ]
+  },
+  {
+    "id": "femucaribe-login-plugin",
+    "title": "FEMUCARIBE Access — Login Institucional Accesible",
+    "type": "Plugin WordPress & UX de Autenticación",
+    "role": "Ingeniero de Frontend & UX",
+    "description": "Plugin de WordPress que transforma la pantalla de autenticación estándar en un entorno corporativo accesible, con branding federativo, validación visual y soporte ergonómico para funcionarios municipales.",
+    "highlights": [
+      "Rediseñé completamente wp-login.php con estilos institucionales, contrastes aprobados y tipografía de máxima legibilidad",
+      "Incorporé controles de visualización de contraseña con accesibilidad para lectores de pantalla y soporte de teclado",
+      "Aislé y reubicó el selector de idiomas y accesos institucionales para una experiencia de inicio de sesión limpia y sin distracciones",
+      "Optimizado para carga ultraligera sin dependencias pesadas de terceros, respetando directrices de seguridad de WordPress"
+    ],
+    "stack": [
+      "WordPress",
+      "PHP",
+      "CSS",
+      "JavaScript",
+      "HTML"
+    ],
+    "image": "image-femucaribe-login",
+    "color": "#8B5CF6",
+    "github": "https://github.com/AntonyML/plugin-femucaribe-login",
+    "repositoryLabel": "Repositorio del Plugin",
+    "challenge": "La pantalla nativa de inicio de sesión de WordPress carece de identidad corporativa, tiene fuentes pequeñas de bajo contraste y genera rechazo en usuarios no técnicos o adultos mayores que administran plataformas institucionales.",
+    "solution": "Se desarrolló un plugin que inyecta una capa de diseño sobria y moderna sobre login_enqueue_scripts. Reubica los enlaces institucionales a la cabecera, centra el foco en las credenciales con tamaños de fuente aumentados, alinea iconos de visibilidad de contraseña y asegura cumplimiento de accesibilidad para teclado y lectores de pantalla.",
+    "architecture": "Plugin modular con encolado condicional en hooks login_header, login_footer y login_enqueue_scripts. Estilos CSS con variables personalizadas, manejo de transiciones ergonómicas, script ligero para alternancia de visibilidad de contraseña y mitigación de artefactos visuales en navegadores modernos.",
+    "testing": "Pruebas visuales en monitores de diversas resoluciones; pruebas de navegación y confirmación con lectores de pantalla; verificación de contraste con herramientas WCAG; y validación de compatibilidad con autocompletado seguro de contraseñas.",
+    "impact": "Brinda a los directivos y funcionarios una experiencia de bienvenida profesional, accesible y de alta gama desde el primer punto de contacto con el sistema administrativo.",
+    "artifacts": [
+      "Plugin femucaribe-login.php",
+      "Hoja de Estilos Institucional",
+      "Script de Accesibilidad de Credenciales",
+      "Optimización de Enlaces de Retorno"
+    ]
+  },
+  {
     "id": "simpe-bridge",
     "title": "SINPE Bridge — Sistema de Pagos",
     "type": "Flujo de pago SINPE",
@@ -11,7 +210,14 @@
       "Implementé gateway de seguridad con Cloudflare Workers como proxy hacia la API",
       "Construí app Android en Kotlin para captura y trazabilidad de SMS de pago"
     ],
-    "stack": ["FastAPI", "Python", "PostgreSQL", "Cloudflare Workers", "Kotlin", "Android"],
+    "stack": [
+      "FastAPI",
+      "Python",
+      "PostgreSQL",
+      "Cloudflare Workers",
+      "Kotlin",
+      "Android"
+    ],
     "image": "image-simpe-bridge",
     "color": "#0D75C6",
     "github": "https://github.com/AntonyML/simpe-bridge",
@@ -20,7 +226,13 @@
     "architecture": "Separación entre captura, seguridad, lógica de negocio y persistencia. Interfaz explícita entre frontends, workers y backend central. Enfoque en trazabilidad, idempotencia y manejo consistente de errores. Adaptadores pequeños alrededor de una lógica central de negocio.",
     "testing": "Se validaron flujos críticos: creación de órdenes, recepción de pagos, conciliación, seguridad del proxy y respuestas de error. Pruebas manuales de integración con colección Bruno para confirmar que el flujo completo se mantuviera estable entre módulos.",
     "impact": "La solución centralizó un flujo que normalmente estaría repartido entre procesos manuales o herramientas aisladas. Menos fricción operativa, mejor seguimiento de pagos y mayor claridad para soporte y auditoría.",
-    "artifacts": ["API REST", "Cloudflare Worker", "App Android", "Interfaz kiosk", "Colección Bruno"]
+    "artifacts": [
+      "API REST",
+      "Cloudflare Worker",
+      "App Android",
+      "Interfaz kiosk",
+      "Colección Bruno"
+    ]
   },
   {
     "id": "hogar-ancianos",
@@ -34,7 +246,14 @@
       "Construí backend con NestJS + TypeScript y aplicación de escritorio con React + Electron",
       "Asumí responsabilidad técnica completa: análisis, diseño, implementación, documentación y soporte"
     ],
-    "stack": ["NestJS", "TypeScript", "React", "Electron", "Vite", "PostgreSQL"],
+    "stack": [
+      "NestJS",
+      "TypeScript",
+      "React",
+      "Electron",
+      "Vite",
+      "PostgreSQL"
+    ],
     "image": "image-hogar-ancianos",
     "color": "#E91E63",
     "githubBack": "https://github.com/Proyecto-Hogar-Ancianos/backend_nest_js_hogar_de_ancianos",
@@ -46,7 +265,13 @@
     "testing": "Se validaron flujos clave: registro de atenciones, actualización de estados, consultas, seguimiento de entradas y salidas, y consistencia de datos en escenarios de uso diario.",
     "management": "Responsabilidad técnica completa: análisis, diseño de módulos y reglas de negocio, implementación, documentación y soporte. Comunicación directa con el cliente para priorizar alcance, entregables y orden de implementación.",
     "impact": "La solución centralizó la operación, redujo el uso de papel y mejoró la trazabilidad de la información, facilitando el trabajo coordinado entre las áreas del hogar de ancianos.",
-    "artifacts": ["API REST", "App de escritorio Electron", "Módulos por área clínica", "Auditoría", "Expedientes virtuales"]
+    "artifacts": [
+      "API REST",
+      "App de escritorio Electron",
+      "Módulos por área clínica",
+      "Auditoría",
+      "Expedientes virtuales"
+    ]
   },
   {
     "id": "ict-tourism",
@@ -60,7 +285,15 @@
       "Diseñé arquitectura modular con roles claros por componente para facilitar mantenimiento y lectura",
       "El año 2020 se trata como evento especial con opción de excluirlo del control estadístico"
     ],
-    "stack": ["Python", "Streamlit", "Pandas", "NumPy", "Plotly", "PuLP", "OpenPyXL"],
+    "stack": [
+      "Python",
+      "Streamlit",
+      "Pandas",
+      "NumPy",
+      "Plotly",
+      "PuLP",
+      "OpenPyXL"
+    ],
     "image": "image-ict-tourism",
     "color": "#16aa98",
     "github": "",
@@ -69,7 +302,13 @@
     "architecture": "Separación por módulos para evitar un archivo monolítico. app.py actúa como orquestador. constants.py concentra parámetros fijos con justificación metodológica. limitations.py expone los límites para que el usuario no sobreinterprete resultados. Cada técnica tiene un rol claro y no compite con las demás.",
     "testing": "Se verifica el periodo completo de la serie, se muestran años faltantes cuando existen, se comparan modelos por error y se documentan supuestos y límites de cada técnica. Reproducibilidad garantizada mediante constantes y semilla fija donde aplica.",
     "impact": "Convierte un repositorio histórico en una herramienta útil para planificación. En lugar de depender solo de intuición, el usuario puede observar tendencias, medir variabilidad, simular incertidumbre y fundamentar asignaciones de recursos.",
-    "artifacts": ["Dashboard histórico", "Comparación de pronósticos", "I-Chart SPC", "Simulación Monte Carlo", "Optimización lineal"]
+    "artifacts": [
+      "Dashboard histórico",
+      "Comparación de pronósticos",
+      "I-Chart SPC",
+      "Simulación Monte Carlo",
+      "Optimización lineal"
+    ]
   },
   {
     "id": "aegissetup",
@@ -85,7 +324,17 @@
       "Organicé un checklist por dependencias que explica qué falta, cómo resolverlo y qué etapa impide comenzar",
       "Separé reparación y diagnóstico, elevación para operaciones de escritura y desinstalación con revisión previa del plan"
     ],
-    "stack": ["Go", "SQL Server", "Cobra", "Bubble Tea", "ODBC", "Crystal Reports", "Windows DPAPI", "Supabase", "Docker"],
+    "stack": [
+      "Go",
+      "SQL Server",
+      "Cobra",
+      "Bubble Tea",
+      "ODBC",
+      "Crystal Reports",
+      "Windows DPAPI",
+      "Supabase",
+      "Docker"
+    ],
     "image": "image-aegissetup",
     "color": "#0D75C6",
     "github": "https://github.com/AntonyML/aegissetup",
@@ -94,7 +343,14 @@
     "architecture": "La CLI con Cobra y la TUI con Bubble Tea consumen módulos de configuración, requisitos, preparación del entorno y diagnóstico. Setup restaura la base, configura el DSN de 32 bits y registra componentes COM; el diagnóstico comprueba SQL, la conexión ADODB extraída del ejecutable, fechas DMY, Crystal y entorno de impresión. La regeneración parte de una copia original, valida el espacio disponible en los bloques binarios y produce un manifiesto de hashes. CLI y TUI comparten la tabla de requisitos y los módulos, con secuencias propias. La autenticación SQL o Windows depende del entorno; un almacén auxiliar utiliza DPAPI. La TUI incorpora autenticación de operador con Supabase y renovación de sesión. AegisSetup administra el despliegue y la compatibilidad de SIDC, cuya lógica de negocio pertenece a la aplicación existente.",
     "testing": "El repositorio contiene pruebas de runtimes y registro COM, preservación del tamaño de ejecutables y reportes, repetibilidad de parches, configuración regional del DSN y rechazo de conversiones de fecha incorrectas. También cubre reglas del checklist, navegación TUI, elevación, límites de desinstalación y autenticación con servidores HTTP simulados. La integración de fechas con ADODB de 32 bits requiere habilitación explícita; la validación completa en una PC limpia permanece documentada como comprobación pendiente de entorno.",
     "impact": "Convierte la preparación de una aplicación heredada en un procedimiento diagnosticable y repetible. Permite distinguir problemas de conectividad, compatibilidad de 32 bits, conexiones de reportes y configuración regional, y conservar la procedencia de los artefactos regenerados mediante su manifiesto.",
-    "artifacts": ["Instalador Windows", "CLI y TUI operativa", "Checklist por dependencias", "Diagnóstico ADODB y Crystal", "Manifiesto de regeneración", "Kit SQL Server en Docker"]
+    "artifacts": [
+      "Instalador Windows",
+      "CLI y TUI operativa",
+      "Checklist por dependencias",
+      "Diagnóstico ADODB y Crystal",
+      "Manifiesto de regeneración",
+      "Kit SQL Server en Docker"
+    ]
   },
   {
     "id": "server-femucaribe",
@@ -110,7 +366,13 @@
       "Implementé validación SQL antes de tocar la red, límite de filas, modo DryRun y enmascarado de columnas identificadas como sensibles",
       "Preparé el acceso SQL con autenticación integrada de Windows para reutilizar la identidad SSH sin introducir una contraseña SQL"
     ],
-    "stack": ["PowerShell", "OpenSSH", "Ed25519", "SQL Server", "SCP"],
+    "stack": [
+      "PowerShell",
+      "OpenSSH",
+      "Ed25519",
+      "SQL Server",
+      "SCP"
+    ],
     "image": "image-server-femucaribe",
     "color": "#3F51B5",
     "github": "",
@@ -120,7 +382,14 @@
     "architecture": "Un núcleo PowerShell carga la configuración y resuelve el destino y su identidad. Los adaptadores de comandos y SCP usan OpenSSH con IdentitiesOnly y BatchMode, mientras una vía separada abre sesiones con TTY para intervención humana. La capa SQL restringe las formas de consulta, rechaza operaciones de escritura y permite validación en seco antes de abrir la conexión. Transporta el texto SQL codificado para conservar las comillas, lo ejecuta con sqlcmd -E y elimina el archivo temporal remoto en finally. La presentación enmascara las columnas reconocidas por la proyección de la consulta y registra el texto SQL y metadatos, con filtrado de patrones de credenciales. Runbooks y reglas por rol definen las responsabilidades de los agentes y del humano.",
     "testing": "El alta de acceso incorpora una comprobación de autenticación por clave y los wrappers propagan los códigos de salida. El diagnóstico SQL incluye un modo DryRun que valida la sentencia sin enviarla al servidor. La documentación marca la integración de sqlcmd -E como pendiente de comprobación en el entorno; la existencia del wrapper no se presenta como una prueba de funcionamiento en producción.",
     "impact": "Establece una forma repetible de delegar tareas remotas a agentes sin entregarles la contraseña del servidor. La separación entre bootstrap, ejecución automatizada, intervención humana y diagnóstico SQL hace explícitas las responsabilidades y el tratamiento de los errores de autenticación.",
-    "artifacts": ["Bootstrap humano Ed25519", "Wrappers SSH y SCP", "Configuración multidestino", "Validador SQL y DryRun", "Registro de consultas", "Runbooks y reglas para agentes"]
+    "artifacts": [
+      "Bootstrap humano Ed25519",
+      "Wrappers SSH y SCP",
+      "Configuración multidestino",
+      "Validador SQL y DryRun",
+      "Registro de consultas",
+      "Runbooks y reglas para agentes"
+    ]
   },
   {
     "id": "cvmeld",
@@ -136,21 +405,46 @@
       "Integré autorización de consumo, liquidación atómica de créditos y cuotas, e idempotencia para reintentos con la misma clave",
       "Desarrollé módulos API de ranking híbrido, generación y revisión de postulaciones, seguimiento e entrevistas con ejemplos STAR y simulación textual"
     ],
-    "stack": ["Next.js", "React", "TypeScript", "FastAPI", "Python", "PostgreSQL", "Tailwind CSS", "Pydantic", "SQLAlchemy", "LiteLLM", "Typst", "Cloudflare R2"],
+    "stack": [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "FastAPI",
+      "Python",
+      "PostgreSQL",
+      "Tailwind CSS",
+      "Pydantic",
+      "SQLAlchemy",
+      "LiteLLM",
+      "Typst",
+      "Cloudflare R2"
+    ],
     "image": "image-cvmeld",
     "color": "#16aa98",
     "github": "",
     "githubFront": "https://github.com/AntonyML/open-ai-jobs-search-nextjs-frontend",
     "githubBack": "https://github.com/AntonyML/open-ai-jobs-search-fastapi-backend",
     "websites": [
-      { "label": "Ver CVMeld", "href": "https://cvmeld.com/es" }
+      {
+        "label": "Ver CVMeld",
+        "href": "https://cvmeld.com/es"
+      }
     ],
     "challenge": "Adaptar un CV exige relacionar una trayectoria profesional con los requisitos de cada vacante sin perder el documento original ni mezclar recursos entre usuarios. La generación con IA introduce respuestas que deben validarse, costes y tiempos variables; el producto necesita controlar el acceso, contabilizar consumo y permitir recuperar documentos incluso si falla su renderizado.",
     "solution": "Organicé el flujo web alrededor de un perfil persistente, una base activa recuperable y adaptaciones independientes por oferta. El JSON del documento se conserva antes de compilar su PDF, de modo que un fallo de renderizado no elimina el contenido y permite reconstruirlo sin repetir la inferencia. La biblioteca permite consultar, recuperar y eliminar documentos con descargas firmadas. Añadí planes, créditos, sesiones revocables y administración de proveedores; en la API implementé además ranking, cartas, seguimiento y entrevistas, como módulos diferenciados del generador web actual.",
     "architecture": "Frontend Next.js y React con TypeScript, Tailwind CSS y traducciones con next-intl; API FastAPI con Pydantic y SQLAlchemy async sobre PostgreSQL. La generación resuelve proveedores configurados por etapa mediante LiteLLM, sanea y valida el JSON y aplica una reparación dirigida cuando falla el esquema. El JSON persistido es la fuente del documento; Typst compila el PDF en segundo plano, con archivos por usuario en R2 y URLs firmadas. Los endpoints verifican sesión activa y propiedad de los recursos. El consumo pasa por autorización previa y liquidación con bloqueo de la cuenta de créditos, registro contable e idempotencia por usuario, clave y payload. La ingesta normaliza y deduplica ofertas y comprueba URLs y redirecciones contra SSRF. Los módulos API de empleabilidad combinan ranking determinista y cualitativo, etapas de revisión y registro de resultados.",
     "testing": "Las pruebas pytest cubren versiones de CV y conservación de la base, propiedad de recursos y bloqueo de URLs privadas, validación y reparación de respuestas de IA, fallos de PDF, almacenamiento R2, sesiones, créditos y cuotas. Hay casos de ranking, postulaciones, resultados y entrevistas con proveedores simulados. Playwright contempla autenticación, restricciones de rutas, idioma, estados del feed y reconexión.",
     "impact": "Permite reutilizar un perfil, conservar una base recuperable y organizar documentos específicos para cada vacante. Separar datos, generación y PDF facilita recuperar entregables sin repetir llamadas de IA, mientras créditos, cuotas y registros de consumo dan al administrador herramientas para controlar la operación del servicio.",
-    "artifacts": ["Generador web bilingüe", "Perfil profesional estructurado", "CV base y versiones adaptadas", "Biblioteca de documentos", "PDF Typst y descargas R2", "Administración de proveedores y créditos", "API de ranking y postulaciones", "API de entrevistas y seguimiento"]
+    "artifacts": [
+      "Generador web bilingüe",
+      "Perfil profesional estructurado",
+      "CV base y versiones adaptadas",
+      "Biblioteca de documentos",
+      "PDF Typst y descargas R2",
+      "Administración de proveedores y créditos",
+      "API de ranking y postulaciones",
+      "API de entrevistas y seguimiento"
+    ]
   },
   {
     "id": "delicias-de-la-urba",
@@ -166,19 +460,32 @@
       "Generé datos estructurados FoodEstablishment con menú, ofertas en CRC y horarios, junto con metadatos canonical y sociales",
       "Añadí una franja de productos destacados con pausa al pasar el cursor y ajuste para la preferencia de movimiento reducido"
     ],
-    "stack": ["Astro", "TypeScript", "CSS"],
+    "stack": [
+      "Astro",
+      "TypeScript",
+      "CSS"
+    ],
     "image": "image-delicias-urba",
     "color": "#E91E63",
     "github": "https://github.com/AntonyML/ComidaUrba",
     "websites": [
-      { "label": "Ver menú digital", "href": "https://deliciasdelaurba.tonyml.com/" }
+      {
+        "label": "Ver menú digital",
+        "href": "https://deliciasdelaurba.tonyml.com/"
+      }
     ],
     "challenge": "Presentar una oferta amplia de comida rápida en una página fácil de recorrer desde el teléfono, conservando los precios legibles y el contacto para pedidos al alcance durante la consulta. El contenido visible y la información entregada a buscadores necesitan mantenerse consistentes al cambiar el catálogo.",
     "solution": "Separé el catálogo de su presentación mediante interfaces TypeScript y componentes Astro. Las once categorías alimentan el menú y sus accesos; el layout reutiliza esos productos para construir las ofertas del schema. Los enlaces convencionales permiten recorrer las secciones y una mejora progresiva identifica la categoría visible. WhatsApp actúa como canal externo de conversación para coordinar el pedido.",
     "architecture": "Astro genera una página estática compuesta por presentación, franja de destacados, navegación de categorías, tarjetas de menú y accesos de contacto. Un módulo TypeScript concentra productos, precios y enlaces del negocio. CSS nativo resuelve las grillas y la navegación fija; IntersectionObserver actualiza la categoría activa con un script pequeño, sin hidratar un framework de interfaz. El layout deriva FoodEstablishment y Offer del catálogo y configura canonical, Open Graph y Twitter Cards. La preferencia de movimiento reducido detiene la animación de la franja de destacados.",
     "testing": "El proyecto dispone de comandos de compilación y previsualización con Astro para revisar el catálogo y la navegación. El repositorio no incluye una suite automatizada de pruebas.",
     "impact": "Reúne el menú y sus precios en un enlace público y mantiene disponible el acceso al canal de pedidos durante la consulta. Compartir la fuente de datos entre tarjetas y ofertas estructuradas facilita actualizar el catálogo sin mantener dos versiones de la información.",
-    "artifacts": ["Catálogo tipado", "Navegación con seguimiento de sección", "Grilla de menú adaptable", "Accesos a WhatsApp", "Schema FoodEstablishment y Offer"]
+    "artifacts": [
+      "Catálogo tipado",
+      "Navegación con seguimiento de sección",
+      "Grilla de menú adaptable",
+      "Accesos a WhatsApp",
+      "Schema FoodEstablishment y Offer"
+    ]
   },
   {
     "id": "aegisba",
@@ -194,7 +501,15 @@
       "Registré corridas y artefactos en Supabase y añadí acumulación y reenvío de eventos ante errores recuperables",
       "Desarrollé configuración portable cifrada con AES-GCM y PBKDF2, cuya importación vuelve a proteger las credenciales R2 con DPAPI local"
     ],
-    "stack": ["Go", "SQL Server", "Cloudflare R2", "Supabase", "Cobra", "Bubble Tea", "Windows DPAPI"],
+    "stack": [
+      "Go",
+      "SQL Server",
+      "Cloudflare R2",
+      "Supabase",
+      "Cobra",
+      "Bubble Tea",
+      "Windows DPAPI"
+    ],
     "image": "image-aegisba",
     "color": "#4CAF50",
     "github": "https://github.com/AntonyML/AegisBA",
@@ -203,7 +518,14 @@
     "architecture": "La capa de aplicación concentra los casos de uso y recibe interfaces de motor SQL, almacenamiento y eventos; Cobra y Bubble Tea son adaptadores de entrada. El respaldo pasa por comprobación de espacio, archivo temporal, verificación SQL, hash y publicación final. El estado conserva idempotencia y la última copia remota pendiente por perfil. Los backends implementan R2, UNC y almacenamiento Supabase, mientras un módulo independiente clasifica errores y calcula backoff con jitter. R2 comprueba el tamaño remoto y UNC verifica tamaño y SHA-256. Los errores de observabilidad no abortan el respaldo. DPAPI protege las credenciales R2 locales; un bundle con AES-GCM y PBKDF2 permite trasladar configuración y volver a cifrarla al importar. El Programador de tareas invoca procesos desatendidos de duración limitada.",
     "testing": "La suite incluye pruebas de aplicación con dependencias inyectadas, integración local con un motor SQLite de pruebas y fallos controlados de interrupción, corrupción, espacio insuficiente y temporales huérfanos. Cubre conservación de copias anteriores, pendientes remotos, idempotencia por perfil, bloqueos, migración de estado y reintentos con reloj y jitter simulados. La portabilidad prueba contraseña incorrecta y alteración del bundle. La integración SQL Server comprueba respaldo, verificación y restauración equivalente; esta integración y las pruebas remotas de Supabase requieren activación explícita.",
     "impact": "Permite distinguir una copia local confirmada de una sincronización pendiente y conservar información para recuperar la operación. Los perfiles y la separación de adaptadores permiten configurar destinos y programación manteniendo la lógica de respaldo independiente de la interfaz de terminal.",
-    "artifacts": ["Agente Windows CLI y TUI", "Perfiles y tareas programadas", "Respaldos verificados", "Sincronización R2 y UNC", "Registro de corridas y artefactos", "Bundle de configuración cifrado"]
+    "artifacts": [
+      "Agente Windows CLI y TUI",
+      "Perfiles y tareas programadas",
+      "Respaldos verificados",
+      "Sincronización R2 y UNC",
+      "Registro de corridas y artefactos",
+      "Bundle de configuración cifrado"
+    ]
   },
   {
     "id": "aegisdesk",
@@ -219,19 +541,42 @@
       "Construí tickets con catálogo de incidencias, idempotencia, límites de solicitudes y validación de acción y hostname de Turnstile",
       "Registré aceptación de términos por versión y huella SHA-256, con reenvío pendiente y limpieza programada de datos operativos"
     ],
-    "stack": ["Go", "TypeScript", "Hono", "Drizzle", "Cloudflare Workers", "D1 Cloudflare", "Cloudflare Access", "Turnstile", "Ed25519"],
+    "stack": [
+      "Go",
+      "TypeScript",
+      "Hono",
+      "Drizzle",
+      "Cloudflare Workers",
+      "D1 Cloudflare",
+      "Cloudflare Access",
+      "Turnstile",
+      "Ed25519"
+    ],
     "image": "image-aegisdesk",
     "color": "#0D75C6",
     "github": "https://github.com/AntonyML/AegisDesk",
     "websites": [
-      { "label": "Portal de tickets", "href": "https://aegisdesk.tonyml.com/tickets" },
-      { "label": "Panel de administración", "href": "https://aegisdesk.tonyml.com/panel" }
+      {
+        "label": "Portal de tickets",
+        "href": "https://aegisdesk.tonyml.com/tickets"
+      },
+      {
+        "label": "Panel de administración",
+        "href": "https://aegisdesk.tonyml.com/panel"
+      }
     ],
     "challenge": "Una aplicación instalada necesita soporte, identificación del equipo y una política definida cuando no puede consultar al servidor. Hay que coordinar instalaciones y mantenimiento, distinguir un fallo de red de una decisión administrativa y comprobar que cada estado pertenece a la instalación correcta. El panel también necesita limitar los datos y acciones al alcance del operador y su organización.",
     "solution": "Desarrollé un shell que enrola la instalación, sincroniza configuración firmada y consulta avisos calculados por el servidor antes del lanzamiento. Conserva el último estado disponible dentro de límites temporales y solicita soporte cuando la configuración deja de ser utilizable; los cambios remotos de política se incorporan al sincronizar. El backend sirve el portal de tickets y un panel con permisos por organización, registra acciones operativas y gestiona consentimiento de mantenimiento y retención.",
     "architecture": "Un Worker con Hono compone rutas públicas, del shell y administrativas. Los servicios de enrolamiento, configuración, ciclos, tickets y directorio encapsulan operaciones; repositorios y Drizzle acceden a D1. El enrolamiento consume el código y crea instalación, ciclo y evento en un lote condicionado para evitar registros huérfanos por reutilización. La configuración y los estados se firman con Ed25519 y se vinculan a la instalación. El shell Go verifica respuestas, utiliza ETag y aplica vigencia, gracia offline y rechazo de políticas anteriores. Su token se guarda con DPAPI y permisos locales restringidos. Cloudflare Access identifica administradores y las membresías determinan rol y organización. El shell presenta soporte y consentimiento de mantenimiento e invoca el ejecutable configurado, conservando la lógica de SIDC en la aplicación existente.",
     "testing": "Vitest y D1 con migraciones de prueba cubren enrolamiento concurrente, códigos reutilizados, roles, aislamiento organizacional, configuración firmada, ciclos, tickets, CSRF, abuso y retención. Los tests de tickets comprueban el resumen del catálogo y el rechazo de texto libre enviado al endpoint. En Go hay casos de firmas inválidas, políticas anteriores, reloj atrasado, conservación de estados deshabilitados o revocados offline, gracia y caducidad, caché corrupta y token fuera del JSON. También se prueban aceptación de términos y validación del ejecutable objetivo.",
     "impact": "Reúne solicitudes, instalaciones y decisiones de mantenimiento en una sola solución, con un comportamiento offline explícito y trazabilidad operativa. El portal y el panel comparten backend, y la intermediación del lanzamiento mantiene separadas las responsabilidades del soporte y de la aplicación institucional.",
-    "artifacts": ["Shell Windows", "Portal de tickets", "Panel de instalaciones", "Contrato de configuración firmada", "Migraciones D1", "Registro de aceptación de términos"]
+    "artifacts": [
+      "Shell Windows",
+      "Portal de tickets",
+      "Panel de instalaciones",
+      "Contrato de configuración firmada",
+      "Migraciones D1",
+      "Registro de aceptación de términos"
+    ]
   }
 ]
