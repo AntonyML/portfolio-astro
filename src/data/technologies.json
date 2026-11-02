@@ -254,5 +254,9 @@
   {
     "text": "OpenSSH",
     "logo": "https://cdn.simpleicons.org/openssh"
+  },
+  {
+    "text": "Mailbridge",
+    "logo": "bx bx-envelope"
   }
 ]

@@ -135,7 +135,7 @@ El validador rechaza archivos `.png`, `.jpg`, `.jpeg`, `.gif`, `.svg` y `.bmp` e
 
 ### Formulario de contacto
 
-El formulario envía un `POST` con `{ name, email, message }` al endpoint definido en la constante `URLEMAIL` de `src/assets/index.js`, actualmente `https://email-portfolio.tonyml.com`. El servicio de correo se mantiene fuera de este repositorio; para usar otro servicio, actualiza esa constante y verifica que acepte solicitudes desde el dominio del portafolio.
+El formulario envía un `POST` a Mailbridge (`https://mailer.tonyml.com/api/send`) con cabecera `x-app-key` y cuerpo `{ reply_to, variables: { name, email, message } }`, configurados en `URLEMAIL` y `MAILBRIDGE_APP_KEY` de `src/assets/index.js`.
 
 ## Despliegue en Cloudflare Workers
 

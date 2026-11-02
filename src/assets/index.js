@@ -1,6 +1,7 @@
 const THEME_KEY = "portfolio-theme";
 const THEME_META_SELECTOR = "[data-dynamic-theme-color]";
-const URLEMAIL= "https://email-portfolio.tonyml.com";
+const URLEMAIL = "https://mailer.tonyml.com/api/send";
+const MAILBRIDGE_APP_KEY = "ml_live_adab9fe65979454797fb57c0c1b84ffb";
 
 function applyTheme(theme) {
   const root = document.documentElement;
@@ -127,8 +128,8 @@ function initContactForm() {
     try {
       const response = await fetch(URLEMAIL, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, message }),
+        headers: { "Content-Type": "application/json", "x-app-key": MAILBRIDGE_APP_KEY },
+        body: JSON.stringify({ reply_to: email, variables: { name, email, message } }),
       });
 
       const data = await response.json();
