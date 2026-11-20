@@ -1,6 +1,6 @@
 const THEME_KEY = "portfolio-theme";
 const THEME_META_SELECTOR = "[data-dynamic-theme-color]";
-const URLEMAIL = "https://mailer.tonyml.com/api/send";
+const URLEMAIL = "https://rd.tonyml.com/api/m/mail/public/send";
 const MAILBRIDGE_APP_KEY = "ml_live_adab9fe65979454797fb57c0c1b84ffb";
 
 function applyTheme(theme) {

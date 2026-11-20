@@ -135,7 +135,7 @@ El validador rechaza archivos `.png`, `.jpg`, `.jpeg`, `.gif`, `.svg` y `.bmp` e
 
 ### Formulario de contacto
 
-El formulario envía un `POST` a Mailbridge (`https://mailer.tonyml.com/api/send`) con cabecera `x-app-key` y cuerpo `{ reply_to, variables: { name, email, message } }`, configurados en `URLEMAIL` y `MAILBRIDGE_APP_KEY` de `src/assets/index.js`.
+El formulario envía un `POST` al módulo Mail de AegisRD (`https://rd.tonyml.com/api/m/mail/public/send`) con cabecera `x-app-key` y cuerpo `{ reply_to, variables: { name, email, message } }`, configurados en `URLEMAIL` y `MAILBRIDGE_APP_KEY` de `src/assets/index.js`.
 
 ## Despliegue en Cloudflare Workers
 
